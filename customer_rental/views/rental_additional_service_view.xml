@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="rental_additional_service_form_view" model="ir.ui.view">
+            <field name="name">rental additional service form</field>
+            <field name="model">rental.additional.service</field>
+            <field name="arch" type="xml">
+                <form string="rental product type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="service_type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="rental_additional_service_search_view" model="ir.ui.view">
+            <field name="name">rental additional service search</field>
+            <field name="model">rental.additional.service</field>
+            <field name="arch" type="xml">
+                <search string="ModelTitle">
+                    <group expand="1" string="Group By">
+                        <filter string="name" name="name" context="{'group_by':'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="rental_additional_service_tree_view" model="ir.ui.view">
+            <field name="name">rental additional service tree</field>
+            <field name="model">rental.additional.service</field>
+            <field name="arch" type="xml">
+                <tree string="rental product type">
+                    <field name="name"/>
+                    <field name="service_type"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

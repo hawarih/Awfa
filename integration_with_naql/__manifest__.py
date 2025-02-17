@@ -1,0 +1,41 @@
+
+{
+    'name': 'integration_with_naql',
+    'version': '1.0',
+    'summary': 'Auto-generated module for integration_with_naql',
+    'author': 'Generated Script',
+    'category': 'Custom',
+    'depends': ['customer_rental'],
+    'data': [
+        'security/ir.model.access.csv',
+        
+        'data/product_product.xml',
+        'data/product_template.xml',
+        'data/res_groups.xml',
+        
+        'views/account_journal_view.xml',
+        'views/close_naql_contract_view.xml',
+        'views/customer_rental_policy_view.xml',
+        'views/extend_wizard_view.xml',
+        'views/extended_coverage_view.xml',
+        'views/get_data_view.xml',
+        'views/inspection_wizard_view.xml',
+        'views/naql_create_contract_view.xml',
+        'views/naql_lookups_view.xml',
+        'views/naql_main_close_code_view.xml',
+        'views/naql_sub_close_code_view.xml',
+        'views/naql_suspend_code_view.xml',
+        'views/otp_confirm_view.xml',
+        'views/rental_contract_view.xml',
+        'views/res_config_settings_view.xml',
+        'views/res_country_view.xml',
+        'views/stock_location_view.xml',
+        'views/suspend_naql_contract_view.xml',
+        'views/view_naql_contract_wizard_view.xml',
+        
+        'views/action_act_window.xml',
+        'views/menu_items.xml',
+],
+    'installable': True,
+    'application': False,
+}

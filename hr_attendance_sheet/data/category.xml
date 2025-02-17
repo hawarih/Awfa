@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_attendance_sheet.module_category_attendance_sheet" model="ir.module.category">
+            <field name="name">Attendance Sheet</field>
+            <field name="description">Helps you manage Attendance sheet processes.</field>
+            <field name="sequence">6</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

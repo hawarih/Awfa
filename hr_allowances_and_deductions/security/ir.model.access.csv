@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+allowance_deduction_name_id,allowance_deduction_name,model_allowance_deduction,,1,1,1,1
+input_times_name_id,input_times_name,model_input_times,,1,1,1,1
+settlement_line_name_id,settlement_line_name,model_settlement_line,,1,1,1,1

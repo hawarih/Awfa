@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_notification_document_ir_actions_server" model="ir.actions.server">
+            <field name="name">Generate Document Notification</field>
+            <field name="model_id" ref="adjustment_docs.model_hr_document_notification"/>
+            <field name="state">code</field>
+            <field name="code">model.notification_document()</field>
+        </record>
+    </data>
+</odoo>

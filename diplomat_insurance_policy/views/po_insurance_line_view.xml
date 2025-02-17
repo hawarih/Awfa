@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="po_insurance_line_form_id" model="ir.ui.view">
+            <field name="name">po.insurance.line.form</field>
+            <field name="model">po.insurance.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="purchase_id" invisible="1"/>
+                                <field name="current_date" readonly="True"/>
+                                <field name="insurance_id" options="{'no_open': True, 'no_create': True}" domain="[('state', '=', 'running')]"/>
+                            </group>
+                            <group>
+                                <field name="insurance_value"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="insurance_line_ids" domain="[('order_id', '=', purchase_id), ('vehicle_id', '!=', False), ('vehicle_id.has_insurance', '=', False)]" widget="one2many" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="vehicle_id"/>
+                                    <field name="license_plate"/>
+                                    <field name="vin_sn"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="add_insurance" string="Add Insurance" type="object" class="oe_highlight"/>
+                    or
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

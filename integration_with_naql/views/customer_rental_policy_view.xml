@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data>
+          <record id="view_customer_rental_policy_form_inherit" model="ir.ui.view">
+               <field name="name">customer.rental.policy.form.inherit</field>
+               <field name="model">customer.rental.policy</field>
+               <field name="inherit_id" ref="customer_rental.customer_rental_policy_form"/>
+               <field name="arch" type="xml">
+                    <xpath expr="//field[@name='related_plan']" position="after">
+                         <field name="naql_policy"/>
+                    </xpath>
+               </field>
+          </record>
+     </data>
+</odoo>

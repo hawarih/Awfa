@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_loans_id" name="Advance Salary" sequence="5" />
+        <menuitem id="advance_salary_categ_id" name="Advance Salary "
+                            parent="hr_advance.menu_loans_id" action="hr_advance.advance_salary_action_id" sequence="5" />
+        <menuitem id="advance_salary_type_categ_id" name="Advance Salary Type" sequence="10" 
+                            parent="hr_advance.menu_loans_id" action="hr_advance.advance_salary_type_action_id"/>
+    </data>
+</odoo>

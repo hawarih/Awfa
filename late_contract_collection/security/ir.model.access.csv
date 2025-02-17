@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+add_statement_wizard_name_id,add_statement_wizard_name,model_add_statement_wizard,,1,1,1,1
+cancel_arrest_warrant_name_id,cancel_arrest_warrant_name,model_cancel_arrest_warrant,,1,1,1,1
+cancel_arrest_warrant_wizard_name_id,cancel_arrest_warrant_wizard_name,model_cancel_arrest_warrant_wizard,,1,1,1,1
+generalization_name_id,generalization_name,model_generalization,,1,1,1,1
+generalization_wizard_name_id,generalization_wizard_name,model_generalization_wizard,,1,1,1,1
+statement_name_id,statement_name,model_statement,,1,1,1,1

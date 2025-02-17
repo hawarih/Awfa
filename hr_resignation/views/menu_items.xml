@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="employee_resignation" name="Resignation" sequence="21" />
+        
+        <menuitem id="employee_resignation_approved" name="Approved Resignation" 
+                    action="hr_resignation.view_approved_resignation" 
+                    parent="hr_resignation.employee_resignation" sequence="4"/>
+
+        <menuitem id="employee_resignation_configration" name="Configration" 
+                    parent="hr_resignation.employee_resignation" sequence="500"/>
+
+        <menuitem id="employee_resignation_request" name="Resignation Request" 
+                    action="hr_resignation.view_employee_resignation" 
+                    parent="hr_resignation.employee_resignation" sequence="4"/>
+
+        <menuitem id="menu_final_sattelment" name="EOS Calculations" 
+                    action="hr_resignation.action_view_hr_hr_eos_resignation" 
+                    parent="hr_resignation.employee_resignation" sequence="10"/>
+
+        <menuitem id="menu_hr_resignation_reason" name="Resignation Type" 
+                    action="hr_resignation.action_hr_resignation_reason" 
+                    parent="hr_resignation.employee_resignation_configration" sequence="100"/>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_department_shift_lines_tree" model="ir.ui.view">
+            <field name="name">hr.department.shift.lines.tree</field>
+            <field name="model">hr.department.shift.lines</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="work_schedule"/>
+                    <field name="start_date" required="True"/>
+                    <field name="start_date_hijri" string="Start Hijri Date" optional="hide"/>
+                    <field name="end_date" required="True"/>
+                    <field name="end_date_hijri" string="End Hijri Date" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

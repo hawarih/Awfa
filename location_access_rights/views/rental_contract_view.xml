@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="rental_contract_locations_form_inherit" model="ir.ui.view">
+            <field name="name">Rental Contract Locations Form Inherit</field>
+            <field name="model">rental.contract</field>
+            <field name="inherit_id" ref="customer_rental.rental_contract_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fleet_vehicle_id']" position="after">
+                    <field name="user_location_ids" invisible="1" widget="many2many_tags"/>
+                    <field name="user_allowed_location_ids" invisible="1" widget="many2many_tags"/>
+                </xpath>
+
+                <xpath expr="//field[@name='fleet_vehicle_id']" position="attributes">
+                    <attribute name="domain">[('location_id_store','in',user_location_ids),('state_id.type', '=', 'ready_rent')]</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='drop_off_branch_id']" position="attributes">
+                    <attribute name="domain">[('id','in',user_allowed_location_ids)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

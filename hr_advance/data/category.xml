@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_advance.advance_salary_groups" model="ir.module.category">
+            <field name="name">Advance Salary Groups</field>
+            <field name="sequence">7</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

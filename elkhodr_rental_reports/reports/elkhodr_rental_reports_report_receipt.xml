@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="elkhodr_rental_reports.report_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page" dir="rtl" style="page-break-inside: avoid;">
+                        <link rel="stylesheet" href="/elkhodr_rental_reports/static/src/css/font_css.css" />
+                        <t t-call="elkhodr_rental_reports.elkhodr_header_template_id" />
+                        <t t-if="o.is_internal_transfer == True">
+                            <t t-call="elkhodr_rental_reports.sanad_transfer_t_top_template_id" />
+                            <t t-call="elkhodr_rental_reports.sanad_transfer_t_mid_template_id" />
+                            <t t-call="elkhodr_rental_reports.sanad_transfer_t_bottom_template_id" />
+                        </t>
+                        <t t-else="">
+                            <t t-if="o.payment_type == 'outbound'">
+                                <t t-call="elkhodr_rental_reports.sanad_sarf_top_template_id" />
+                                <t t-call="elkhodr_rental_reports.sanad_sarf_mid_template_id" />
+                                <t t-call="elkhodr_rental_reports.sanad_sarf_bottom_template_id" />
+                            </t>
+                            <t t-else="">
+                                <t t-call="elkhodr_rental_reports.sanad_amr_top_template_id" />
+                                <t t-call="elkhodr_rental_reports.sanad_amr_mid_template_id" />
+                                <t t-call="elkhodr_rental_reports.sanad_amr_bottom_template_id" />
+                            </t>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="sanad_transfer_t_top_template_id">
+        <div class="row" style="justify-content: bottom">
+            <div class="col-5 text-end" style="font-size :20px;text-align:end;">
+                <Strong>
+                    سند رقم:
+                </Strong>
+                <Strong t-field="o.name" style=" color: #ff0000;"/>
+            </div>
+            <div class="col-3 text-center" style="font-size :30px;text-align:center;">
+                <Strong style=" color: #ff0000;">
+                    سند تحويل
+                </Strong>
+            </div>
+            <div class="col-4 text-start" style="text-align:start;">
+                <Strong>
+                    تاريخ الطباعة:
+                </Strong>
+                <span t-esc="time.strftime('%Y-%m-%d')"/>
+                <span t-esc="time.strftime('%H:%M')"/>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_transfer_t_mid_template_id">
+        <div class="row">
+            <div class="row col-6 text-end" style="text-align:end;">
+                <div class="col-3 text-end" style="text-align:end;">
+                    <Strong>
+                        تاريخ السند:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        اسم الموظف:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        مبلغ وقدره:
+                    </Strong>
+                </div>
+                <div class="col-6 text-end" style="text-align:end;">
+                    <Strong t-field="o.date"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.partner_id"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.word_num"/>
+                </div>
+            </div>
+            <div class="col-6" style="text-align:end;">
+                <Strong>
+                    الفرع:
+                </Strong>
+                <Strong t-field="o.journal_id"/>
+                <br/>
+                <Strong>
+                    تحويل الي:
+                </Strong>
+                <Strong t-field="o.destination_journal_id"/>
+                <br/>
+                <table class="table table-bordered" style="border: 2px solid black;width:50%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">قيمة التحويل</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.amount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_transfer_t_bottom_template_id">
+        <div class="text-right" style="text-align:right">
+            <Strong style="padding-left:16px;">
+                البيان:
+            </Strong>
+            <Strong t-field="o.ref"/>
+        </div>
+        <br/>
+        <div>
+            <table class="table table-bordered" style="border: 2px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:right;">
+                <thead>
+                    <tr>
+
+                        <td height="50">
+                            <Strong style="padding-left:20px;">
+                                توريد الي:
+                            </Strong>
+                            <Strong t-field="o.destination_journal_id"/>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-6 text-end" style="text-align:end;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:auto;margin-right:0;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">توقيع المستلم</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+<!--                                <img style="width: 200px; height: 80px;"-->
+<!--                                     t-attf-src="data:image/png;base64,{{o.payment_signature}}"/>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">اسم الموظف</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.create_uid"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+    <template id="sanad_sarf_top_template_id">
+        <div class="row" style="justify-content: bottom">
+            <div class="col-5 text-end" style="font-size :20px;text-align:end;">
+                <Strong>
+                    سند رقم:
+                </Strong>
+                <Strong t-field="o.name" style=" color: #ff0000;"/>
+            </div>
+            <div class="col-2 text-center" style="font-size :30px;text-align:center;">
+                <Strong style=" color: #ff0000;">
+                    سند صرف
+                </Strong>
+            </div>
+            <div class="col-5 text-start" style="text-align:start;">
+                <Strong>
+                    تاريخ الطباعة:
+                </Strong>
+                <span t-esc="time.strftime('%Y-%m-%d')"/>
+                <span t-esc="time.strftime('%H:%M')"/>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_sarf_mid_template_id">
+        <div class="row">
+            <div class="row col-6 text-end" style="text-align:end;">
+                <div class="col-3 text-end" style="text-align:end;">
+                    <Strong>
+                        تاريخ السند:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        اسم العميل:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        الرقم الضريبي:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        مبلغ وقدره:
+                    </Strong>
+                </div>
+                <div class="col-6 text-end" style="text-align:end;">
+                    <Strong t-field="o.date"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.partner_id"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.partner_id.vat"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.word_num"/>
+                </div>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <Strong style="padding-left: 16px;">
+                    الفرع:
+                </Strong>
+                <Strong t-field="o.journal_id"/>
+                <br/>
+                <table class="table table-bordered" style="border: 2px solid black;width:50%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">قيمة السند</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.amount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_sarf_bottom_template_id">
+        <div class="text-right" style="text-align:right">
+            <Strong style="padding-left: 16px;">
+                رقم العقد
+            </Strong>
+            <Strong t-field="o.ref"/>
+        </div>
+        <br/>
+        <div>
+            <table class="table table-bordered" style="border: 2px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:right;">
+                <thead>
+                    <tr>
+                        <td height="50">
+                            <strong style="font-weight: bold;padding-left: 20px;">توريد الي :</strong>
+                            <t t-if="o.is_internal_transfer == True">
+                                <Strong t-field="o.destination_journal_id"/>
+                            </t>
+                            <t t-else="">
+                                <Strong t-field="o.description"/>
+                            </t>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-6 text-end" style="text-align:end;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:auto;margin-right:0;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">توقيع العميل</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+<!--                                <img style="width: 200px; height: 80px;"-->
+<!--                                     t-attf-src="data:image/png;base64,{{o.payment_signature}}"/>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">اسم الموظف</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.create_uid"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+    <template id="sanad_amr_top_template_id">
+        <div class="row" style="justify-content: bottom">
+            <div class="col-5 text-end" style="font-size :20px;text-align:end;">
+                <Strong>
+                    سند رقم:
+                </Strong>
+                <Strong t-field="o.name" style=" color: #ff0000;"/>
+            </div>
+            <div class="col-2 text-center" style="font-size :30px;text-align:center;">
+                <Strong style=" color: #ff0000;">
+                    سند قبض
+                </Strong>
+            </div>
+            <div class="col-5 text-start" style="text-align:start;">
+                <Strong>
+                    تاريخ الطباعة:
+                </Strong>
+                <span t-esc="time.strftime('%Y-%m-%d')"/>
+                <span t-esc="time.strftime('%H:%M')"/>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_amr_mid_template_id">
+        <div class="row">
+            <div class="row col-6 text-end" style="text-align:end;">
+                <div class="col-3 text-end" style="text-align:end;">
+                    <Strong>
+                        تاريخ السند:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        اسم العميل:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        مبلغ وقدره:
+                    </Strong>
+                </div>
+                <div class="col-6 text-end" style="text-align:end;">
+                    <Strong t-field="o.date"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.partner_id"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.word_num"/>
+                </div>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <Strong style="padding-left: 16px;">
+                    الفرع:
+                </Strong>
+                <Strong t-field="o.journal_id"/>
+                <br/>
+                <table class="table table-bordered" style="border: 2px solid black;width:50%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">قيمة السند</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.amount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="sanad_amr_bottom_template_id">
+        <div class="text-right" style="text-align:right">
+            <Strong style=" padding-left: 16px;">
+                رقم العقد:
+            </Strong>
+            <Strong t-field="o.ref"/>
+        </div>
+        <br/>
+        <div>
+            <table class="table table-bordered" style="border: 2px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:right;">
+                <thead>
+                    <tr>
+                        <td height="50">
+                            <Strong t-field="o.description"/>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-6 text-end" style="text-align:end;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:auto;margin-right:0;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;padding-left: 16px;">توقيع العميل</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+<!--                                <img style="width: 200px; height: 80px;"-->
+<!--                                     t-attf-src="data:image/png;base64,{{o.payment_signature}}"/>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;padding-left: 16px;">اسم الموظف</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.create_uid"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+
+
+    <record id="elkhodr_rental_reports.action_report_receipt" model="ir.actions.report">
+        <field name="name">طباعة سند</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">elkhodr_rental_reports.report_receipt</field>
+        <field name="report_file">elkhodr_rental_reports.report_receipt</field>
+        <field name="binding_model_id" ref="model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

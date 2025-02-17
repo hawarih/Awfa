@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_fleet_vehicle_view_kanban" model="ir.ui.view">
+            <field name="name">fleet.vehicle.tree.inherit.po</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_kanban_tags_section')]" position="after">
+                    <div class="o_secondary">
+                        <field name="state_id"/>
+                    </div>
+                </xpath>
+                <xpath expr="//div[hasclass('o_kanban_tags_section')]" position="after">
+                    <div class="o_secondary">
+                        <field name="gps_name"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="gps_inherit_fleet_vehicle_info_form" model="ir.ui.view">
+            <field name="name">gps.inherit.fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="gps_history" type="object" class="oe_stat_button" icon="fa-map-marker">
+                        <span>GPS</span>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

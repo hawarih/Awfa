@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_layout_header" name="custom_layout_header">
+        <t t-name="passion_petty_cash_report_pdf.custom_layout_header">
+            <div class="header" style="text-align: right;width:100%;" dir="rtl">
+                <div class="row">
+                    <div class="col-8" style="font-size: 30px;font-weight: bold;">
+                        <!--                    <span>شركة بنش مارك لتنظيم المعارض</span>-->
+                        <span>
+                            <t t-esc="res_company.name"/>
+                        </span>
+                        <!--                    <span>-->
+                        <!--                        <t t-esc="year"/>-->
+                        <!--                    </span>-->
+                    </div>
+                    <div class="col-4">
+                        <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" alt="Logo" style="max-width: 70%;max-height: 140px;" class="float-start"/>
+                    </div>
+                </div>
+            </div>
+            <div class="article" style="font-size:12px;font-weight: bold;">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer"></div>
+        </t>
+    </template>
+
+    <template id="passion_petty_cash_report_pdf.petty_report_template">
+        <t t-call="web.html_container">
+            <t t-call="passion_petty_cash_report_pdf.custom_layout_header">
+                <div class="page" dir="rtl" style="font-size: 17px;">
+                    <div class="row">
+                        <div class="col-4 text-left">
+
+                        </div>
+                        <div class="col-4 text-center">
+                            <div style="border:2px solid black;width:100%;font-size:22px;font-weight: bold;">
+                                <h2>كشف حساب</h2>
+                            </div>
+                        </div>
+                        <div class="col-4 text-left">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-3 text-left">
+                            <span>رقم الحساب/</span>
+                        </div>
+                        <div class="col-3 text-right">
+                            <span t-esc="account_number" />
+                        </div>
+                        <div class="col-2 text-left">
+                            <span>اسم الحساب /</span>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span t-esc="employee" />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-2" />
+                        <div class="col-2 text-left">
+                            <span>من تاريخ/</span>
+                        </div>
+                        <div class="col-2 text-right">
+                            <span t-esc="date_from" />
+                        </div>
+                        <div class="col-2 text-left">
+                            <span>الى تاريخ/</span>
+                        </div>
+                        <div class="col-2 text-right">
+                            <span t-esc="date_to" />
+                        </div>
+                        <div class="col-2" />
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>
+                                    <strong>البيان</strong>
+                                </th>
+                                <th>
+                                    <strong>رقم القيد</strong>
+                                </th>
+                                <th>
+                                    <strong>تاريخ المستند</strong>
+                                </th>
+
+                                <th>
+                                    <strong>مدين</strong>
+                                </th>
+                                <th>
+                                    <strong>دائن</strong>
+                                </th>
+                                <th>
+                                    <strong>الرصيد</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="lines" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <t t-esc="line['description']" />
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['doc_number']" />
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['date']" />
+                                    </td>
+
+                                    <td class="text-center">
+                                        <t t-esc="line['debit']" />
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['credit']" />
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['balance']" />
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td class="text-center">الرصيد النهائي</td>
+                                <td />
+                                <td class="text-center">
+                                    <t t-esc="date_to" />
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="totals['total_debit']" />
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="totals['total_credit']" />
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="totals['balance']" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row mt-0 mb-0">
+                        <div class="col-4 text-center">
+                            <p>المحاسب :  </p>
+                            <p>...............................</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p>المدير المالي :  </p>
+                            <p>...............................</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p>المستلم :  </p>
+                            <p>...............................</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </t>
+        </t>
+
+    </template>
+
+    <record id="passion_petty_cash_report_pdf.petty_report" model="ir.actions.report">
+        <field name="name">Petty Cash Report</field>
+        <field name="model">petty.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">passion_petty_cash_report_pdf.petty_report_template</field>
+        <field name="report_file">passion_petty_cash_report_pdf.petty_report_template</field>
+        <field name="binding_model_id" ref="model_petty_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

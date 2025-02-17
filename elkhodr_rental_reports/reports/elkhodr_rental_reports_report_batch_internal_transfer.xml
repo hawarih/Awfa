@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="elkhodr_rental_reports.report_batch_internal_transfer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page" dir="rtl" style="page-break-inside: avoid">
+                        <link rel="stylesheet" href="/elkhodr_rental_reports/static/src/css/font_css.css" />
+                        <t t-call="elkhodr_rental_reports.elkhodr_header_template_id" />
+                        <t t-call="elkhodr_rental_reports.sanad_transfer_top_template_id" />
+                        <t t-call="elkhodr_rental_reports.sanad_transfer_mid_template_id" />
+                        <t t-call="elkhodr_rental_reports.sanad_transfer_bottom_template_id" />
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="elkhodr_rental_reports.elkhodr_header_template_id">
+        <div class="header" dir="rtl">
+                <link rel="stylesheet" href="/elkhodr_rental_reports/static/src/css/font_css.css"/>
+                <div class="row" style="report_header_style">
+                    <div class="col-9" style="text-align: right ; font-size: 20px; " dir="rtl">
+                        <strong>
+                            اسم الشركة:
+                        </strong>
+                        <span t-field="o.company_id.name"/>
+                        <br/>
+                        <strong>
+                            عنوان الشركة:
+                        </strong>
+                        <span t-field="o.company_id.street"/>
+                        <br/>
+                        <strong>
+                            جوال الشركة:
+                        </strong>
+                        <span t-field="o.company_id.mobile"/>
+                        <br/>
+                        <strong>
+                            البريد الالكتروني:
+                        </strong>
+                        <span t-field="o.company_id.email"/>
+                        <br/>
+                        <strong>
+                            الموقع الالكتروني:
+                        </strong>
+                        <span t-field="o.company_id.website"/>
+                        <br/>
+                    </div>
+                    <div class="col-3" style="text-align: left" dir="ltr">
+                        <img t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                    </div>
+                </div>
+
+            </div>
+    </template>
+
+    <template id="elkhodr_rental_reports.sanad_transfer_top_template_id">
+        <div class="row" style="justify-content: bottom">
+            <div class="col-5 text-end" style="font-size :20px;text-align:end;">
+                <Strong>
+                    سند رقم:
+                </Strong>
+                <Strong t-field="o.name" style=" color: #ff0000;"/>
+            </div>
+            <div class="col-3 text-center" style="font-size :30px;text-align:center;">
+                <Strong style=" color: #ff0000;">
+                    سند تحويل
+                </Strong>
+            </div>
+            <div class="col-4 text-start" style="text-align:start;">
+                <Strong>
+                    تاريخ الطباعة:
+                </Strong>
+                <span t-esc="time.strftime('%Y-%m-%d')"/>
+                <span t-esc="time.strftime('%H:%M')"/>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="elkhodr_rental_reports.sanad_transfer_mid_template_id">
+        <div class="row">
+            <div class="row col-6 text-end" style="text-align:end;">
+                <div class="col-4 text-end" style="text-align:end;">
+                    <Strong>
+                        تاريخ السند:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        اسم الموظف:
+                    </Strong>
+                    <br/>
+                    <br/>
+                    <Strong>
+                        مبلغ وقدره:
+                    </Strong>
+                </div>
+                <div class="col-6 text-end" style="text-align:end;">
+                    <Strong t-field="o.date"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.create_uid"/>
+                    <br/>
+                    <br/>
+                    <Strong t-field="o.batch_internal_transfer_line_ids.word_num"/>
+                </div>
+            </div>
+            <div class="col-6" style="text-align:end;">
+                <Strong>
+                    الفرع:
+                </Strong>
+                <Strong t-field="o.batch_internal_transfer_line_ids.journal_id"/>
+                <br/>
+                <Strong>
+                    تحويل الي:
+                </Strong>
+                <Strong t-field="o.batch_internal_transfer_line_ids.dest_journal_id"/>
+                <br/>
+                <table class="table table-bordered" style="border: 2px solid black;width:50%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">قيمة التحويل</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.batch_internal_transfer_line_ids.amount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr style="height:6px;border-width:10;color:rgb(0,0,0) ;background-color:rgb(0,0,0);"/>
+    </template>
+
+    <template id="elkhodr_rental_reports.sanad_transfer_bottom_template_id">
+        <div class="text-right" style="text-align:right">
+            <Strong style="padding-left: 16px;">
+                البيان:
+            </Strong>
+            <Strong t-field="o.batch_internal_transfer_line_ids.description"/>
+        </div>
+        <br/>
+        <div>
+            <table class="table table-bordered" style="border: 2px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:right;">
+                <thead>
+                    <tr>
+                        <td height="50">
+                            <Strong style="padding-left:20px;">
+                                توريد الي:
+                            </Strong>
+                            <Strong t-field="o.description"/>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-6 text-end" style="text-align:end;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:auto;margin-right:0;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">توقيع المستلم</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 text-start" style="text-align:start;">
+                <table class="table table-bordered" style="border: 2px solid black;width:90%;margin-left:0;margin-right:auto;text-align:center;">
+                    <thead>
+                        <tr>
+                            <td class="text-center">
+                                <strong style="font-weight: bold;">اسم الموظف</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center" height="50">
+                                <Strong t-field="o.create_uid"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+
+    <record id="elkhodr_rental_reports.action_report_batch_internal_transfer" model="ir.actions.report">
+        <field name="name">Batch Internal Transfer</field>
+        <field name="model">batch.internal.transfer</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">elkhodr_rental_reports.report_batch_internal_transfer</field>
+        <field name="report_file">elkhodr_rental_reports.report_batch_internal_transfer</field>
+        <field name="binding_model_id" ref="model_batch_internal_transfer"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

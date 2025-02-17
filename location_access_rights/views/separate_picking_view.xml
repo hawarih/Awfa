@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="separate_picking_deliver_to_form_inherit" model="ir.ui.view">
+            <field name="name">separate_picking_deliver_to_form_inherit</field>
+            <field name="model">separate.picking</field>
+            <field name="inherit_id" ref="diplomat_purchase_order_separate_picking.separate_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_order_id']" position="after">
+                    <field name="picking_type_ids" invisible="1" widget="many2many_tags"/>
+                </xpath>
+
+                <xpath expr="//field[@name='stock_picking_type_id']" position="attributes">
+                    <attribute name="domain">[('id','in',parent.picking_type_ids)]</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+authorization_country_id,authorization_country,model_authorization_country,,1,1,1,1
+close_naql_contract_id,close_naql_contract,model_close_naql_contract,,1,1,1,1
+extended_coverage_id,extended_coverage,model_extended_coverage,,1,1,1,1
+get_data_id,get_data,model_get_data,,1,1,1,1
+inspection_wizard_name_id,inspection_wizard_name,model_inspection_wizard,,1,1,1,1
+naql_contract_logs_id,naql_contract_logs,model_naql_contract_logs,,1,1,1,1
+naql_create_contract_name_id,naql_create_contract_name,model_naql_create_contract,,1,1,1,1
+naql_lookups_id,naql_lookups,model_naql_lookups,,1,1,1,1
+naql_main_close_code_id,naql_main_close_code,model_naql_main_close_code,,1,1,1,1
+naql_sub_close_code_id,naql_sub_close_code,model_naql_sub_close_code,,1,1,1,1
+naql_suspend_code_id,naql_suspend_code,model_naql_suspend_code,,1,1,1,1
+otp_confirm_name_id,otp_confirm_name,model_otp_confirm,,1,1,1,1
+suspend_naql_contract_id,suspend_naql_contract,model_suspend_naql_contract,,1,1,1,1
+vehicle_naql_contract_wizard_id,vehicle_naql_contract_wizard,model_vehicle_naql_contract_wizard,,1,1,1,1
+view_naql_contract_wizard_id,view_naql_contract_wizard,model_view_naql_contract_wizard,,1,1,1,1

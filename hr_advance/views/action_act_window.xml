@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="actiom_close_advance_wizard" model="ir.actions.act_window">
+            <field name="name">Close Advance</field>
+            <field name="res_model">close.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="actiom_close_advances_wizard" model="ir.actions.act_window">
+            <field name="name">Close Advance</field>
+            <field name="res_model">close.advances</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="actiom_pay_wizard" model="ir.actions.act_window">
+            <field name="name">Payment</field>
+            <field name="res_model">pay.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="advance_salary_action_id" model="ir.actions.act_window">
+            <field name="name">Advance Salary</field>
+            <field name="res_model">advance.salary</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="advance_salary_type_action_id" model="ir.actions.act_window">
+            <field name="name">Advance Salary Type</field>
+            <field name="res_model">advance.salary.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="payment_advance_action_server" model="ir.actions.server">
+            <field name="name">Close Advances</field>
+            <field name="model_id" ref="hr_advance.model_advance_salary"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.action_close_advances(records)
+            </field>
+        </record>
+    </data>
+</odoo>

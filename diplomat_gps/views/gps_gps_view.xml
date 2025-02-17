@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="gps_form" model="ir.ui.view">
+            <field name="name">gps.form</field>
+            <field name="model">gps.gps</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" groups="diplomat_gps.gps_confirmer"/>
+                        <button name="action_confirm" type="object" string="Reassign" class="oe_highlight" states="not working" groups="diplomat_gps.gps_confirmer"/>
+                        <button name="action_reset_to_draft" type="object" string="Reset to Draft" attrs="{'invisible': ['|',('state', '=', 'draft'),('state', '=', 'lost')]}" groups="diplomat_gps.gps_reset_to_draft"/>
+                        <button name="action_clear" type="object" string="Clear" class="oe_highlight" states="working" groups="diplomat_gps.gps_clear"/>
+                        <button name="action_scrap_gps" type="object" string="Scrap GPS" class="oe_highlight" states="not working" groups="diplomat_gps.gps_scrap"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_scrap_ids" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('scrap_ids', '=', [])]}">
+                                <span>Scrap GPS</span>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="lot_ids" invisible="1"/>
+                                <field name="lot_id" attrs="{'invisible': [('related_product', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="assign_vehicle" attrs="{'required': [('state', '=', 'draft')],'readonly': ['|', ('state', '=', 'working'), ('state', '=', 'lost')]}"/>
+                            </group>
+                            <group>
+                                <field name="related_product" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_location_id" invisible="1"/>
+                                <field name="location_id" domain="[('allowed_transfer', '!=', False)]" attrs="{'invisible': [('related_product', '=', False)], 'readonly': [('state', 'not in', ('working','not working'))]}" groups="diplomat_gps.gps_location" force_save="True"/>
+                                <field name="scrap_ids" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="gps_search" model="ir.ui.view">
+            <field name="name">gps.search</field>
+            <field name="model">gps.gps</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="lot_id"/>
+                    <field name="location_id"/>
+                    <field name="assign_vehicle"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group by...">
+                        <filter string="Serial Number" name="lot_id" domain="[]" context="{'group_by': 'lot_id'}"/>
+                        <filter string="Location" name="location_id" domain="[]" context="{'group_by': 'location_id'}"/>
+                        <filter string="Assign Vehicle" name="assign_vehicle" domain="[]" context="{'group_by': 'assign_vehicle'}"/>
+                        <filter string="State" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="gps_tree" model="ir.ui.view">
+            <field name="name">gps.tree</field>
+            <field name="model">gps.gps</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="lot_id"/>
+                    <field name="location_id"/>
+                    <field name="assign_vehicle"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

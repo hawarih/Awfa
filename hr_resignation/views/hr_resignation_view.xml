@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="employee_resignation_form" model="ir.ui.view">
+            <field name="name">hr.resignation.form</field>
+            <field name="model">hr.resignation</field>
+            <field name="arch" type="xml">
+                <form string="Employee Resignation">
+                    <header>
+                        <button name="action_approve" type="object" string="Approve" states="draft" class="oe_highlight"/>
+                        <button name="action_direct_manager_approve" type="object" string="Approve" class="oe_highlight" attrs="{'invisible':['|',('check_direct_manager','=',False),('state','!=','wait_direct_manager')]}"/>
+                        <button name="action_direct_manager_refuse" type="object" string="Refuse" attrs="{'invisible':['|',('check_direct_manager','=',False),('state','!=','wait_direct_manager')]}"/>
+
+                        <button name="action_hr_approve" type="object" string="Approve" groups="hr_resignation.group_hr_officer" states="wait_hr_officer" class="oe_highlight"/>
+                        <button name="action_reject" type="object" string="Refuse" states="wait_hr_officer" groups="hr_resignation.group_hr_officer"/>
+
+                        <button name="action_hr_manager_approve" type="object" string="Approve" groups="hr_resignation.group_hr_manager" states="wait_hr_manager" class="oe_highlight"/>
+                        <button name="action_reject" type="object" string="Refuse" states="wait_hr_manager" groups="hr_resignation.group_hr_manager"/>
+
+                        <button name="action_gm_approve" type="object" groups="hr_resignation.group_gm_manager" string="Approve" states="wait_gm_manager" class="oe_highlight"/>
+                        <button name="action_gm_refuse" type="object" string="Refuse" states="wait_gm_manager" groups="hr_resignation.group_gm_manager"/>
+
+                        <button string="Set to Draft" type="object" groups="hr.group_hr_manager" name="reset_to_draft" states="approved"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,wait_direct_manager,wait_gm_manager,wait_hr_officer,wait_hr_manager,approved"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Employee Details">
+                                <field name="read_only" invisible="1"/>
+                                <field name="click_date" invisible="0"/>
+                                <field name="check_direct_manager" invisible="1"/>
+                                <field name="employee_id" attrs="{'readonly': ['|',('read_only','=',False),('state','=','approved')]}"/>
+                                <field name="department_id"/>
+                                <field name="employee_contract" invisible="1"/>
+                                <field name="job_id"/>
+                                <field name="contract_id"/>
+                            </group>
+                            <group string="Dates">
+                                <field name="joined_date"/>
+                                <field name="resign_confirm_date" invisible="1"/>
+                                <field name="expected_revealing_date" attrs="{'readonly': [('state','=','approved')]}"/>
+                                <field name="approved_revealing_date" groups="hr.group_hr_user"/>
+                                <field name="notice_period" invisible="1"/>
+                                <field name="notification" groups="base.group_system"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group string="Resignation Details">
+                                <field name="resignation_type" string="Type" groups="hr.group_hr_user" invisible="1"/>
+                                <field name="resignation_reason_id" attrs="{'readonly': [('state','=','approved')]}"/>
+                                <field name="reason" attrs="{'readonly': [('state','=','approved')]}"/>
+                            </group>
+                            <group>
+                                <field name="custody_state"/>
+                                <field name="petty_cash_state"/>
+                            </group>
+                        </group>
+                        <group string="Exit Progress" col="2">
+                            <group>
+                                <field name="emp_confirm_date" attrs="{'invisible':[('state','=','draft')]}"/>
+                                <field name="dep_manager_confirm_date" attrs="{'invisible':[('state','=','draft')]}"/>
+                                <field name="gm_confirm_date" attrs="{'invisible':[('state','=','draft')]}"/>
+                                <field name="final_sattalment_id"/>
+                            </group>
+                            <group col="2" invisible="1">
+                                <field name="progress_bar" widget="percentpie" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="activity_ids"/>
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="employee_resignation_tree" model="ir.ui.view">
+            <field name="name">hr.resignation.tree</field>
+            <field name="model">hr.resignation</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Resignation">
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="employee_contract" invisible="1"/>
+                    <field name="job_id"/>
+                    <field name="contract_id"/>
+                    <field name="joined_date" readonly="1"/>
+                    <field name="expected_revealing_date"/>
+                    <field name="approved_revealing_date"/>
+                    <field name="resignation_type"/>
+                    <field name="notice_period" invisible="1"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_rental_contract_form_inherit" model="ir.ui.view">
+            <field name="name">rental.contract.form.inherit</field>
+            <field name="model">rental.contract</field>
+            <field name="inherit_id" ref="customer_rental.rental_contract_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_tajeer" string="Tajeer" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page name="naql" string="Naql">
+                        <group>
+                            <field name="naql_id" readonly="1"/>
+                            <field name="naql_contract_number" readonly="1"/>
+                            <field name="naql_token_number" readonly="1"/>
+                            <field name="naql_contract_state" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='auth_type']" position="replace">
+                    <field name="naql_authorization_type" required="0" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                    <field name="authorization_country_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))], 'required': [('naql_authorization_type', '=', '2')], 'invisible': [('naql_authorization_type', '!=', '2')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='additional_services']" position="after">
+                    <field name="extended_coverage_id" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}" domain="[('company_id','in',allowed_company_ids)]"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="pageControlWidget" owl="1">
+        <div class="o_widget o_widget_page_control_widget">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-2"></div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary" data-tooltip="Next" aria-label="Next" data-bounce-button="" title=""> Next </button>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+    </t>
+</templates>

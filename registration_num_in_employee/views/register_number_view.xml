@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="register_number_form" model="ir.ui.view">
+            <field name="name">register.number.form</field>
+            <field name="model">register.number</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- Hidden Fields -->
+                    <field name="registration_employee_number" invisible="1"/>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button type="object" name="get_employees_with_registration_number" class="oe_stat_button" icon="fa-users" attrs="{'invisible': [('registration_employee_number', '=', 0)]}">
+                                <field name="registration_employee_number" widget="statinfo" string="Employees"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="registration_number"/>
+                            <field name="identification_number"/>
+                            <field name="labour_office_number"/>
+                            <field name="insurance_subscription_number"/>
+                            <field name="location"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="register_number_tree" model="ir.ui.view">
+            <field name="name">register.number.tree</field>
+            <field name="model">register.number</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="registration_number"/>
+                    <field name="identification_number"/>
+                    <field name="labour_office_number"/>
+                    <field name="insurance_subscription_number"/>
+                    <field name="location"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

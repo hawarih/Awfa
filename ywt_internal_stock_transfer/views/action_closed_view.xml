@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_closed_form" model="ir.ui.view">
+            <field name="name">action.closed.form</field>
+            <field name="model">action.closed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="transfer_id" invisible="1"/>
+                    <div class="row">
+                        <field name="note" readonly="1"/>
+                    </div>
+                    <footer>
+                        <button string="Confirm" class="btn-primary" type="object" name="action_for_closed"/>
+                        <button string="Cancel" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

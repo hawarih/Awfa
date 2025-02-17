@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="employee_subgroup_form" model="ir.ui.view">
+            <field name="name">employee.subgroup.form</field>
+            <field name="model">employee.subgroup</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_subgroup_search" model="ir.ui.view">
+            <field name="name">employee.subgroup.search</field>
+            <field name="model">employee.subgroup</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Name" name="group_name" context="{'group_by':'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="employee_subgroup_tree" model="ir.ui.view">
+            <field name="name">employee.subgroup.tree</field>
+            <field name="model">employee.subgroup</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

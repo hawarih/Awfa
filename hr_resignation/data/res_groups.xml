@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_resignation.group_gm_manager" model="res.groups">
+            <field name="name">General Manager</field>
+            <field name='category_id' ref="hr_resignation.module_category_resignation"/>
+        </record>
+
+        <record id="hr_resignation.group_hr_manager" model="res.groups">
+            <field name="name">Hr Manager</field>
+            <field name='category_id' ref="hr_resignation.module_category_resignation"/>
+        </record>
+
+        <record id="hr_resignation.group_hr_officer" model="res.groups">
+            <field name="name">Hr Officer</field>
+            <field name='category_id' ref="hr_resignation.module_category_resignation"/>
+        </record>
+    </data>
+</odoo>

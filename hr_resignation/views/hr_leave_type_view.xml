@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_leave_type_form_inherit_remove_remaining" model="ir.ui.view">
+            <field name="name">hr.leave.type.form.business.trip</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_requests']" position="after">
+                    <field name="remove_remaining"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

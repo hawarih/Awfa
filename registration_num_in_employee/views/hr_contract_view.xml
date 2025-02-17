@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="custom_code_inherit_contract_form_view" model="ir.ui.view">
+            <field name="name">custom.code.inherit.hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="custom_codes.inherit_hr_contract_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='kafala']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='commission']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_hr_contract_form" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <field name="date_end" position="after">
+                    <field name="date_end_hijri" string="Hijri Date"/>
+                    <field name="end_date"/>
+                    <field name="end_date_hijri" string="Hijri Date"/>
+                </field>
+
+                <field name="date_start" position="after">
+                    <field name="date_start_hijri" string="Hijri Date"/>
+                </field>
+
+                <xpath expr="//field[@name='contract_type_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='contract_type_id'][2]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='job_id'][2]" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

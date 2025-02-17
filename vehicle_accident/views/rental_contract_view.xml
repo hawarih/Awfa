@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_insurance_policy_form" model="ir.ui.view">
+            <field name="name">inherit.rental.contract.form</field>
+            <field name="model">rental.contract</field>
+            <field name="inherit_id" ref="customer_rental.rental_contract_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('badge')]" position="after">
+                    <field name="is_accident" invisible="1"/>
+                    <div class="badge rounded-pill text-bg-danger" attrs="{'invisible' : ['|',('is_accident','=',False), ('state','not in',['open','closed','hold'])]}">
+                    Accident
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="branch_branch_menu" name="Branch" sequence="99" parent="hr.menu_human_resources_configuration" action="custom_codes.branch_branch_action"/>
+        <menuitem id="employee_group_menu" name="Employee Group" sequence="100" parent="hr.menu_human_resources_configuration" action="custom_codes.employee_group_action"/>
+        <menuitem id="employee_subgroup_menu" name="Employee Subgroup" sequence="101" parent="hr.menu_human_resources_configuration" action="custom_codes.employee_subgroup_action"/>
+    </data>
+</odoo> 

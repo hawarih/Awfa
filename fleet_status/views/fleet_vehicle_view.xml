@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_view_form_inherited" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.inherited</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('can_change_state', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="after">
+                    <field name="can_change_state" invisible="True"/>
+                    <field name="state_id" widget="statusbar" force_save="True" attrs="{'readonly': [('can_change_state', '=', False)],'invisible': [('can_change_state', '=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_view_kanban_inherited" model="ir.ui.view">
+            <field name="name">fleet.vehicle.kanban.inherited</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="records_draggable">False</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

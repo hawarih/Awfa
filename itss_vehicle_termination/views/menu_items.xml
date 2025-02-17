@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="vehicle_termination_menu" name="Vehicle Termination" 
+                    action="vehicle_termination_action" 
+                    parent="sale.sale_menu_root" sequence="35"/>
+    </data>
+</odoo>

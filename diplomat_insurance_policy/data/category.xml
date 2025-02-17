@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_insurance_policy.categ_insurance_management" model="ir.module.category">
+            <field name="name">Insurance Management</field>
+            <field name="sequence">1</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+maintenance_repair_task_line_name_id,maintenance_repair_task_line_name,model_maintenance_repair_task_line,base.group_user,1,1,1,1
+maintenance_spare_part_line_name_id,maintenance_spare_part_line_name,model_maintenance_spare_part_line,base.group_user,1,1,1,1
+maintenance_workshop_name_id,maintenance_workshop_name,model_maintenance_workshop,base.group_user,1,1,1,1
+preventive_maintenance_plan_name_id,preventive_maintenance_plan_name,model_preventive_maintenance_plan,base.group_user,1,1,1,1
+repair_task_name_id,repair_task_name,model_repair_task,base.group_user,1,1,1,1
+transfer_stock_task_line_name_id,transfer_stock_task_line_name,model_transfer_stock_line,base.group_user,1,1,1,1
+vehicle_preventive_maintenance_name_id,vehicle_preventive_maintenance_name,model_vehicle_preventive_maintenance,base.group_user,1,1,1,1

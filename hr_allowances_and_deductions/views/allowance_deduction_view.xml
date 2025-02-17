@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="allowance_deduction_form" model="ir.ui.view">
+            <field name="name">allowance.deduction.form</field>
+            <field name="model">allowance.deduction</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_draft" string="Reset To Draft" type="object" class="oe_highlight" states="cancel"/>
+                        <button name="action_request_approve" string="Request Approve" groups="hr_allowances_and_deductions.group_request_approve" type="object" states="draft" class="oe_highlight"/>
+                        <button name="action_done" string="Approve" type="object" groups="hr_allowances_and_deductions.group_admin_approve" states="waiting" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" type="object" states="draft,waiting,done" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id" required="1"/>
+                                <field name="department_id"/>
+                                <field name="job_id"/>
+                                <field name="date" required="1"/>
+                                <field name="request_date"/>
+                                <field name="duration" required="1"/>
+                            </group>
+                            <group>
+                                <field name="type" required="1"/>
+                                <field name="input_type_id" required="1"/>
+                                <field name="amount"/>
+                                <!--                            <field name="rate" attrs="{'invisible':[('type','=','allowance')]}"/>-->
+                                <field name="rate" invisible="1"/>
+                                <field name="amount_total"/>
+                                <field name="amount_paid"/>
+                                <field name="amount_remaining"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                        <notebook>
+                            <page string="Settlement Line">
+                                <field name="settlement_line_ids">
+                                    <tree>
+                                        <field name="date"/>
+                                        <field name="amount"/>
+                                        <field name="state"/>
+                                        <field name="allowance_deduction_id" invisible="1"/>
+                                        <field name="payslip_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="allowance_deduction_search" model="ir.ui.view">
+            <field name="name">allowance.deduction.search</field>
+            <field name="model">allowance.deduction</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="employee_id"/>
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="input_type_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" name="group_employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by':'date'}"/>
+                        <filter string="Type" name="group_type" context="{'group_by':'type'}"/>
+                        <filter string="Input Type" name="group_input_type_id" context="{'group_by':'input_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="allowance_deduction_tree" model="ir.ui.view">
+            <field name="name">allowance.deduction.tree</field>
+            <field name="model">allowance.deduction</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="input_type_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

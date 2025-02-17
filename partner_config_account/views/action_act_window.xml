@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="partner_config_account_action" model="ir.actions.act_window">
+            <field name="name">Partner Config Account</field>
+            <field name="res_model">partner.config.account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

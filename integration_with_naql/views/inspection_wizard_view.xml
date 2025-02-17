@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inspection_wizard_form" model="ir.ui.view">
+            <field name="name">inspection.wizard.form</field>
+            <field name="model">inspection.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="sale_id" invisible="1"/>
+                            <field name="ac"/>
+                            <field name="radio_stereo"/>
+                            <field name="screen"/>
+                            <field name="speedometer"/>
+                            <field name="keys"/>
+                            <field name="car_seats"/>
+                            <field name="safety_triangle"/>
+                            <field name="other1"/>
+                        </group>
+                        <group>
+                            <field name="fire_extinguisher"/>
+                            <field name="first_aid_kit"/>
+                            <field name="spare_tire_tools"/>
+                            <field name="tires"/>
+                            <field name="spare_tires"/>
+                            <!--                        <field name="fill_vehicle_info_now"/>-->
+                            <!--                        <field name="vehicle_status"/>-->
+                            <field name="oil_change_km_distance"/>
+                            <field name="fuel_type_code"/>
+                            <field name="oil_change_date"/>
+                            <field name="oil_type"/>
+                            <field name="other2"/>
+                        </group>
+                    </group>
+                    <field name="vehicle_sketch" invisible="1"/>
+                    <widget name="vehicle_inspection" options="{'input_field': 'vehicle_sketch'}" class="oe_edit_only"/>
+                    <footer>
+                        <button string="Apply" class="btn-primary" type="object" name="apply"/>
+                        <button string="Cancel" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

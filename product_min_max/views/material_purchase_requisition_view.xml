@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="material_purchase_requisition_form_view_inherited" model="ir.ui.view">
+            <field name="name">material.purchase.requisition</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="inherit_id" ref="diplomat_material_purchase_requisition.material_purchase_requisition_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='custom_picking_type_id']" position="after">
+                    <field name="source_location_id" groups="product_min_max.requisition_no_important"/>
+                    <field name="destination_location_id"/>
+                </xpath>
+                <xpath expr="//header//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" string="confirm" statusbar_visible="draft,approve,stock,receive"/>
+                </xpath>
+                <xpath expr="//button[@name='action_received']" position="replace">
+
+                </xpath>
+
+                <xpath expr="//button[@name='manager_approve']" position="replace">
+                    <button name="user_approve" type="object" string="Approve" states="draft" class="btn-primary" groups="diplomat_material_purchase_requisition.group_purchase_requisition_manager"/>
+                    <button name="force_confirm" type="object" string="Force Confirm" states="draft" class="btn-primary" groups="product_min_max.requisition_administrator"/>
+                </xpath>
+                <xpath expr="//notebook//page[1]//field[@name='requisition_line_ids']//tree//field[@name='product_id']" position="after">
+                    <field name="purchase_id" invisible="0" domain="[('type', '=','spar' )]"/>
+                </xpath>
+                <xpath expr="//field[@name='location_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='dest_location_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='custom_picking_type_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('state', '=', 'draft')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='delivery_picking_id']" position="attributes">
+                    <attribute name="groups">product_min_max.requisition_no_important</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="groups">product_min_max.requisition_no_important</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="groups">product_min_max.requisition_no_important</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

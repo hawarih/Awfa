@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_location_id']" position="before">
+                    <field name="check_type" required="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='work_location_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('check_type', '=', 'work')]}</attribute>
+                    <attribute name="domain">[('address_id','=', address_id)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

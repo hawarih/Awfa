@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+insurance_policy_name_id,insurance_policy_name,model_insurance_policy,diplomat_insurance_policy.group_insurance_create,1,1,1,1
+insurance_policy_line_name_id,insurance_policy_line_name,model_insurance_policy_line,diplomat_insurance_policy.group_insurance_create,1,1,1,1
+po_insurance_line_name_id,po_insurance_line_name,model_po_insurance_line,base.group_user,1,1,1,1

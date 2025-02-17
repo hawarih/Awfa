@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="passion_itss_petty_cash.module_category_petty_cash" model="ir.module.category">
+            <field name="name">Petty Cash</field>
+            <field name="description">Helps you manage Petty Cash</field>
+            <field name="sequence">8</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="po_insurance_line_form_inherited" model="ir.ui.view">
+            <field name="name">po.insurance.line.form.inherited</field>
+            <field name="model">po.insurance.line</field>
+            <field name="inherit_id" ref="diplomat_insurance_policy.po_insurance_line_form_id"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='insurance_line_ids']" position="attributes">
+                    <attribute name="domain">[('order_id', '=', purchase_id), ('vehicle_id', '!=', False),
+                    ('vehicle_id.has_insurance', '=', False), '|', ('insurance', '=', 0), ('insurance', '=', False)]
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_insurance_policy_id" name="Insurance Policy" sequence="5" parent="account_accountant.menu_accounting" action="diplomat_insurance_policy.action_insurance_policy"/>
+    </data>
+</odoo>

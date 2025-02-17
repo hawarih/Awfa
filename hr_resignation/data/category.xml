@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_resignation.module_category_resignation" model="ir.module.category">
+            <field name="name">Hr Resignation</field>
+            <field name="sequence">6</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

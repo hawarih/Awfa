@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_hr_eos_resignation_from" model="ir.ui.view">
+            <field name="name">view.hr.hr.eos.resignation.from</field>
+            <field name="model">hr.eos.resignation</field>
+            <field name="arch" type="xml">
+                <form string="EOS Payment Process">
+                    <header>
+                        <button name="compute_sheet" states="draft" string="Compute EOS" type="object" class="btn-primary"/>
+                        <button name="button_confirm" states="draft" string="Confirm" type="object" class="btn-primary"/>
+                        <button name="button_refuse" string="Refuse" type="object" class="btn-danger" states="draft" confirm="Are you sure you want to do this?"/>
+
+                        <button name="button_approve" states="confirm" string="Approve" type="object" class="btn-primary"/>
+                        <button name="button_refuse" string="Refuse" type="object" class="btn-danger" states="confirm" confirm="Are you sure you want to do this?"/>
+ class="oe_highlight"/&gt;
+                        <button name="create_payslip" attrs="{'invisible':['|','|',('process_type','=','expense'),('state','!=','approve'),('payslip_id','!=',False)]}" string="Generate Payslip" type="object" class="oe_highlight"/>
+
+                        <button name="button_cancel" string="Cancel" type="object" class="btn-danger" states="approve" confirm="Are you sure you want to do this?"/>
+
+                        <button name="button_refuse" string="Refuse" type="object" class="btn-danger" attrs="{'invisible':['|',('process_type','!=','expense'),('state','!=','approve')]}" confirm="Are You Sure To Do This?"/>
+
+                        <button name="button_refuse" string="Refuse" type="object" class="btn-danger" attrs="{'invisible': ['|',('process_type','!=','expense'),('state', '!=', 'post')]}" confirm="Are You Sure To Do This?"/>
+
+                        <button name="button_refuse" string="Cancel" type="object" class="btn-danger" attrs="{'invisible': ['|',('payslip_id','!=',True),('move_id', '!=', True)]}" confirm="Are You Sure To Do This?"/>
+
+                        <button name="button_draft" states="refuse,cancel" string="Re-draft" type="object" class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,paid"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Resignation Request Details">
+                                <field name="resignation_request_id" required="1" options="{'no_create': True,'no_open':True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="employee_id" readonly="1" force_save="1" options="{'no_create': True,'no_open':True}"/>
+                                <field name="request_date" readonly="1" force_save="1"/>
+                                <field name="last_working_date" readonly="1" force_save="1"/>
+                                <field name="reason_id" readonly="1" force_save="1"/>
+                                <field name="notes"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group string="Service Details">
+                                <field name="hiring_date" readonly="1" force_save="1"/>
+                                <label for="service_period_year" string="Actual Service Duration"/>
+                                <div class="o_row" name="duration">
+                                    <field name="service_period_year" readonly="1" force_save="1"/>
+                                    <span>Years</span>
+                                    <field name="service_period_month" readonly="1" force_save="1"/>
+                                    <span>Months</span>
+                                    <field name="service_period_day" readonly="1" force_save="1"/>
+                                    <span>Days</span>
+                                </div>
+
+                                <field name="duration_in_months" readonly="1" invisible="1"/>
+                                <field name="excluded_period_days" readonly="1" force_save="1"/>
+                                <field name="eos_reward" readonly="1" force_save="1"/>
+                                <field name="ticket_reward"/>
+                                <field name="other_allowed_amount"/>
+                            </group>
+                            <group string="Leave Compensation">
+                                <field name="leave_balance" readonly="1" force_save="1"/>
+                                <field name="max_leave_compensation" readonly="1" force_save="1"/>
+                                <field name="leave_balance_compensation" readonly="1" force_save="1"/>
+                            </group>
+                            <group string="Deductions">
+                                <field name="loan_remaining_amount" required="1"/>
+                                <field name="settlement_remaining_amount"/>
+                                <field name="other_deduction_amount"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_eos_reward" readonly="1" force_save="1"/>
+                                <field name="process_type" widget="radio" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="journal_id" attrs="{'readonly':[('state','!=','approve')],'invisible':['|',('process_type','!=','expense'),('state','!=','approve')],'required':[('process_type','=','expense'),('state','=','approve')]}"/>
+                                <field name="move_id" readonly="1" attrs="{'invisible':[('move_id','=',False)]}"/>
+
+                                <field name="payslip_id" attrs="{'invisible':[('payslip_id','=',False)],'readonly':1}"/>
+                            </group>
+                            <group>
+                                <!--<field name="employee_id" readonly="1"/>-->
+                            </group>
+                        </group>
+                        <label name="refuse_reason" for="refuse_reason" attrs="{'invisible':[('refuse_reason','=',False)]}"/>
+                        <field name="refuse_reason" readonly="1" attrs="{'invisible':[('refuse_reason','=',False)]}"/>
+                        <separator/>
+                        <hr/>
+                        <label name="attachment_ids" for="attachment_ids"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_hr_hr_eos_resignation_tree" model="ir.ui.view">
+            <field name="name">view.hr.hr.eos.resignation.tree</field>
+            <field name="model">hr.eos.resignation</field>
+            <field name="arch" type="xml">
+                <tree string="EOS Calculation" create="1" edit="1">
+                    <field name="request_date"/>
+                    <field name="resignation_request_id"/>
+                    <field name="employee_id"/>
+                    <field name="state"/>
+                    <field name="reason_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

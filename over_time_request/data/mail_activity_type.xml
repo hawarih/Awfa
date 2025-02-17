@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- TODO       Commented res_model for installation. Find the way to uncomment -->
+<odoo>
+    <data noupdate="1">
+        <record id="over_time_request.approval_notification_activity" model="mail.activity.type">
+            <field name="name">Notification Approval</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+            <field name="delay_count">0</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_label">0 days</field>
+            <field name="delay_from">previous_activity</field>
+            <field name="icon">fa-envelope</field>
+            <!-- <field name="res_model">hr.overtime.request</field> -->
+            <field name="chaining_type">suggest</field>
+            <field name="category">default</field>
+            <field name="initial_res_model">hr.overtime.request</field>
+        </record>
+    </data>
+</odoo>

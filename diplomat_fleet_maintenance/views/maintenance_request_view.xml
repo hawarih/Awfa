@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="maintenance_request_view_form_inherited" model="ir.ui.view">
+            <field name="name">maintenance.request.view.form.inherited</field>
+            <field name="model">maintenance.request</field>
+            <field name="arch" type="xml">
+                <form string="Maintenance Request">
+                    <field name="company_id" invisible="1"/>
+                    <field name="category_id" invisible="1"/>
+                    <field name="archive" invisible="1"/>
+                    <field name="stage_done" invisible="True"/>
+                    <field name="stage_confirm" invisible="True"/>
+                    <field name="stage_cancel" invisible="True"/>
+                    <field name="stage_draft" invisible="True"/>
+                    <field name="stage_closed" invisible="True"/>
+                    <field name="currency_id" invisible="True"/>
+                    <field name="preventive_maintenance_plan_ids" required="0" invisible="True"/>
+                    <header>
+                        <button string="Cancel" name="cancel_request" type="object" attrs="{'invisible': ['|','|',('stage_cancel', '=', True),('stage_done', '=', True),('stage_closed', '=', True)]}"/>
+                        <button string="Reopen Request" name="reset_to_draft" type="object" attrs="{'invisible': ['|','|','|',('stage_confirm', '=', True),('stage_draft', '=', True),('stage_done', '=', True),('stage_closed', '=', True)]}"/>
+                        <button string="Confirm" name="confirm" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|',('stage_confirm','=',True),('stage_cancel','=',True),('stage_done', '=', True),('stage_closed', '=', True)]}" groups="diplomat_fleet_maintenance.group_confirm_button"/>
+                        <button string="Repaired" name="repaired" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|','|',('stage_draft', '!=', False),('stage_done', '=', True),('stage_cancel', '=', True),('stage_closed', '=', True),('location_type', 'in', ['external','insurance'])]}"/>
+                        <button string="Request Spare Parts" name="request_spare_parts" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|',('stage_draft', '!=', False),('stage_done', '=', True),('stage_cancel', '=', True),('stage_closed', '=', True)]}"/>
+                        <button string="Closed" name="make_close" type="object" class="oe_highlight" attrs="{'invisible':[('stage_done', '=', False)]}"/>
+                        <button string="Create Bill" name="create_bill" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|',('location_type', '=', 'internal'),('maintenance_type', '=', 'preventive'),('maintenance_type', '=', False),('stage_done', '=', False)]}"/>
+                        <button string="Stock Transfer" name="create_vehicle_transfer" type="object" context="{'default_maintenance_id':active_id}" class="oe_highlight" attrs="{'invisible':['|','|',('location_type', '=', 'internal'),('stage_done', '=', True),('stock_transfer_count','&gt;',0)]}"/>
+                        <field name="stage_id" widget="statusbar" attrs="{'invisible': [('archive', '=', True)]}"/>
+                    </header>
+                    <sheet>
+                        <!--                    <div class="oe_button_box" name="button_box">-->
+                        <!--                       -->
+                        <!--                    </div>-->
+                        <div name="button_box" position="inside">
+
+                            <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('picking_count', '&lt;=', 0)]}">
+                                <field string="Delivery" name="picking_count" widget="statinfo"/>
+                            </button>
+                            <button type="object" name="get_bills" class="oe_stat_button" icon="fa-dollar" attrs="{'invisible': [('bill_count', '&lt;=', 0)]}">
+                                <field string="Bills" name="bill_count" widget="statinfo"/>
+                            </button>
+                            <button name="view_stock_transfer" attrs="{'invisible': [('stock_transfer_count', '&lt;=', 0)]}" type="object" icon="fa-road">
+                                <field string="Stock Transfer" name="stock_transfer_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div attrs="{'invisible': [('archive', '=', False)]}">
+                            <span class="badge text-bg-warning float-end">Canceled</span>
+                        </div>
+                        <div class="oe_right">
+                            <field name="kanban_state" class="oe_inline" widget="state_selection"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="Request"/>
+                            <h1>
+                                <field name="name" readonly="True" required="False"/>
+                            </h1>
+                            <label for="maintenance_type"/>
+                            <div>
+                                <h2>
+                                    <field name="maintenance_type" attrs="{'readonly': [('stage_closed', '=', True)]}"/>
+                                </h2>
+                            </div>
+                            <label for="workshop_ids"/>
+                            <div>
+                                <field name="workshop_ids" widget="many2many_tags" attrs="{'readonly': [('stage_closed', '=', True)]}"/>
+                            </div>
+                        </div>
+
+                        <group>
+                            <group name="maintenance_plan_info" string="Maintenance Plan Info" attrs="{'invisible': [('maintenance_type', '!=', 'preventive')]}">
+                                <field name="preventive_maintenance_plan_id" attrs="{'readonly': [('stage_closed', '=', True)],'required': [('maintenance_type', '=', 'preventive')]}"/>
+                                <field name="team_location" invisible="1"/>
+                                <field name="repair_task_ids" widget="many2many_tags" invisible="1"/>
+                            </group>
+                            <group name="maintenance_info" string="Maintenance Info">
+                                <field name="maintenance_team_id" attrs="{'readonly': [('stage_draft', '=', False)]}"/>
+                                <field name="location_type" attrs="{'readonly':['|',('maintenance_type','=','preventive'),('stage_draft', '=', False)]}"/>
+                                <field name="vendor_id" attrs="{'invisible':[('location_type','!=','external')],'readonly':[('stage_closed', '=', True)]}"/>
+                                <field name="amount" attrs="{'invisible':[('location_type','!=','external')],'readonly':[('stage_closed', '=', True)]}"/>
+                                <field name="employee_id" string="Created By" attrs="{'readonly': [('stage_closed', '=', True)]}"/>
+                                <field name="responsible_id" string="Responsible" invisible="1"/>
+                                <field name="priority" widget="priority" attrs="{'readonly': [('stage_closed', '=', True)]}"/>
+                                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            </group>
+                            <group name="vehicle_info" string="Vehicle Information">
+
+                                <field name="vehicle_id" required="True" attrs="{'readonly': [('stage_draft', '=', False)]}"/>
+                                <field name="license_plate" attrs="{'invisible': [('vehicle_id', '=', False)]}"/>
+                                <field name="model_id" attrs="{'invisible': [('vehicle_id', '=', False)]}"/>
+                            </group>
+                            <group name="maintenance_duration" string="Maintenance Duration">
+                                <field name="repair_request_date" attrs="{'readonly': True}"/>
+                                <field name="repair_close_date" readonly="True" attrs="{'invisible': [('stage_closed', '=', False)]}"/>
+                                <label for="repair_duration" string="Duration"/>
+                                <div>
+                                    <field name="repair_duration" readonly="True" widget="float_time" class="oe_inline"/>
+                                    <span class="ml8">hours</span>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="total_maintenance_amount" widget="monetary" options="{'currency_field': 'currency_id'}" invisible="1"/>
+                        </group>
+                        <notebook attrs="{'invisible': [('vehicle_id', '=', False)]}">
+                            <page name="spare_part" string="Spare Parts">
+                                <field name="maintenance_spare_part_lines" attrs="{'readonly':['|',('stage_done','=',True),('stage_closed','=',True)]}">
+                                    <tree editable="bottom">
+                                        <field name="available_spare_parts" widget="many2many_tags" invisible="True"/>
+                                        <field name="product_id" domain="[('product_tmpl_id', 'in', available_spare_parts)]" attrs="{'readonly':[('has_picking','=',True)]}"/>
+                                        <field name="product_uom_qty" string="Qty" attrs="{'readonly':[('has_picking','=',True)]}"/>
+                                        <field name="product_uom_category_id" invisible="True"/>
+                                        <field name="product_uom" domain="[('category_id', '=', product_uom_category_id)]" attrs="{'readonly':[('has_picking','=',True)]}" options="{'no_create': True}" string="UOM"/>
+                                        <field name="demand"/>
+                                        <field name="picking_id" readonly="True"/>
+                                        <field name="has_picking"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="repair_task" string="Repair Tasks" attrs="{'invisible':[('stage_done','=',True)]}">
+                                <field name="maintenance_repair_task_lines" attrs="{'readonly':['|',('maintenance_type','=','preventive'),('stage_closed','=',True)]}" force_save="1">
+                                    <tree editable="bottom">
+                                        <field name="spare_part_ids" widget="many2many_tags"/>
+                                        <field name="repair_task_id"/>
+                                        <field name="workers_ids" widget="many2many_tags"/>
+                                        <button name="check_task" type="object" class="oe_highlight" string="Done" attrs="{'invisible': [('done', '=', True)]}"/>
+                                        <button name="check_task" type="object" class="oe_highlight" string="Undone" attrs="{'invisible': [('done', '=', False)]}"/>
+                                        <field name="done" readonly="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="extra_info" string="Extra Info" invisible="1">
+                                <group>
+                                    <field name="picking_ids" readonly="True" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                            <page name="entry_check" string="Entry Check" attrs="{'invisible':[('stage_draft','=',False)]}">
+                                <sheet>
+                                    <group name="checklist_in" string="Checklist In" col="4">
+                                        <group>
+                                            <field name="ac_in"/>
+                                            <field name="radio_stereo_in"/>
+                                            <field name="screen_in"/>
+                                            <field name="spare_tire_tools_in"/>
+                                            <field name="tires_in"/>
+                                            <field name="spare_tires_in"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer_in"/>
+                                            <field name="keys_in"/>
+                                            <field name="car_seats_in"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle_in"/>
+                                            <field name="fire_extinguisher_in"/>
+                                            <field name="first_aid_kit_in"/>
+                                            <field name="vehicle_status_in"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_in" string="Km In" modifiers="{&quot;readonly&quot;: true}"/>
+                                            <field name="fuel_in"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:100px;">
+                                        <group>
+                                            <group>
+                                                <field name="image_in_1" string="image in 1" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_2" string="image in 2" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_3" string="image in 3" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_4" string="image in 4" widget="image" class="oe_avatar"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image_in_5" string="image in 5" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_6" string="image in 6" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_7" string="image in 7" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_8" string="image in 8" widget="image" class="oe_avatar"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </page>
+                            <page name="check_out" string="Check Out" >
+                                <sheet>
+                                    <group name="checklist_out" string="Checklist Out" col="4">
+                                        <group>
+                                            <field name="ac_out"/>
+                                            <field name="radio_stereo_out"/>
+                                            <field name="screen_out"/>
+                                            <field name="spare_tire_tools_out"/>
+                                            <field name="tires_out"/>
+                                            <field name="spare_tires_out"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer_out"/>
+                                            <field name="keys_out"/>
+                                            <field name="car_seats_out"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle_out"/>
+                                            <field name="fire_extinguisher_out"/>
+                                            <field name="first_aid_kit_out"/>
+                                            <field name="vehicle_status_out"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_out" string="Km Out" widget="char" attrs="{'required': [('stage_done', '=', True)]}"/>
+                                            <field name="fuel_out"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:100px;">
+                                        <group>
+                                            <group>
+                                                <field name="image_out_1" string="image out 1" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_2" string="image out 2" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_3" string="image out 3" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_4" string="image out 4" widget="image" class="oe_avatar"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image_out_5" string="image out 5" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_6" string="image out 6" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_7" string="image out 7" widget="image" class="oe_avatar"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_8" string="image out 8" widget="image" class="oe_avatar"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </page>
+                            <page name="check_in_out" string="Check In And Out" attrs="{'invisible':[('stage_closed','=',False)]}">
+                                <sheet>
+                                    <group name="checklist_in" string="Checklist In" col="4">
+                                        <group>
+                                            <field name="ac_in2" string="Ac In" readonly="1"/>
+                                            <field name="radio_stereo_in2" string="Radio Stereo In" readonly="1"/>
+                                            <field name="screen_in2" string="Screen In" readonly="1"/>
+                                            <field name="spare_tire_tools_in2" string="Spare Tire Tools In" readonly="1"/>
+                                            <field name="tires_in2" string="Tires In" readonly="1"/>
+                                            <field name="spare_tires_in2" string="Spare Tires In" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer_in2" string="Speedometer In" readonly="1"/>
+                                            <field name="keys_in2" string="Keys In" readonly="1"/>
+                                            <field name="car_seats_in2" string="Car Seats In" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle_in2" string="Safety Triangle In" readonly="1"/>
+                                            <field name="fire_extinguisher_in2" string="Fire Extinguisher In" readonly="1"/>
+                                            <field name="first_aid_kit_in2" string="First Aid Kit In" readonly="1"/>
+                                            <field name="vehicle_status_in2" string="Vehicle Status In" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_in2" string="Km In" readonly="1"/>
+                                            <field name="fuel_in2" string="Fuel In" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:30px;">
+                                        <group>
+                                            <group>
+                                                <field name="image_in_12" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_22" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_32" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_42" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image_in_52" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_62" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_72" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_in_82" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                    <group name="checklist_out" string="Checklist Out" col="4">
+                                        <group>
+                                            <field name="ac_out2" string="Ac Out" readonly="1"/>
+                                            <field name="radio_stereo_out2" string="Radio Stereo Out" readonly="1"/>
+                                            <field name="screen_out2" string="Screen Out" readonly="1"/>
+                                            <field name="spare_tire_tools_out2" string="Spare Tire Tools Out" readonly="1"/>
+                                            <field name="tires_out2" string="Tires Out" readonly="1"/>
+                                            <field name="spare_tires_out2" string="Spare Tires Out" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer_out2" string="Speedometer Out" readonly="1"/>
+                                            <field name="keys_out2" string="Keys Out" readonly="1"/>
+                                            <field name="car_seats_out2" string="Car Seats Out" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle_out2" string="Safety Triangle Out" readonly="1"/>
+                                            <field name="fire_extinguisher_out2" string="Fire Extinguisher Out" readonly="1"/>
+                                            <field name="first_aid_kit_out2" string="First Aid Kit Out" readonly="1"/>
+                                            <field name="vehicle_status_out2" string="Vehicle Status Out" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_out2" string="Km Out" readonly="1"/>
+                                            <field name="fuel_out2" string="Fuel Out" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:30px;">
+                                        <group>
+                                            <group>
+                                                <field name="image_out_12" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_22" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_32" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_42" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image_out_52" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_62" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_72" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image_out_82" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="maintenance_request_view_kanban_inherited" model="ir.ui.view">
+            <field name="name">maintenance.request.view.kanban.inherited</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban/field[@name='equipment_id']" position="after">
+                    <field name="workshop_ids"/>
+                </xpath>
+                <xpath expr="//div[hasclass('o_kanban_record_body')]" position="inside">
+                    <span t-if="record.workshop_ids.raw_value">
+                        <field name="workshop_ids"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maintenance_request_view_tree_inherited" model="ir.ui.view">
+            <field name="name">maintenance.request.view.tree.inherited</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='category_id']" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='stage_id']" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_id']" position="attributes">
+                        <attribute name="optional">hide</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_id']" position="after">
+                        <field name="license_plate"/>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

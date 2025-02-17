@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_ovt_hr_contract_form_view" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form.view</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="itss_payroll_customize.inherit_hr_contract_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='salary_items']//group/group[3]" position="after">
+                    <group string="OverTime">
+                        <field name="ovt_working_days_rate"/>
+                        <field name="ovt_holidays_rate"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_hr_contract_form_view" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form.view</field>
+            <field name="model">hr.contract</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='structure_type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="cancel_arrest_warrant_wizard" model="ir.ui.view">
+            <field name="name">Cancel Arrest Warrant Wizard</field>
+            <field name="model">cancel.arrest.warrant.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top">
+                            <field name="cancellation_number"/>
+                            <field name="rental_contract_id" invisible="1"/>
+                            <field name="date"/>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel Arrest Warrant" name="cancel_arrest_warrant" class="oe_highlight" type="object"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

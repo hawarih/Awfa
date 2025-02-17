@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="add_product_form" model="ir.ui.view">
+            <field name="name">add.product.form</field>
+            <field name="model">add.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="product_ids" invisible="1"/>
+                            <field name="product_id" domain="[('id', 'in', product_ids)]" options="{'no_quick_create':True,'no_create_edit':True,'no_create':True,'no_edit':True,'no_open': True}"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Add Product" class="btn-primary" type="object" name="add_vehicle"/>
+                        <button string="Cancel" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

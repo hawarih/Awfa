@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="extend_contract_payment_wizard_form" model="ir.ui.view">
+            <field name="name">Extend Contract Payment Wizard</field>
+            <field name="model">extend.contract.payment.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h4>This record does not meet the requirements for contract extension.</h4>
+                        <h4>Do you still want To confirm payment ?</h4>
+                        <group>
+                            <field name="journal" invisible="1"/>
+                            <field name="contract_id" invisible="1"/>
+                        </group>
+                        <footer>
+                            <button name="confirm_payment" string="Yes" type="object" class="oe_highlight"/>
+                            <button string="No" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

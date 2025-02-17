@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="supplier"/>
+                    <field name="customer"/>
+                    <field name="driver" attrs="{'invisible': ['|',('company_type', '=', 'company'),('customer', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="batch_internal_transfer_search" model="ir.ui.view">
+            <field name="name">res.partner.filter.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.res_partner_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='customer']" position="attributes">
+                    <attribute name="domain">['|',('customer_rank','&gt;', 0),('customer','=', True)]</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='supplier']" position="attributes">
+                    <attribute name="domain">['|',('supplier_rank','&gt;', 0),('supplier','=', True)]</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='supplier']" position="after">
+                    <filter string="Driver / Shipping co" name="filter_driver" domain="[('driver','=',True)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

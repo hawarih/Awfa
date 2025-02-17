@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_suspend_naql_contract_form" model="ir.ui.view">
+            <field name="name">suspend.naql.contract.form</field>
+            <field name="model">suspend.naql.contract</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="suspend_code_id"/>
+                            <field name="oil_change_cost"/>
+                            <field name="spare_parts_cost"/>
+                            <field name="damage_cost"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_apply" string="Apply" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

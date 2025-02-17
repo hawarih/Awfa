@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="extend_wizard_form_view" model="ir.ui.view">
+            <field name="name">Extend wizard form view</field>
+            <field name="model">extend.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top" string="Extend Information">
+                            <group name="group_left">
+                                <field name="contract_id" invisible="1"/>
+                                <field name="paid_amount"/>
+                                <field name="to_pay"/>
+                                <field name="total_payment"/>
+                                <field name="current_due_amount"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="accepted_extended_days"/>
+                                <field name="extended_days"/>
+                            </group>
+                        </group>
+
+                        <group attrs="{'invisible': [('to_pay', '=', 0)]}" string="Payment Information">
+                            <group>
+                                <field name="journal"/>
+                                <field name="current_date"/>
+                            </group>
+                            <group>
+                                <field name="memo"/>
+                            </group>
+                        </group>
+
+                        <footer>
+                            <button string="Extend" name="extend_button" class="oe_highlight" type="object"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

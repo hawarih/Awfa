@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <data noupdate="1">
+                <record id="sick_leave_saudi_arabia.sick_leave_salary_rule" model="hr.salary.rule">
+                        <field name="name">Sick Leave</field>
+                        <field name="code">SICK</field>
+                        <field name="sequence">80</field>
+                        <field name="quantity">1.0</field>
+                        <field name="struct_id" ref="hr_attendance_sheet.structure_itss"/>
+                        <field name='category_id' ref="hr_payroll.DED" />
+                        <field name="active">True</field>
+                        <field name="appears_on_payslip">True</field>
+                        <field name="appears_on_employee_cost_dashboard">False</field>
+                        <field name="appears_on_payroll_report">False</field>
+                        <field name="condition_select">none</field>
+                        <field name="condition_range">contract.wage</field>
+                        <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET > categories.NET * 0.10</field>
+                        <field name="amount_python_compute">
+sick_leaves=payslip.dict.get_sick_leaves() 
+day_salary=contract.wage / 30 
+result=-day_salary*(sick_leaves['not paid']+sick_leaves['partial_paid']*0.25)
+                        </field>
+                </record>
+
+        </data>
+</odoo>

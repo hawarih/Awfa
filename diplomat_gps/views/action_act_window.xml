@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_gps_vehicle_history" model="ir.actions.act_window">
+            <field name="name">GPS History</field>
+            <field name="res_model">gps.vehicle.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="gps_action" model="ir.actions.act_window">
+            <field name="name">GPS</field>
+            <field name="res_model">gps.gps</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data>
+          <record id="view_branch_branch_form_inherit" model="ir.ui.view">
+               <field name="name">branch.branch.form.inherit</field>
+               <field name="model">branch.branch</field>
+               <field name="inherit_id" ref="custom_codes.branch_branch_form"/>
+               <field name="arch" type="xml">
+                    <xpath expr="//field[@name='name']" position="after">
+                         <field name="work_location_id" required="1"/>
+                    </xpath>
+               </field>
+          </record>
+     </data>
+</odoo>

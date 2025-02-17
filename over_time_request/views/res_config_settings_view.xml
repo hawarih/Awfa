@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_res_config_settings_inherit_for_overtime" model="ir.ui.view">
+            <field name="name">res.config.settings.overtime.inherit.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Overtime" string="OverTime" data-key="over_time_request" groups="hr.group_hr_manager">
+                        <h2>OverTime</h2>
+                        <div class="row mt16 o_settings_container" id="overtime_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="ovt_working_days_rate">
+                                <div class="o_setting_right_pane">
+                                    <div>
+                                        <label for="ovt_working_days_rate" string="OVT Working Days Rate "/>
+                                        <field name="ovt_working_days_rate"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="ovt_holidays_rate">
+                                <div class="o_setting_right_pane" name="related_user">
+                                    <label for="ovt_working_days_rate" string="OVT Holidays Rate "/>
+                                    <field name="ovt_holidays_rate"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

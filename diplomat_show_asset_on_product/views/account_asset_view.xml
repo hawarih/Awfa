@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_asset_form_inherit" model="ir.ui.view">
+            <field name="name">account.asset.form.inherit</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="product_name" invisible="1"/>
+                    <button class="oe_stat_button" string="Related Product" name="action_view_related_products" type="object" icon="fa-truck" attrs="{'invisible': [('original_move_line_ids', '=', False)]}">
+                    </button>
+                </xpath>
+
+                <xpath expr="//sheet/group/group/field[@name='account_depreciation_id']" position="attributes">
+                    <attribute name="domain">[]</attribute>
+                </xpath>
+
+                <xpath expr="//notebook/page/group/group//field[@name='account_depreciation_id']" position="attributes">
+                    <attribute name="domain">[]</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_account_asset_form_readonly" model="ir.ui.view">
+            <field name="name">account.asset.form.readonly</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                    <attribute name="delete">0</attribute>
+                </xpath>
+
+                <header position="replace"/>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_rental.category_customer_rental" model="ir.module.category">
+            <field name="name">Customer Rental</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

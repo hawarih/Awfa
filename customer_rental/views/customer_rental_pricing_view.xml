@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_rental_pricing_form" model="ir.ui.view">
+            <field name="name">customer.rental.pricing.form</field>
+            <field name="model">customer.rental.pricing</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <label for="name" string="Rental Pricing Name"/>
+                        <field name="name" placeholder="Rental Pricing Name"/>
+
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="models" widget="many2many_tags"/>
+                                <field name="km_free" required="1"/>
+                                <field name="km_extra_cost" required="1"/>
+                                <field name="fuel" required="1"/>
+                                <field name="km_open_percentage"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="allowed_hours"/>
+                                <field name="date_from" required="1"/>
+                                <field name="date_to"/>
+                                <field name="location" widget="many2many_tags" domain="[('allowed_transfer','=',True),('allowed_transfer','=',True)]"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page name="actual_pricing_policy" string="Actual_Pricing_Policy">
+                                <field name="actual_pricing_lines">
+                                    <tree create="false" editable="bottom">
+                                        <field name="plan_name" readonly="1" />
+                                        <field name="price" style="text-align: left;" />
+                                    </tree>
+                                </field>
+
+                            </page>
+
+                            <page name="full_pricing_policy" string="Full_Pricing_Policy">
+                                <field name="full_pricing_lines">
+                                    <tree create="false" editable="bottom">
+                                        <field name="plan_name" readonly="1"/>
+                                        <field name="price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_rental_pricing_tree" model="ir.ui.view">
+            <field name="name">customer.rental.pricing.tree</field>
+            <field name="model">customer.rental.pricing</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="models" widget="many2many_tags"/>
+                    <field name="km_free"/>
+                    <field name="km_extra_cost"/>
+                    <field name="fuel"/>
+                    <field name="allowed_hours"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

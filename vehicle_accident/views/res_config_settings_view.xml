@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="accident_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">accident.res.config.settings.view.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Accident" id="accident" string="Accident" data-key="vehicle_accident">
+                        <h2>Vehicle Accident</h2>
+                        <div class="row mt16 o_settings_container" id="vehicle_accident_setting">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <div class="text-muted content-group mt16">
+                                        <span>Accident Journal</span>
+                                        <field name="company_accident_journal_id" class="text-center oe_inline"/>
+                                    </div>
+                                </div>
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <div class="text-muted content-group mt16">
+                                        <span>First Side</span>
+                                        <field name="company_first_side_id" class="text-center oe_inline"/>
+                                    </div>
+                                </div>
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <div class="text-muted content-group mt16">
+                                        <span>Second Side</span>
+                                        <field name="company_second_side_id" class="text-center oe_inline"/>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="text-muted content-group mt16">
+                                        <span>Third Side</span>
+                                        <field name="company_third_side_id" class="text-center oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

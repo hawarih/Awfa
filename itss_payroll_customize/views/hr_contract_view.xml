@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_hr_contract_form" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="salary_items" string="Salary Items">
+                        <group>
+                            <group string="Allowance">
+                                <field name="housing"/>
+                                <field name="transportation"/>
+                                <field name="food"/>
+                                <field name="call"/>
+                                <field name="job_nature"/>
+                                <field name="education"/>
+                                <field name="other"/>
+                                <field name="personal_car_usage"/>
+                                <field name="bonus"/>
+                                <field name="assigned" attrs="{'invisible':[('is_assigned','=',False)],'readonly':[('assigned_readonly','=',True)]}"/>
+                            </group>
+                            <group string="Deduction">
+                                <field name="gosi"/>
+                            </group>
+                            <group string="Assigned">
+                                <field name="is_assigned" attrs="{'readonly':[('assigned_readonly','=',True)]}"/>
+                                <field name="assigned_readonly" invisible="1"/>
+                                <label for="assigned_from" attrs="{'invisible': [('is_assigned', '=', False)]}" string="Assigned Dates" id="label_dates"/>
+                                <div>
+                                    <div class="o_row o_row_readonly">
+                                        <span class="oe_inline" attrs="{'invisible': [('is_assigned', '=', False)]}">
+                                        From
+                                        </span>
+                                        <field name="assigned_from" class="oe_inline" nolabel="1" attrs="{'invisible': [('is_assigned', '=', False)],'readonly':[('assigned_readonly','=',True)]}" widget="daterange" options="{'related_end_date': 'assigned_to'}"/>
+                                        <span class="oe_inline" attrs="{'invisible': [('is_assigned', '=', False)]}">
+                                        To
+                                        </span>
+                                        <field name="assigned_to" class="oe_inline" attrs="{'invisible': [('is_assigned', '=', False)],'readonly':[('assigned_readonly','=',True)]}" widget="daterange" options="{'related_start_date': 'assigned_from'}"/>
+                                    </div>
+                                </div>
+                                <!--                            <field name="assigned_from"/>-->
+                                <!--                            <field name="assigned_to"/>-->
+                            </group>
+                            <group string="Other Allowances">
+                                <field name="other_allowance_line_ids" nolabel="1">
+                                    <tree string="Other allowances" editable="bottom">
+                                        <field name="hr_other_allowance_id" widget="selection"/>
+                                        <field name="code"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                        </group>
+
+                    </page>
+
+                </xpath>
+
+                <xpath expr="//header" position="inside">
+                    <button name="action_confirm_assigned_dates" string="Confirm Assigned Dates" type="object" attrs="{'invisible':['|',('is_assigned','=',False),('assigned_readonly','=',True)]}" class="oe_highlight"/>
+                    <button name="action_confirm_assigned_dates" string="Reset Assigned Dates" type="object" attrs="{'invisible':[('assigned_readonly','=',False)]}" groups="hr.group_hr_manager" class="oe_highlight"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

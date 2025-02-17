@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_stock_report_quantity_by_location_prepare" model="ir.actions.act_window">
+            <field name="name">Inventory By Location</field>
+            <field name="res_model">stock.report.quantity.by.location.prepare</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_fleet_maintenance.group_confirm_button" model="res.groups">
+            <field name="name">Accident Manager Approve</field>
+            <field name='category_id' ref="base.module_category_manufacturing_maintenance" />
+        </record>
+
+        <record id="diplomat_fleet_maintenance.group_maintenance_team_user" model="res.groups">
+            <field name="name">Maintenance Team User</field>
+            <field name='category_id' ref="base.module_category_manufacturing_maintenance" />
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]" />
+        </record>
+    </data>
+</odoo>

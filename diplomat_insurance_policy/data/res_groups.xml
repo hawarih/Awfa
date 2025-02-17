@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_insurance_policy.group_insurance_confirm" model="res.groups">
+            <field name="name">Insurance Confirm and Bill</field>
+            <field name='category_id' ref="diplomat_insurance_policy.categ_insurance_management" />
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="diplomat_insurance_policy.group_insurance_create" model="res.groups">
+            <field name="name">Insurance Creator</field>
+            <field name='category_id' ref="diplomat_insurance_policy.categ_insurance_management" />
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="diplomat_insurance_policy.group_insurance_stop" model="res.groups">
+            <field name="name">Insurance Stop</field>
+            <field name='category_id' ref="diplomat_insurance_policy.categ_insurance_management" />
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

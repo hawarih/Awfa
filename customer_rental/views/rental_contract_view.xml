@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO -->
+
+<odoo>
+    <data>
+        <record id="rental_contract_form" model="ir.ui.view">
+            <field name="name">rental.contract.form</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="return_vehicle" string="Return" type="object" class="oe_highlight" attrs="{'invisible' : ['|',('is_returned', '=',True),('state','not in',('open'))]}"/>
+                        <button name="delay_penalty" string="Delay Penalty" type="object" class="oe_highlight" attrs="{'invisible' : ['|',('state','not in',('open')),('is_returned','=',True)]}"/>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <field name="rental_pricing" invisible="1" force_save="1"/>
+                        <field name="has_allow_discount_group" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="view_invoices" string="Invoices" type="object" icon="fa-list" attrs="{'invisible' : [('invoice_ids', '=',False)]}">
+                                <field name="invoice_ids" widget="statinfo"/>
+                            </button>
+                            <button name="view_accidents" string="Accidents" type="object" icon="fa-list">
+                            </button>
+                            <button name="view_payments" string="Payment" type="object" icon="fa-list" attrs="{'invisible' : [('payment_ids', '=',False)]}">
+                                <field name="payment_ids" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div>
+                            <div class="oe_title">
+                                <field name="payment_ids" invisible="1"/>
+                                <h1 attrs="{'invisible': [('state', '!=', 'draft')]}">
+                                    <span>Draft</span>
+                                </h1>
+                                <h1 attrs="{'invisible': [('state', '=', 'draft')]}">
+                                    <field name="name" readonly="1"/>
+                                </h1>
+                            </div>
+                            <div style="float:right;padding:0 15px 0 0 ;">
+                                <div style="font-size:20px">
+                                    <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|',('is_extended','=',False), ('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                                    Extended
+                                    </div>
+                                    <div class="badge rounded-pill text-bg-danger" attrs="{'invisible' : ['|',('is_late','=',False), ('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                                    Late
+                                    </div>
+                                    <field name="is_extended" invisible="1"/>
+                                    <field name="is_late" invisible="1" force_save="1"/>
+                                    <field name="is_returned" invisible="1"/>
+                                    <field name="rental_invoices_dates_admin" invisible="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <notebook>
+                            <page name="customer_vehicle" string="Customer Vehicle">
+                                <group name="group_top">
+                                    <group name="group_left" string="Customer&amp;Information">
+                                        <field name="current_date" invisible="1"/>
+                                        <field name="customer_id" domain="[('is_company', '=', False),('customer','=',True)]" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                        <field name="national_identity_number" readonly="1"/>
+
+                                        <field name="mobile" readonly="1"/>
+                                        <field name="need_extra_driver" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                        <field name="extra_driver" attrs="{'invisible' : [('need_extra_driver' ,'!=', 'yes')]                                            ,'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}" domain="[('is_company', '=', False),('customer','=',True)]"/>
+                                    </group>
+                                    <group name="group_right" string="Vehicle Information">
+                                        <field name="category_id"/>
+                                        <field name="fleet_model_id"/>
+                                        <field name="fleet_vehicle_id" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}" />
+                                        <field name="licence_plate" attrs="{'invisible':[('fleet_vehicle_id','=',False)]}" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="contract_information" string="Contract Information">
+                                <group name="group_left" string="Expected Duration">
+                                    <group>
+                                        <field name="pickup_branch_id" domain="[('allowed_transfer', '=', True),('rental_location', '=', True)]" readonly="0" force_save="1"/>
+                                        <field name="pickup_date" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                        <field name="duration" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                        <field name="auth_type" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="drop_off_branch_id" domain="[('rental_location', '=', True)]" attrs="{'readonly': [('state','in',('open','hold','closed'))]}"/>
+                                        <field name="return_date"/>
+                                        <field name="actual_monthly_invoice" readonly="1"/>
+                                        <field name="is_corrected" readonly="1"/>
+                                        <field name="invoice_amount_value" readonly="1"/>
+                                        <field name="ran_schedule_action" invisible="1"/>
+                                    </group>
+                                </group>
+
+                                <group name="group_left" string="Rental Policy &amp; Plan">
+                                    <field name="rental_policy_id" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                    <field name="rental_plan_id" domain="[('related_policy','in',rental_policy_id)]" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                </group>
+                                <group name="group_left" string="Invoices Dates" attrs="{'invisible':[('rental_invoices_dates_admin','=',False)]}">
+                                    <field name="next_monthly_invoice" readonly="1"/>
+                                    <field name="last_monthly_invoice" readonly="1"/>
+                                </group>
+                            </page>
+
+                            <page name="additional_services" string="Additional Services" states="draft">
+                                <group name="group_top">
+                                    <field name="additional_services" widget="many2many_checkboxes" attrs="{'readonly': [('state','in',('open','hold','closed','delivered_indebet'))]}"/>
+                                </group>
+                            </page>
+                            <page name="financial_information" string="Financial Information">
+                                <group name="group_top">
+                                    <group name="group_left">
+                                        <field name="vehicle_cost" readonly="1" force_save="1"/>
+                                        <field name="additional_service_cost"/>
+                                        <field name="total_per_day"/>
+                                    </group>
+                                    <group name="group_right">
+                                        <field name="discount" force_save="1" attrs="{'readonly':['|',('has_allow_discount_group','=',False),('state','!=','draft')]}"/>
+                                        <field name="discount_amount"/>
+                                    </group>
+                                </group>
+
+                                <field name="rental_order_lines">
+                                    <tree create="false" editable="bottom">
+                                        <field name="rental_product_type" invisible="1"/>
+                                        <field name="has_allow_edit_trip_days_group" invisible="1"/>
+                                        <field name="product_id" force_save="1" attrs="{'readonly': ['|','|',('has_allow_edit_trip_days_group','=',False),('rental_product_type','!=','is_trip'), ('parent.state','not in',['draft'])]}"/>
+                                        <field name="count" force_save="1" readonly="1"/>
+                                        <field name="unit_of_measure" force_save="1" readonly="1"/>
+                                        <field name="unit_price" force_save="1" attrs="{'readonly': ['|','|',('has_allow_edit_trip_days_group','=',False),('rental_product_type','!=','is_trip'), ('parent.state','not in',['draft'])]}"/>
+                                        <field name="discount_amount" force_save="1" readonly="1"/>
+                                        <field name="taxes_id" widget="many2many_tags" force_save="1" readonly="1"/>
+                                        <field name="subtotal_without_tax" force_save="1" readonly="1"/>
+                                        <field name="subtotal_with_tax" force_save="1" readonly="1"/>
+
+                                    </tree>
+                                </field>
+                                <group name="group_top">
+                                    <field name="total_amount"/>
+                                    <field name="paid_amount"/>
+                                    <field name="previous_amount" readonly="1"/>
+                                    <field name="due_amount"/>
+                                    <field name="filter_due_amount" invisible="1"/>
+                                </group>
+                            </page>
+                            <page name="check_out" string="Check Out">
+                                <sheet>
+                                    <group name="checklist" string="Checklist" col="4">
+                                        <group>
+                                            <field name="ac" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="radio_stereo" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="screen" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="spare_tire_tools" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="tires" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="spare_tires" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="keys" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="car_seats" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="fire_extinguisher" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="first_aid_kit" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            <field name="vehicle_status" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_out" readonly="1" force_save="1"/>
+                                            <field name="fuel_out" attrs="{'readonly': [('state','not in',('draft'))]}" required="1"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:100px;">
+                                        <group>
+                                            <group>
+                                                <field name="image1" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image2" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image3" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image4" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image5" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image6" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image7" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                            <group>
+                                                <field name="image8" widget="image" class="oe_avatar" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </page>
+                            <page name="check_in" string="Check in" attrs="{'invisible':[('is_returned','=',False)]}">
+                                <sheet>
+                                    <group name="checklist_in" string="Checklist_in" col="4">
+                                        <group>
+                                            <field name="ac_in" readonly="1"/>
+                                            <field name="radio_stereo_in" readonly="1"/>
+                                            <field name="screen_in" readonly="1"/>
+                                            <field name="spare_tire_tools_in" readonly="1"/>
+                                            <field name="tires_in" readonly="1"/>
+                                            <field name="spare_tires_in" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="speedometer_in" readonly="1"/>
+                                            <field name="keys_in" readonly="1"/>
+                                            <field name="car_seats_in" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="safety_triangle_in" readonly="1"/>
+                                            <field name="fire_extinguisher_in" readonly="1"/>
+                                            <field name="first_aid_kit_in" readonly="1"/>
+                                            <field name="vehicle_status_in" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="km_in" readonly="1"/>
+                                            <field name="fuel_in" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <group style="margin-top:100px;">
+                                        <group>
+                                            <group>
+                                                <field name="image1_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image2_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image3_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image4_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="image5_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image6_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image7_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="image8_in" widget="image" class="oe_avatar" readonly="1"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </page>
+                            <page states="open,hold,delivered_indebet" name="calculation" string="Calculation">
+                                <group name="group_top">
+                                    <group name="group_left" string="KM Calculation">
+                                        <field name="km_out" readonly="1" force_save="1"/>
+                                        <field name="km_in" readonly="1"/>
+                                        <field name="total_dist"/>
+                                        <field name="km_free"/>
+                                        <field name="total_km_free"/>
+                                        <field name="km_extra_cost"/>
+                                        <field name="total_km_extra"/>
+                                        <field name="total_km_extra_cost"/>
+                                    </group>
+                                    <group name="group_right" string="Fuel Calculation">
+                                        <field name="another_fuel_out" readonly="1" string="Fuel Out"/>
+                                        <field name="fuel_in"/>
+                                        <field name="total_consumed_fuel"/>
+                                        <field name="fuel_price"/>
+                                        <field name="fuel_cost"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <widget name="page_control_widget" context="{'no_pages': 6}"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="rental_contract_pivot" model="ir.ui.view">
+            <field name="name">rental.contract.pivot</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="name"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="rental_contract_tree" model="ir.ui.view">
+            <field name="name">rental.contract.tree</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="customer_id" optional="show"/>
+                    <field name="national_identity_number" optional="show"/>
+                    <field name="mobile" optional="hide"/>
+                    <field name="licence_plate" optional="show"/>
+                    <field name="pickup_branch_id" optional="show"/>
+                    <field name="pickup_date" optional="show"/>
+                    <field name="drop_off_branch_id" optional="show"/>
+                    <field name="total_amount" optional="hide"/>
+                    <field name="paid_amount" optional="hide"/>
+                    <field name="filter_due_amount" optional="hide"/>
+                                   <!-- <field name="due_amount" optional="hide"/> -->
+                    <field name="state" optional="show" widget="badge" decoration-success="state == 'draft'" decoration-info="state == 'open'" decoration-warning="state == 'hold'" decoration-danger="state == 'closed'"/>
+                    <field name="create_uid" optional="show"/>
+                    <!--                <field name="image_128" widget="image"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="rental_contract_view_kanban" model="ir.ui.view">
+            <field name="name">rental contract kanban</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="fleet_vehicle_id"/>
+                    <field name="image_128" widget="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <div>
+                                        <strong class="o_kanban_record_title">
+                                            <t>
+                                                <field name="name"/>
+                                            </t>
+                                        </strong>
+                                    </div>
+                                    <t t-extend="kanban-box">
+                                        <div class="o_kanban_image">
+                                            <img t-att-src="kanban_image('fleet.vehicle','image_128',record.fleet_vehicle_id.raw_value)"/>
+                                        </div>
+                                    </t>
+                                    <div class="p-2">
+                                        <ul>
+                                            <li>
+                                                <t>
+                                                    <strong>Customer :</strong>
+                                                    <field name="customer_id"/>
+                                                </t>
+                                            </li>
+                                            <li style="float:right;padding:0 15px 0 0 ;">
+                                                <t>
+                                                    <field name="state" widget="badge" decoration-success="state == 'draft'" decoration-info="state == 'open'" decoration-warning="state == 'hold'" decoration-danger="state == 'closed'" readonly="1"/>
+                                                </t>
+                                            </li>
+                                            <li>
+                                                <t>
+                                                    <small>
+                                                        <i class="fa fa-map-marker" title="Location"/>
+                                                    </small>
+                                                    <strong>Pickup Branch :</strong>
+                                                    <field name="pickup_branch_id"/>
+                                                </t>
+                                            </li>
+
+                                            <li>
+                                                <t>
+                                                    <strong>Licence Plate :</strong>
+                                                    <field name="licence_plate"/>
+                                                </t>
+                                            </li>
+                                        </ul>
+
+
+                                    </div>
+                                    <div style="float:right;padding:0 15px 0 0 ;">
+                                        <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|',('is_returned','=',False), ('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                                        Returned
+                                        </div>
+                                        <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|',('is_extended','=',False), ('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                                        Extended
+                                        </div>
+                                        <div class="badge rounded-pill text-bg-danger" attrs="{'invisible' : ['|',('is_late','=',False), ('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                                        Late
+                                        </div>
+                                        <field name="is_extended" invisible="1"/>
+                                        <field name="is_late" invisible="1"/>
+                                        <field name="is_returned" invisible="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="rental_contract_view_search" model="ir.ui.view">
+            <field name="name">rental contract search</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <search string="All Contracts">
+                    <field string="Name" name="name"/>
+                    <field string="Customer" name="customer_id"/>
+                    <field string="National Identity" name="national_identity_number"/>
+                    <field string="Mobile" name="mobile"/>
+                    <field string="Pickup Branch" name="pickup_branch_id"/>
+                    <field string="Drop Off Branch" name="drop_off_branch_id"/>
+                    <field string="Status" name="state"/>
+                    <field string="License Plate" name="licence_plate"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

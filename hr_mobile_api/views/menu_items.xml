@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menuitem_mobile_api_categ" name="Mobile Api" 
+                        parent="base.menu_custom" sequence="40"/>
+
+        <menuitem id="menuitem_mobile_terms_policy" name="Mobile Terms And Policy" 
+                        action="hr_mobile_api.view_mobile_terms_policy_action" 
+                        parent="hr_mobile_api.menuitem_mobile_api_categ" sequence="4"/>
+    </data>
+</odoo>

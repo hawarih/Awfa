@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_fleet_vehicle_form_view" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+            
+                <field name="fuel" position="after">
+                    <field name="current_fuel"/>
+                </field>
+                <xpath expr="//button[@name='return_action_to_open']" position="after">
+                    <button name="view_rental_contracts" type="object" class="oe_stat_button" icon="fa-book" help="show the rental contracts for this vehicle" string="Rental Contracts"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

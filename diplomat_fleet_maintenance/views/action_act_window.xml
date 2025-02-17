@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="maintenance_config_settings" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="maintenance_workshop_action" model="ir.actions.act_window">
+            <field name="name">Maintenance Workshop</field>
+            <field name="res_model">maintenance.workshop</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="preventive_maintenance_plan_action" model="ir.actions.act_window">
+            <field name="name">Preventive Maintenance Plan</field>
+            <field name="res_model">preventive.maintenance.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="repair_task_action" model="ir.actions.act_window">
+            <field name="name">Repair Task</field>
+            <field name="res_model">repair.task</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="vehicle_preventive_maintenance_action" model="ir.actions.act_window">
+            <field name="name">Preventive Maintenance</field>
+            <field name="res_model">vehicle.preventive.maintenance</field>
+            <field name="view_mode">tree,kanban</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- ================================= Actions Server ================================= -->
+        <record id="cron_vehicle_preventive_maintenance_notification_ir_actions_server" model="ir.actions.server">
+            <field name="name">Vehicle Preventive Maintenance: Generate Notification</field>
+            <field name="model_id" ref="model_vehicle_preventive_maintenance"/>
+            <field name="state">code</field>
+            <field name="code">model._send_notification()</field>
+        </record>
+    </data>
+</odoo>

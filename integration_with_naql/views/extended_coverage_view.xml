@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="extended_coverage_tree" model="ir.ui.view">
+            <field name="name">extended.coverage.tree</field>
+            <field name="model">extended.coverage</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="naql_id"/>
+                    <field name="service_id" required="1"/>
+                    <field name="company_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="over_time_request.hr_overtime_request_category" model="ir.module.category">
+            <field name="name">OverTime Request</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_inventory_form" model="ir.actions.act_window">
+            <field name="name">Stock Adjustments</field>
+            <field name="res_model">stock.inventory</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

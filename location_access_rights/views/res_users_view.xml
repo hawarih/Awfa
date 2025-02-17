@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_users_rental_inherit" model="ir.ui.view">
+            <field name="name">res_users_rental_inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page id="location_access_rights" string="Location Access Rights">
+                        <group>
+                            <field name="picking_type_ids" widget="many2many_tags"/>
+                            <field name="location_ids" widget="many2many_tags"/>
+                            <field name="allowed_location" widget="many2many_tags"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

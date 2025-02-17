@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+name_hr_department_shift1_id,name_hr_department_shift1,model_hr_department_shift_lines,hr_department_shift.user_can_delete_shifts,1,0,1,1
+name_hr_department_shift2_id,name_hr_department_shift2,model_hr_department_shift_lines,hr_department_shift.user_can_edit_shifts,1,1,1,0
+name_hr_department_shift3_id,name_hr_department_shift3,model_hr_department_shift_lines,hr_department_shift.user_can_edit_and_delete_shifts,1,1,1,1
+name_hr_department_shift4_id,name_hr_department_shift4,model_hr_department_shift_lines,,1,0,0,0

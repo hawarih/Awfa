@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_card_vehicle_history" model="ir.actions.act_window">
+            <field name="name">Card History</field>
+            <field name="res_model">card.vehicle.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="fleet_card_action" model="ir.actions.act_window">
+            <field name="name">Card</field>
+            <field name="res_model">fleet.card</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

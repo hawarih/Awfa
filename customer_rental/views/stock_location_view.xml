@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_transfer_inherit_view_location_form" model="ir.ui.view">
+            <field name="name">stock.location.form.rental.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="ywt_internal_stock_transfer.transfer_inherit_view_location_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allowed_transfer']" position="after">
+                    <field name="rental_location"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock_location_form_rental_inherit" model="ir.ui.view">
+            <field name="name">stock.location.form.rental.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/h2" position="after">
+                    <notebook>
+                        <page name="basic_information" string="Basic Information">
+
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock_location_basic_info_form_rental_inherit" model="ir.ui.view">
+            <field name="name">stock.location.form.rental.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="customer_rental.stock_location_form_rental_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='basic_information']" position="inside">
+                    <xpath expr="//sheet/group[1]" position="move"/>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name='basic_information']" position="after">
+                    <page name="rental_restriction" string="Rental Restriction" attrs="{'invisible':[('rental_location','=',False)]}">
+                        <group>
+                            <field name="sales_journal_id"/>
+                            <field name="account_analytic_account_id"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

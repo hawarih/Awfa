@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fleet_vehicle_key_name_id,fleet_vehicle_key_name,model_fleet_vehicle_key,base.group_user,1,1,1,1
+scrap_key_wiz_name_id,scrap_key_wiz_name,model_scrap_key_wiz,base.group_user,1,1,1,1

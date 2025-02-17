@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="respartner_form_inherit" model="ir.ui.view">
+            <field name="name">res partner form add is work address</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="additional_naql_fields.view_res_partner_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='passport_number']" position="after">
+                    <group>
+                        <field name="is_work_address" string="Is Work Address"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

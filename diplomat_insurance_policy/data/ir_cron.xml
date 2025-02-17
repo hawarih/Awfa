@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="action_notification_insurance" model="ir.cron">
+            <field name="name">Generate Insurance Notification</field>
+            <field name="model_id" ref="diplomat_insurance_policy.model_insurance_policy"/>
+            <field name="state">code</field>
+            <field name="code">model.notification_insurance()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

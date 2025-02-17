@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_hr_contract_form" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="contract_type"/>
+                    <field name="kafala"/>
+                    <field name="commission"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="inherit_hr_contract_search" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.search</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='inactive']" position="before">
+                    <filter string="Commission" name="filter_commission" domain="[('commission','=',True)]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

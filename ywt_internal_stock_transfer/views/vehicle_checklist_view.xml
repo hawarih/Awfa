@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_vehicle_checklist_form" model="ir.ui.view">
+            <field name="name">inherit.vehicle.checklist.form</field>
+            <field name="model">vehicle.checklist</field>
+            <field name="inherit_id" ref="diplomat_vehicle_receipt_checklist.vehicle_checklist_form_view"/>
+            <field name="arch" type="xml">
+                <field name="vehicle_status" position="after">
+                    <field name="internal_stock_transfer_id" invisible="1"/>
+                    <field name="vendor_km" attrs="{'invisible':['|',('picking_code','!=','incoming'),('internal_stock_transfer_id','=', False)]}"/>
+                    <field name="km_in" attrs="{'invisible':[('picking_code','not in',['incoming','internal'])]}"/>
+                    <field name="km_out" readonly="True" attrs="{'invisible':[('picking_code','!=','outgoing')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

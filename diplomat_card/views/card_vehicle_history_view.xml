@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="card_vehicle_history_tree" model="ir.ui.view">
+            <field name="name">card.vehicle.history.tree</field>
+            <field name="model">card.vehicle.history</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="date"/>
+                    <field name="user_id"/>
+                    <field name="card_id"/>
+                    <field name="gps_id" invisible="1"/>
+                    <field name="vehicle_id" invisible="1"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

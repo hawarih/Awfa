@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="customer_rental_menu" name="Customer Rental" sequence="7" 
+                            groups="customer_rental.group_edit_trip_days_price,elkhodr_journal_restrictions.group_rental_journal_restriction_administrator,elkhodr_journal_restrictions.group_rental_journal_restriction_user" />
+
+        <menuitem id="customer_rental_orders_menu" name="Orders" sequence="1" parent="customer_rental.customer_rental_menu"/>
+        <menuitem id="customer_rental_customers_menu" name="Customer" sequence="1" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.res_partner_view_action"/>
+        <menuitem id="customer_rental_payment_menu" name="Payments" sequence="2" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.account_payment_view_action"/>
+        <menuitem id="customer_rental_orders_sub_menu" name="Orders" sequence="3" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.rental_contract_action"/>
+        <menuitem id="customer_rental_invoices_menu" name="Invoices" sequence="4" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.invoices_view_action"/>
+        <menuitem id="customer_rental_opened_orders_sub_menu" name="Opened Orders" sequence="4" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.opened_rental_contract_action"/>
+        <menuitem id="indebet_orders_sub_menu" name="Delivered Indebet Orders" sequence="5" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.indebet_rental_contract_action"/>
+        <menuitem id="customer_rental_held_orders_sub_menu" name="Delivered Pending Orders" sequence="5" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.held_rental_contract_action"/>
+        <menuitem id="customer_rental_closed_orders_sub_menu" name="Closed Orders" sequence="6" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.closed_rental_contract_action"/>
+        <menuitem id="customer_rental_late_orders_sub_menu" name="Late Orders" sequence="7" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.late_rental_contract_action"/>
+        <menuitem id="customer_rental_new_orders_sub_menu" name="New Orders" sequence="7" parent="customer_rental.customer_rental_orders_menu" action="customer_rental.new_rental_contract_action"/>
+        
+        <menuitem id="customer_rental_vehicle_menu" name="Vehicle" sequence="2" parent="customer_rental.customer_rental_menu"/>
+        <menuitem id="customer_rental_ready_menu" name="Ready" sequence="1" parent="customer_rental.customer_rental_vehicle_menu" action="customer_rental.ready_vehicle_view_action"/>
+        <menuitem id="customer_rental_rented_menu" name="Rented" sequence="2" parent="customer_rental.customer_rental_vehicle_menu" action="customer_rental.rented_vehicle_view_action"/>
+        <menuitem id="customer_rental_accident_menu" name="Accident" sequence="3" parent="customer_rental.customer_rental_vehicle_menu" action="customer_rental.accident_vehicle_view_action"/>
+        <menuitem id="customer_rental_maintenance_menu" name="Maintenance" sequence="4" parent="customer_rental.customer_rental_vehicle_menu" action="customer_rental.maintenance_vehicle_view_action"/>
+
+        <menuitem id="customer_rental_config_menu" name="Configuration" sequence="3" parent="customer_rental.customer_rental_menu"/>
+        <menuitem id="customer_rental_rental_plan_menu" name="Rental Plan" sequence="1" parent="customer_rental.customer_rental_config_menu" action="customer_rental.customer_rental_plan_action"/>
+        <menuitem id="customer_rental_rental_policy_plan_menu" name="Rental Policy Plan" sequence="2" parent="customer_rental.customer_rental_config_menu" action="customer_rental.customer_rental_policy_action"/>
+        <menuitem id="customer_rental_rental_pricing_menu" name="Rental Pricing" sequence="3" parent="customer_rental.customer_rental_config_menu" action="customer_rental.customer_rental_pricing_action"/>
+        <menuitem id="customer_rental_setting_menu" name="setting" sequence="4" parent="customer_rental.customer_rental_config_menu" action="customer_rental.customer_rental_setting_action"/>
+        <menuitem id="customer_rental_additional_service_menu" name="rental additional service" sequence="5" parent="customer_rental.customer_rental_config_menu" action="customer_rental.rental_additional_service_action"/>
+
+    </data>
+</odoo>

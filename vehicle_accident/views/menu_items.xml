@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="vehicle_accident_menu" name="Vehicle Accident" sequence="0"/>
+        
+        <menuitem id="main_accident_menu" name="Accident" sequence="0" 
+                    parent="vehicle_accident.vehicle_accident_menu"/>
+        <menuitem id="accident_menu" name="Accidents" sequence="1" 
+                    parent="vehicle_accident.main_accident_menu" action="vehicle_accident.accident_menu_action"/>
+        <menuitem id="evaluation_party_menu" name="Evaluation Party" sequence="2" 
+                    parent="vehicle_accident.main_accident_menu" action="vehicle_accident.evaluation_party_menu_action"/>
+        <menuitem id="vehicle_menu" name="Vehicles" sequence="1" 
+                    parent="vehicle_accident.main_accident_menu" action="vehicle_accident.vehicle_menu_action"/>
+        <menuitem id="insurance_reasons_menu" name="Insurance Reasons" sequence="3" 
+                    parent="vehicle_accident.main_accident_menu" action="vehicle_accident.insurance_reasons_menu_action"/>
+
+        <menuitem id="partner_menu" name="Partners" sequence="1" 
+                    parent="vehicle_accident.vehicle_accident_menu"/>
+        <menuitem id="customer_partner_menu" name="Customers" sequence="1" 
+                    parent="vehicle_accident.partner_menu" action="vehicle_accident.customer_partner_menu_action"/>
+        <menuitem id="invoices_partner_menu" name="Invoices" sequence="3" 
+                    parent="vehicle_accident.partner_menu" action="vehicle_accident.invoice_partner_menu_action"/>
+        <menuitem id="payments_partner_menu" name="Payments" sequence="2" 
+                    parent="vehicle_accident.partner_menu" action="vehicle_accident.payment_partner_menu_action"/>
+        <menuitem id="supplier_partner_menu" name="Vendors" sequence="4" 
+                    parent="vehicle_accident.partner_menu" action="vehicle_accident.supplier_partner_menu_action"/>
+
+        <menuitem id="configuration_menu" name="Configuration" sequence="2" 
+                    parent="vehicle_accident.vehicle_accident_menu"/>
+
+        <menuitem id="accident_config_settings_menu" name="Settings" sequence="0" 
+                    parent="maintenance.menu_maintenance_configuration" action="vehicle_accident.accident_config_settings"/>
+
+    </data>
+</odoo>

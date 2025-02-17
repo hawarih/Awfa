@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="confirmation_wizard" model="ir.ui.view">
+            <field name="name">Confirmation</field>
+            <field name="model">confirmation.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="type" invisible="1"/>
+                        <div attrs="{'invisible' : [('type' , '!=' , 'hold')]}">
+                            <p>Are You Sure You Want To Hold Contract ?</p>
+                        </div>
+                        <div attrs="{'invisible' : [('type' , '!=' , 'close')]}">
+                            <p>Are You Sure You Want To Close Contract ?</p>
+                        </div>
+                        <div attrs="{'invisible' : [('type' , '!=' , 'apply_penalty')]}">
+                            <p>Are You Sure You Want To Un Apply The Penalty On This Contract ?</p>
+                        </div>
+                        <footer>
+                            <button string="Yes" name="confirm" class="oe_highlight" type="object"/>
+                            <button string="No" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

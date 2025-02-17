@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="create_monthly_invoices_for_rental_contracts" model="ir.cron">
+            <field name="name">Create Monthly Invoices For Rental Contracts</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.create_monthly_invoices()</field>
+            <field name="active" eval="True" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+
+        <record forcecreate="True" id="change_rental_pricing_state" model="ir.cron">
+            <field name="name">Change Rental Pricing State</field>
+            <field name="model_id" ref="customer_rental.model_customer_rental_pricing"/>
+            <field name="state">code</field>
+            <field name="code">model.change_rental_pricing_states()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+
+        <record forcecreate="True" id="compute_is_late_for_rental_contracts" model="ir.cron">
+            <field name="name">Compute Is Late For Rental Contracts</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.compute_is_late_for_contracts()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+
+        <record forcecreate="True" id="correct_invoices_amount" model="ir.cron">
+            <field name="name">Correct Invoices Amount</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.correct_invoices_amount()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+
+        <record forcecreate="True" id="recompute_contract_state" model="ir.cron">
+            <field name="name">Recompute Contract State</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.recompute_contract_state()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+
+        <record forcecreate="True" id="reconcile_contract_invoices" model="ir.cron">
+            <field name="name">Reconcile Contract Invoices With Payments</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.action_cron_reconcile()</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+        </record>
+    </data>
+</odoo>

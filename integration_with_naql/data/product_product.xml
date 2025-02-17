@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="integration_with_naql.external_authorization_cost" model="product.product">
+            <field name="name">External Tamm Authorization Cost</field>
+            <field name="detailed_type">service</field>
+            <field name="type">service</field>
+            <field name='categ_id' ref="product.product_category_all" />
+            <field name="sale_ok">True</field>
+            <field name='uom_id' ref="uom.product_uom_unit"/>
+            <field name="uom_name">Units</field>
+            <field name='uom_po_id' ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="integration_with_naql.internal_authorization_cost" model="product.product">
+            <field name="name">Internal Tamm Authorization Cost</field>
+            <field name="detailed_type">service</field>
+            <field name="type">service</field>
+            <field name='categ_id' ref="product.product_category_all" />
+            <field name="sale_ok">True</field>
+            <field name='uom_id' ref="uom.product_uom_unit"/>
+            <field name="uom_name">Units</field>
+            <field name='uom_po_id' ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="integration_with_naql.vehicle_shipping_product" model="product.product">
+            <field name="name">تسليم السيارة في مدينة اخرى</field>
+            <field name="sequence">1</field>
+            <field name="detailed_type">service</field>
+            <field name="type">service</field>
+            <field name='categ_id' ref="product.product_category_all" />
+            <field name='uom_id' ref="uom.product_uom_unit"/>
+            <field name="uom_name">Units</field>
+            <field name='uom_po_id' ref="uom.product_uom_unit"/>
+        </record>
+
+    </data>
+</odoo>

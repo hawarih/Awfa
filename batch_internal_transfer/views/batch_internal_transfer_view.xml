@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="batch_internal_transfer_form" model="ir.ui.view">
+            <field name="name">batch.internal.transfer.form</field>
+            <field name="model">batch.internal.transfer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="send_to_auditor" string="Send To Auditor" groups="batch_internal_transfer.group_send_to_auditor" type="object" class="oe_highlight" states="draft"/>
+                        <button name="action_approve" string="Approve" groups="batch_internal_transfer.group_approve_button" type="object" states="waiting_approve" class="oe_highlight"/>
+                        <button name="generate_payments" string="Generate Payments" groups="batch_internal_transfer.group_generate_payments" type="object" states="approved" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button type="object" name="action_view_payment" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('payment_count', '=', 0)]}">
+                                <field name="payment_count" widget="statinfo" string="Payments"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date" attrs="{'readonly':[('state','not in',['draft', 'waiting_approve'])]}"/>
+                                <field name="total_amount" attrs="{'invisible':[('total_amount','=',0)]}"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" attrs="{'readonly':[('state','not in',['draft', 'waiting_approve'])]}"/>
+                                <field name="transfer_from_ids" widget="many2many_tags" invisible="1"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="batch_lines" string="Batch Lines">
+                                <!-- add context="{'default_field' : field}" to set default value -->
+                                <field name="batch_internal_transfer_line_ids" attrs="{'readonly':[('state','not in',['draft', 'waiting_approve'])]}">
+                                    <tree editable="bottom">
+                                        <!-- add domain="[('id','=',parent.field)]" to set default domain -->
+                                        <field name="journal_id" required="1"/>
+                                        <field name="dest_journal_id" required="1"/>
+                                        <field name="date" required="1"/>
+                                        <field name="amount" required="1"/>
+                                        <field name="description" required="1"/>
+                                        <field name="state" readonly="1"/>
+                                        <field name="current_balance" readonly="1"/>
+                                        <button name="create_payment" string="Create Payment" type="object" attrs="{'invisible':['|',('parent.state','not in',['approved','partial_post']),('state','!=','draft')]}" class="oe_highlight"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="batch_internal_transfer_search" model="ir.ui.view">
+            <field name="name">batch.internal.transfer.search</field>
+            <field name="model">batch.internal.transfer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="journal_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Date" name="group_date" context="{'group_by':'date'}"/>
+                        <filter string="Transfer To" name="group_journal_id" context="{'group_by':'journal_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="batch_internal_transfer_tree" model="ir.ui.view">
+            <field name="name">batch.internal.transfer.tree</field>
+            <field name="model">batch.internal.transfer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="transfer_from_ids" widget="many2many_tags"/>
+                    <field name="journal_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

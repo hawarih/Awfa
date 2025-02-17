@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_rental_inherit_form" model="ir.ui.view">
+            <field name="name">Res Partner Rental Inherit Form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="show_rental_contracts" type="object" class="oe_stat_button" icon="fa-book" help="show the rental contracts for this vehicle" string="Rental Contracts"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_fleet_vehicle_form" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/group[last()]" position="after">
+                    <group name="checklist" string="Checklist" col="3">
+                        <group>
+                            <field name="ac"/>
+                            <field name="radio_stereo"/>
+                            <field name="screen"/>
+                            <field name="spare_tire_tools"/>
+                            <field name="tires"/>
+                            <field name="spare_tires"/>
+                        </group>
+                        <group>
+                            <field name="speedometer"/>
+                            <field name="keys"/>
+                            <field name="car_seats"/>
+                            <field name="oil_change_km_distance"/>
+                            <field name="fuel_type_code"/>
+                            <field name="number_of_keys"/>
+                        </group>
+                        <group>
+                            <field name="safety_triangle"/>
+                            <field name="fire_extinguisher"/>
+                            <field name="first_aid_kit"/>
+                            <field name="oil_type_id" domain="[('is_oil', '!=', False)]"/>
+                            <field name="oil_change_date"/>
+                            <field name="vehicle_status"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

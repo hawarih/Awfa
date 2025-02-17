@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_users_rental_inherit" model="ir.ui.view">
+            <field name="name">res_users_rental_inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page id="late_rental_contracts" string="Late Rental Contracts">
+                        <group>
+                            <field name="officer" force_save="1"/>
+                            <field name="officer_days" attrs="{'invisible':[('officer','=',False)]}" force_save="1"/>
+                            <field name="rental_area_manager" force_save="1"/>
+                            <field name="rental_area_manager_days" attrs="{'invisible':[('rental_area_manager','=',False)]}" force_save="1"/>
+                            <field name="call_center" force_save="1"/>
+                            <field name="call_center_days" attrs="{'invisible':[('call_center','=',False)]}" force_save="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

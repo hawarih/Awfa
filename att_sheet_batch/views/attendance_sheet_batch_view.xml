@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="attendance_sheet_batch_form_view" model="ir.ui.view">
+            <field name="name">attendance.sheet.batch.form.view</field>
+            <field name="model">attendance.sheet.batch</field>
+            <field name="arch" type="xml">
+                <form string="Attendance Sheet Batch">
+                    <header>
+                        <button name="gen_att_sheet" string="Generate Sheets" class="oe_highlight" states="draft" type="object"/>
+                        <button name="submit_att_sheet" string="Submit Sheets" class="oe_highlight" states="att_gen" type="object"/>
+                        <button name="action_done" string="Approve Sheets" class="oe_highlight" states="att_sub" type="object" groups="att_sheet_batch.group_general_manager"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,att_gen,att_sub,done"/>
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="return_payslips" string="Payslips" type="object" icon="fa-book" states="done" class="oe_highlight"/>
+                        </div>
+                        <group>
+                            <field name="department_ids" widget="many2many_tags" placeholder="Departments" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+
+                            <field name="category_ids" widget="many2many_tags" placeholder="Categories" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            -
+                                <field name="date_to" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="name" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <!--<field name="is_done" invisible="1"/>-->
+                        </group>
+                        <group>
+                            <field name="employee_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                            <field name="struct_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Attendance Sheets">
+                                <field name="att_sheet_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                    <tree create="0">
+                                        <field name="name"/>
+                                        <field name="employee_id"/>
+                                        <field name="payslip_id" column_invisible="parent.state not in ['done']"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="attendance_sheet_batch_tree_view" model="ir.ui.view">
+            <field name="name">attendance.sheet.batch.tree.view</field>
+            <field name="model">attendance.sheet.batch</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_vehicle_purchase_order_form" model="ir.ui.view">
+            <field name="name">inherit.vehicle.purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="Diplomat_Vehicle_Purchasing.inherit_view_purchase_order_form_vehicle" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='picking_type_id']" position="after">
+                    <field name="separate_stock_picking" invisible="1"/>
+                    <field name="is_picking_created" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('separate_stock_picking','=',True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_purchase_stock_order_form" model="ir.ui.view">
+            <field name="name">inherit.purchase.stock.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_picking']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('separate_stock_picking','=',True),'|', '|' ,
+                        ('is_shipped', '=', True), ('state','not in', ('purchase','done')), ('incoming_picking_count', '=', 0)]}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_picking']" position="after">
+                    <button name="%(separate_picking_action)d" string="Receive Vehicles" type="action" attrs="{'invisible':['|','|',('is_picking_created','=',True),('separate_stock_picking','=',False),('state','!=','purchase')]}" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_purchase_order_form" model="ir.ui.view">
+            <field name="name">inherit.purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='qty_received']" position="after">
+                    <field name="stock_picking_type_id" attrs="{'column_invisible':[('parent.separate_stock_picking','=',False)]}" optional="show"/>
+                    <field name="picked" attrs="{'column_invisible':[('parent.separate_stock_picking','=',False)]}" optional="show"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('vehicle_id','!=',False)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

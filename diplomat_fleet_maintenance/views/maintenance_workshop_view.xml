@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="maintenance_workshop_form_view" model="ir.ui.view">
+            <field name="name">maintenance.workshop.form.view</field>
+            <field name="model">maintenance.workshop</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="maintenance_workshop_tree_view" model="ir.ui.view">
+            <field name="name">maintenance.workshop.tree.view</field>
+            <field name="model">maintenance.workshop</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

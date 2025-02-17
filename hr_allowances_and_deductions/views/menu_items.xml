@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="allowance_deduction_root_menu" name="Allowance And Deduction"/>
+        <menuitem id="allowance_deduction_menu" name="Allowance And Deduction" sequence="10" parent="hr_allowances_and_deductions.allowance_deduction_root_menu"/>
+        <menuitem id="allowance_menu" name="Allowance" sequence="10" 
+                                    parent="hr_allowances_and_deductions.allowance_deduction_menu" 
+                                    action="hr_allowances_and_deductions.allowance_action" />
+        <menuitem id="deduction_menu" name="Deduction" sequence="20" 
+                                    parent="hr_allowances_and_deductions.allowance_deduction_menu" 
+                                    action="hr_allowances_and_deductions.deduction_action" />
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="employee_document_form_view" model="ir.ui.view">
+            <field name="name">hr.employee.document.form</field>
+            <field name="model">hr.employee.document</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="document_name"/>
+                                <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                                <field name="employee_ref" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="issue_date"/>
+                                <field name="expiry_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="employee_document_tree_view" model="ir.ui.view">
+            <field name="name">hr.employee.document.tree</field>
+            <field name="model">hr.employee.document</field>
+            <field name="arch" type="xml">
+                <tree string="docs">
+                    <field name="name"/>
+                    <field name="issue_date"/>
+                    <field name="expiry_date"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

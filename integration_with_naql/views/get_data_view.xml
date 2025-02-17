@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_get_data_form" model="ir.ui.view">
+            <field name="name">get.data.form</field>
+            <field name="model">get.data</field>
+            <field name="arch" type="xml">
+                <form string="MODEL" create="true" duplicate="true" edit="true" delete="true">
+                    <sheet>
+                        <group>
+                            <field name="request_type"/>
+                            <field name="data" readonly="1"/>
+                        </group>
+                    </sheet>I
+                    <footer>
+                        <button name="get_contract" string="Ok" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

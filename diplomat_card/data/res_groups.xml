@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_card.card_clear" model="res.groups">
+            <field name="name">Card Clear</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+        <record id="diplomat_card.card_confirmer" model="res.groups">
+            <field name="name">Card Confirmer</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+        <record id="diplomat_card.card_creator" model="res.groups">
+            <field name="name">Card Creator</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+        <record id="diplomat_card.card_location" model="res.groups">
+            <field name="name">Card Location</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+        <record id="diplomat_card.card_reset_to_draft" model="res.groups">
+            <field name="name">Card Reset to Draft</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+        <record id="diplomat_card.card_scrap" model="res.groups">
+            <field name="name">Card Scrap</field>
+            <field name='category_id' ref="diplomat_card.card_category" />
+        </record>
+
+    </data>
+</odoo>

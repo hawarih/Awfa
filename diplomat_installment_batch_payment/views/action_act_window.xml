@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="installment_batch_payment_action" model="ir.actions.act_window">
+            <field name="name">Installment Batch Payment</field>
+            <field name="res_model">installment.batch.payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="group_show_rental_order_blacklist" model="res.groups">
+            <field name="name">Show Rental Order Blacklist</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental"/>
+        </record>
+    </data>
+</odoo>

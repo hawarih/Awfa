@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_accident_discount_wizard_id,access_accident_discount_wizard,model_accident_discount_wizard,,1,1,1,1
+access_accident_follower_wizard_id,access_accident_follower_wizard,model_accident_follower_wizard,,1,1,1,1
+access_evaluation_party_id,access_evaluation_party,model_evaluation_party,,1,1,1,1
+access_not_insurance_reason_id,access_not_insurance_reason,model_not_insurance_reason,,1,1,1,1
+access_vehicle_accident_id,access_vehicle_accident,model_vehicle_accident,,1,1,1,1
+access_vehicle_accident_lines_id,access_vehicle_accident_lines,model_vehicle_accident_lines,,1,1,1,1

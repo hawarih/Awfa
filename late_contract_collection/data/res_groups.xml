@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="late_contract_collection.allow_add_generalization_group" model="res.groups">
+            <field name="name">Allow Add Generalization</field>
+            <field name='category_id' ref="late_contract_collection.collection_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="late_contract_collection.allow_add_statement_group" model="res.groups">
+            <field name="name">Allow Add Statement</field>
+            <field name='category_id' ref="late_contract_collection.collection_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="late_contract_collection.cancellation_of_arrest_warrant_group" model="res.groups">
+            <field name="name">Cancellation of Arrest Warrant</field>
+            <field name='category_id' ref="late_contract_collection.collection_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+    </data>
+</odoo>

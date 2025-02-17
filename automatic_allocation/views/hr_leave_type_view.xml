@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="time_off_annual_holiday_status_form_inherit" model="ir.ui.view">
+            <field name="name">time.off.holiday.status.form.inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_requests']" position="after">
+                    <field name="automatic_allocation"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

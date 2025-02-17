@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="attendance_sheet_form_view_batch_inherited" model="ir.ui.view">
+            <field name="name">attendance.sheet.form.view</field>
+            <field name="model">attendance.sheet</field>
+            <field name="inherit_id" ref="hr_attendance_sheet.attendance_sheet_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='date_from']" position="before">
+                    <field name="batch_id" invisible="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_attsheet_approve']" position="attributes">
+                    <attribute name="groups">att_sheet_batch.group_general_manager</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

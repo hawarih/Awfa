@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_accident_form_view" model="ir.ui.view">
+            <field name="name">vehicle.accident.form.view</field>
+            <field name="model">vehicle.accident</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                        <button name="action_previous" string="Previous" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['announcement','due_amount','closed','cancel'])]}" type="object" groups="vehicle_accident.accident_group,vehicle_accident.accident_previous_group"/>
+                        <button name="action_next" string="Reporting Data" class="oe_highlight" states="announcement" type="object" groups="vehicle_accident.accident_group,vehicle_accident.accident_reporting_group"/>
+                        <button name="action_next2" string="Evaluation Data" class="oe_highlight" states="reporting" type="object" groups="vehicle_accident.accident_group,vehicle_accident.accident_evaluation_group"/>
+                        <button name="action_next3" string="Document Data" class="oe_highlight" states="evaluation" type="object" groups="vehicle_accident.accident_group,vehicle_accident.accident_documentation_group"/>
+                        <button name="action_lines_amount_computation" string="Calculation Amount" class="oe_highlight" states="waiting_insurance_document" confirm="Are you sure you want go next ?" type="object" groups="vehicle_accident.accident_group,vehicle_accident.accident_calculation_group"/>
+                        <button name="action_close" string="Close" class="oe_highlight" states="due_amount" type="object" confirm="Are you sure you want to Close" groups="vehicle_accident.accident_group,vehicle_accident.accident_closing_group"/>
+                        <button name="action_cancel" string="Cancel" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['due_amount','closed','cancel'])]}" type="object" confirm="Are you sure you want to Cancel" groups="vehicle_accident.accident_group,vehicle_accident.accident_canceling_group"/>
+                        <field name="state" widget="statusbar" statusbar_visible="announcement,reporting,evaluation,waiting_insurance_document,due_amount,closed,cancel"/>
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="view_invoices" string="Invoices" type="object" icon="fa-list">
+                            </button>
+                        </div>
+                        <notebook>
+                            <page string="Announcement" attrs="{'invisible': [('state', 'in', ['reporting','evaluation','due_amount','waiting_insurance_document'])]}">
+                                <group name="group_top" string="Announcement Data">
+                                    <group name="group_right">
+                                        <field name="vehicle" domain="[('has_insurance', '=', 'true')]" readonly="context.get('is_contract', False)"/>
+                                        <field name="customer_id" readonly="context.get('is_contract', False)"/>
+                                        <field name="city" required="1"/>
+                                        <field name="report_source" required="1"/>
+                                        <field name="announcement_date" required="1"/>
+                                        <field name="accident_date" required="1"/>
+                                        <field name="comment"/>
+                                    </group>
+                                    <group name="group_left">
+                                        <field name="accident_policy" force_save="1"/>
+                                        <field name="insurance_type" force_save="1"/>
+                                        <field name="document_state" readonly="1"/>
+                                        <field name="rental_contract_ids" readonly="0" attrs="{'invisible': [('rental_contract_ids', '=',False)]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Reporting" attrs="{'invisible': [('state', 'in', ['announcement','evaluation','due_amount','closed','cancel','waiting_insurance_document'])]}">
+                                <group name="group_top" string="Accident Report Data">
+                                    <group name="group_right">
+                                        <field name="accident_type" force_save="1" attrs="{'required': [('state', '=', 'reporting')]}"/>
+                                        <field name="national_identity_number" invisible="1"/>
+                                        <field name="not_insurance_reasons" attrs="{'invisible': [('accident_type', '!=', 'first')]}"/>
+                                        <field name="customer_accident_percentage" invisible="1" force_save="1"/>
+                                        <field name="other_party_accident_percentage" invisible="1" force_save="1"/>
+                                        <field name="shared_customer_accident_percentage" attrs="{'required': [('state', '=', 'reporting')],'readonly':[('accident_type', 'in', ['first','accident_without_contract'])]}" force_save="1"/>
+                                        <field name="shared_other_party_accident_percentage" attrs="{'readonly':[('accident_type', 'in', ['first','accident_without_contract'])]}" readonly="1" force_save="1"/>
+                                        <field name="other_party_id" attrs="{'invisible': [('other_party_accident_percentage', '=', 0)]}"/>
+                                        <field name="report_accident_number" attrs="{'required': [('state', '=', 'reporting')]}"/>
+                                        <field name="report_date"/>
+                                        <field name="is_external" invisible="1" force_save="1"/>
+                                    </group>
+                                    <group name="group_left">
+                                        <field name="report_attachment"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Evaluating" attrs="{'invisible': [('state', 'in', ['announcement','reporting','due_amount','closed','cancel'])]}">
+                                <group name="group_top" string="External Evaluation">
+                                    <group name="group_right">
+                                        <field name="external_hand_wages" force_save="1"/>
+                                        <field name="external_spare_parts" force_save="1"/>
+                                        <field name="total_external_evaluation" force_save="1"/>
+                                    </group>
+                                    <group name="group_left">
+                                        <field name="estimation_attachment"/>
+                                        <field name="evaluation_type" force_save="1" attrs="{'readonly': [('is_external', '=', True)],'required': [('state', '=', 'evaluation')],}"/>
+                                        <field name="evaluation_party"/>
+                                        <field name="accident_journal_id" invisible="1"/>
+                                    </group>
+                                </group>
+                                <field name="vehicle_lines_ids" force_save="1" attrs="{'invisible': [('state', 'not in', ['waiting_insurance_document'])]}" nolabel="1">
+                                    <tree create="false" editable="bottom">
+                                        <field name="item" readonly="1"/>
+                                        <field name="is_1st_create_invoice" invisible="1"/>
+                                        <field name="is_added_to_rental_contract" invisible="1"/>
+                                        <field name="is_first_line" invisible="1"/>
+                                        <field name="is_3rd_line" invisible="1"/>
+                                        <field name="amount" readonly="1"/>
+                                        <field name="discount_amount" readonly="1"/>
+                                        <field name="net_amount"/>
+                                        <field name="taxes" widget="many2many_tags"/>
+                                        <field name="net_amount_taxed"/>
+                                        <field name="remaining_customer"/>
+                                        <field name="to_invoice" readonly="0"/>
+                                        <field name="remaining" readonly="1" sum="Total"/>
+                                        <button name="second_create_invoice" type="object" icon="fa-pencil" string="Create Invoice" attrs="{'invisible': ['|',('is_first_line', '=', True),('is_3rd_line', '=', True)]}"/>
+                                        <button name="third_create_invoice" type="object" icon="fa-pencil" string="Create Invoice" attrs="{'invisible': [('is_3rd_line', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                                <group string="Deductible Amount" attrs="{'invisible': [('evaluation_type', 'in', ['external'])]}">
+                                    <field name="deductible_amount"/>
+                                </group>
+                            </page>
+                            <page string="Evaluating" attrs="{'invisible': [('state', 'in', ['announcement','reporting','evaluation','closed','cancel','waiting_insurance_document'])]}">
+                                <group name="group_top" string="External Evaluation">
+                                    <group name="group_right">
+                                        <field name="external_hand_wages"/>
+                                        <field name="external_spare_parts"/>
+                                        <field name="total_external_evaluation"/>
+                                    </group>
+                                    <group name="group_left">
+                                        <field name="estimation_attachment"/>
+                                        <field name="follower_id" readonly="1"/>
+                                    </group>
+                                </group>
+                                <field name="accident_journal_id" invisible="1"/>
+                                <!--                            <group string="Internal Evaluation"-->
+                                <!-- attrs="{'invisible': [('evaluation_type', 'in', ['external','deductible'])]}">-->
+                                <!--                                <field name="internal_hand_wages"/>-->
+                                <!--                                <field name="internal_spare_parts"/>-->
+                                <!--                                <field name="total_internal_evaluation"/>-->
+                                <!--                            </group>-->
+                                <group string="Deductible Amount" attrs="{'invisible': [('evaluation_type', 'in', ['external'])]}">
+                                    <field name="deductible_amount"/>
+                                </group>
+                                <field name="vehicle_lines_ids" force_save="1" nolabel="1">
+                                    <tree create="false" editable="bottom">
+                                        <field name="item" readonly="1"/>
+                                        <field name="is_1st_create_invoice" invisible="1"/>
+                                        <field name="is_added_to_rental_contract" invisible="1"/>
+                                        <field name="is_first_line" invisible="1"/>
+                                        <field name="is_3rd_line" invisible="1"/>
+                                        <field name="amount" readonly="1"/>
+                                        <field name="discount_amount" readonly="1"/>
+                                        <field name="net_amount"/>
+                                        <field name="taxes" widget="many2many_tags"/>
+                                        <field name="net_amount_taxed"/>
+                                        <field name="remaining_customer"/>
+                                        <field name="to_invoice" readonly="0"/>
+                                        <field name="remaining" readonly="1" sum="Total"/>
+                                        <button name="second_create_invoice" type="object" icon="fa-pencil" string="Create Invoice" attrs="{'invisible': ['|',('is_first_line', '=', True),('is_3rd_line', '=', True)]}"/>
+                                        <button name="third_create_invoice" type="object" icon="fa-pencil" string="Create Invoice" attrs="{'invisible': [('is_3rd_line', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button string="Confirm" name="confirm_button" class="oe_highlight" type="object"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_accident_tree_view" model="ir.ui.view">
+            <field name="name">vehicle.accident.tree.view</field>
+            <field name="model">vehicle.accident</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="vehicle"/>
+                    <field name="customer_id"/>
+                    <field name="national_identity_number"/>
+                    <field name="city"/>
+                    <field name="accident_date"/>
+                    <field name="report_source"/>
+                    <field name="accident_type"/>
+                    <field name="not_insurance_reasons"/>
+                    <field name="customer_accident_percentage" string="Customer Accident Percentage" optional="hide"/>
+                    <field name="other_party_accident_percentage" optional="hide"/>
+                    <field name="report_accident_number" optional="hide"/>
+                    <field name="report_date" optional="hide"/>
+                    <field name="total_external_evaluation" optional="hide"/>
+                    <field name="evaluation_party" optional="hide"/>
+                    <field name="follower_id" optional="hide"/>
+                    <field name="state" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="vehicle_accident_view_search" model="ir.ui.view">
+            <field name="name">Vehicle Accident Search</field>
+            <field name="model">vehicle.accident</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field string="Name" name="vehicle"/>
+                    <field string="Customer" name="customer_id"/>
+                    <field string="National Identity Number" name="national_identity_number"/>
+                    <field string="Mobile" name="national_identity_number"/>
+                    <field string="Other Party Name" name="other_party_id"/>
+                    <field string="Report Accident Number" name="report_accident_number"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

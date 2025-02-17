@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_quantity_by_location" name="Inventory by Location" 
+                    action="stock_report_quantity_by_location.action_stock_report_quantity_by_location_prepare" 
+                    parent="stock.menu_warehouse_report" sequence="10"/>
+    </data>
+</odoo>

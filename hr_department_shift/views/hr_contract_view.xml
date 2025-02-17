@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_contract_shift_form_inherited" model="ir.ui.view">
+            <field name="name">hr.contract.shift.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_payroll.hr_contract_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='part_time']" position="after">
+                    <page string="Shift">
+                        <field name="hr_shifts" readonly="1">
+                            <tree>
+                                <field name="hr_department_id" invisible="1"/>
+                                <field name="work_schedule"/>
+                                <field name="start_date"/>
+                                <field name="start_date_hijri" string="Start Hijri Date" optional="hide"/>
+                                <field name="end_date"/>
+                                <field name="end_date_hijri" string="End Hijri Date" optional="hide"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

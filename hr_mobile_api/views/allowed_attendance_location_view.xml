@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_allowed_attendance_location_form" model="ir.ui.view">
+            <field name="name">allowed.attendance.location.form</field>
+            <field name="model">allowed.attendance.location</field>
+            <field name="arch" type="xml">
+                <form string="MODEL" create="true" duplicate="true" edit="true" delete="true">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="latitude" digits="[16, 10]"/>
+                            <field name="longitude" digits="[16, 10]"/>
+                            <field name="allowed_distance"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_allowed_attendance_location_tree" model="ir.ui.view">
+            <field name="name">allowed.attendance.location.tree</field>
+            <field name="model">allowed.attendance.location</field>
+            <field name="arch" type="xml">
+                <tree create="true" duplicate="true" edit="true" delete="true">
+                    <field name="name"/>
+                    <field name="latitude" digits="[16, 10]"/>
+                    <field name="longitude" digits="[16, 10]"/>
+                    <field name="allowed_distance"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

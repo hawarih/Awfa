@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="config_settings_action" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="extended_coverage_action" model="ir.actions.act_window">
+            <field name="name">Extended Coverage</field>
+            <field name="res_model">extended.coverage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="inspection_wizard_action" model="ir.actions.act_window">
+            <field name="name">Inspection</field>
+            <field name="res_model">inspection.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="naql_create_contract_action" model="ir.actions.act_window">
+            <field name="name">Naql Create Contract</field>
+            <field name="res_model">naql.create.contract</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="otp_confirm_action" model="ir.actions.act_window">
+            <field name="name">Otp Confirm</field>
+            <field name="res_model">otp.confirm</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="view_get_data_action" model="ir.actions.act_window">
+            <field name="name">Get Lookup</field>
+            <field name="res_model">get.data</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="view_naql_lookups_action" model="ir.actions.act_window">
+            <field name="name">Get Lookup</field>
+            <field name="res_model">naql.lookups</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="view_naql_main_close_code_action" model="ir.actions.act_window">
+            <field name="name">Close Reasons</field>
+            <field name="res_model">naql.main.close.code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="view_naql_sub_close_code_action" model="ir.actions.act_window">
+            <field name="name">Sub Close Reasons</field>
+            <field name="res_model">naql.sub.close.code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="view_naql_suspend_code_action" model="ir.actions.act_window">
+            <field name="name">Suspend Reasons</field>
+            <field name="res_model">naql.suspend.code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="view_view_naql_contract_wizard_action" model="ir.actions.act_window">
+            <field name="name">View Naql Contract</field>
+            <field name="res_model">view.naql.contract.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

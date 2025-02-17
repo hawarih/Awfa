@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_contract_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Sick Leave">
+                        <field name="hr_sick_leave_line_ids">
+                            <tree create="false" delete="false" editable="false">
+                                <field name="name" readonly="1"/>
+                                <field name="leave_id" invisible="1"/>
+                                <field name="date_from" readonly="1"/>
+                                <field name="date_to" readonly="1"/>
+                                <field name="number_of_days" readonly="1"/>
+                                <field name="time_off_state" readonly="1"/>
+                                <field name="payslip_state" readonly="1"/>
+                                <button name="open_sick_leave" string="View" type="object"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

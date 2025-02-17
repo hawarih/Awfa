@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_material_purchase_requisition.module_category_purchase_requisition" model="ir.module.category">
+            <field name="name">Material Purchase Requisitions</field>
+            <field name="sequence">3</field>
+        </record>
+    </data>
+</odoo>

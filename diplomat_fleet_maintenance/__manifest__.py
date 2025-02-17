@@ -1,0 +1,36 @@
+
+{
+    'name': 'diplomat_fleet_maintenance',
+    'version': '1.0',
+    'summary': 'Auto-generated module for diplomat_fleet_maintenance',
+    'author': 'Generated Script',
+    'category': 'Custom',
+    'depends': ['hr_maintenance', 'diplomat_insurance_policy', 'diplomat_related_vehicle_product_and_model_category',
+                'fleet_analytic_account', 'stock_analytic_account', 'user_notify', 
+                'fleet_status', 'ywt_internal_stock_transfer'],
+    'data': [
+        'data/ir_cron.xml',
+        'data/res_groups.xml',
+        'data/ir_rule.xml',
+        'data/sequence.xml',
+
+        'security/ir.model.access.csv',
+        
+        'views/action_act_window.xml',
+        'views/fleet_vehicle_view.xml',
+        'views/maintenance_request_view.xml',
+        'views/maintenance_stage_view.xml',
+        'views/maintenance_team_view.xml',
+        'views/maintenance_workshop_view.xml',
+        'views/preventive_maintenance_plan_view.xml',
+        'views/product_product_view.xml',
+        'views/product_template_view.xml',
+        'views/repair_task_view.xml',
+        'views/res_config_settings_view.xml',
+        'views/transfer_stock_line_view.xml',
+        'views/vehicle_preventive_maintenance_view.xml',
+        'views/menu_items.xml',
+    ],
+    'installable': True,
+    'application': False,
+}

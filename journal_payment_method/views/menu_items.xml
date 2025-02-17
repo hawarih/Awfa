@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="journal_payment_method_menu" name="Payment Methods" sequence="5" 
+                    parent="account.account_invoicing_menu" action="journal_payment_method.journal_payment_method_action"/>
+    </data>
+</odoo>

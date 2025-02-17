@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="partner_config_account_root_menu" name="Partner Config Account" sequence="10" parent="contacts.res_partner_menu_config"/>
+        <menuitem id="partner_config_account_menu" name="Partner Config Account" sequence="10" 
+                                                    parent="partner_config_account.partner_config_account_root_menu" 
+                                                    action="partner_config_account.partner_config_account_action"/>
+    </data>
+</odoo>

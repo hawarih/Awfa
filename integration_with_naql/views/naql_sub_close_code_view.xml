@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_naql_sub_close_code_form" model="ir.ui.view">
+            <field name="name">naql.sub.close.code.form</field>
+            <field name="model">naql.sub.close.code</field>
+            <field name="arch" type="xml">
+                <form string="MODEL" create="true" duplicate="true" edit="true" delete="true">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="arabic_name"/>
+                            <field name="naql_id"/>
+                            <field name="naql_code"/>
+                            <field name="main_close_reason_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_naql_sub_close_code_tree" model="ir.ui.view">
+            <field name="name">naql.sub.close.code.tree</field>
+            <field name="model">naql.sub.close.code</field>
+            <field name="arch" type="xml">
+                <tree create="true" duplicate="true" edit="true" delete="true">
+                    <field name="name"/>
+                    <field name="arabic_name"/>
+                    <field name="naql_id"/>
+                    <field name="naql_code"/>
+                    <field name="main_close_reason_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

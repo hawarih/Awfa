@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_employee_form" model="ir.ui.view">
+            <field name="name">inherit.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="work_location_id" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="job_id" position="move"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']//field[@name='bank_account_id']" position="after">
+                    <field name="payment_method"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']//field[@name='passport_id']" position="after">
+                    <field name="passport_expiration_date"/>
+                    <field name="place_of_issue"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']//field[@name='country_of_birth']" position="after">
+                    <field name="religion_id"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']/group/group[4]" position="inside">
+                    <separator name="gosi_no" string="GOSI No"/>
+                    <field name="gosi_no"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']//field[@name='birthday']" position="after">
+                    <field name="age"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']//field[@name='has_work_permit']" position="after">
+                    <separator name="medical" string="Medical"/>
+                    <field name="blood_group"/>
+                    <field name="rh_factory" widget="radio"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Emergency Contacts">
+                        <field name="line_id">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="relation_id"/>
+                                <field name="note"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_hr_contract_form" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']//group[@name='payroll_group']" position="inside">
+                    <field name="contract_id" />
+                </xpath>
+
+                <xpath expr="//page[@name='hr_settings']//group[@name='payroll_group']" position="inside">
+                    <field name="registration_number" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

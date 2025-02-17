@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="usage_type_tree" model="ir.ui.view">
+            <field name="name">usage.type.tree</field>
+            <field name="model">usage.type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="tajeer_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

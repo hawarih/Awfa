@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="statement_wizard" model="ir.ui.view">
+            <field name="name">Add Statement</field>
+            <field name="model">add.statement.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="statement_type"/>
+                                <field name="statement_status" attrs="{'invisible': ['|',('statement_type','!=','phone'),('call_status','!=','answered')]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="call_status" attrs="{'invisible': [('statement_type','!=','phone')], 'required':[('statement_type','=','phone')]}"/>
+                                <field name="close_date" attrs="{'invisible': ['|','|',('statement_type','!=','phone'), ('call_status','!=','answered'),('statement_status','!=','pledge_to_deliver')]}"/>
+                                <field name="extend_date" attrs="{'invisible': ['|','|',('statement_type','!=','phone'), ('call_status','!=','answered'),('statement_status','!=','pledge_to_extend')]}"/>
+                            </group>
+                        </group>
+                        <group name="group_left">
+                            <field name="details"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Add Statement" name="add_statement" class="oe_highlight" type="object"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hr_attendance_sheet.paperformat_attendance_sheet" model="report.paperformat">
+        <field name="name">attendance sheet</field>
+        <field name="default">True</field>
+        <field name="format">custom</field>
+        <field name="margin_top">40.0</field>
+        <field name="margin_bottom">15.0</field>
+        <field name="margin_left">5.0</field>
+        <field name="margin_right">5.0</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+        <field name="print_page_width">210.0</field>
+        <field name="print_page_height">297.0</field>
+    </record>
+</odoo>

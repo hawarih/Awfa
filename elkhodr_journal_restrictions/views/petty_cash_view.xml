@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_petty_cash_form" model="ir.ui.view">
+            <field name="name">inherit.petty.cash.form</field>
+            <field name="model">petty.cash</field>
+            <field name="inherit_id" ref="passion_itss_petty_cash.petty_cash_form_view" />
+            <field name="arch" type="xml">
+                <field name="pay_journal_id" position="after">
+                    <field name="account_journal_ids" invisible="0"/>
+                </field>
+                <field name="pay_journal_id" position="attributes">
+                    <attribute name="domain">[('id','in',account_journal_ids)]</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

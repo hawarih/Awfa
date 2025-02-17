@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data>
+          <record id="view_hr_work_location_form_inherit" model="ir.ui.view">
+               <field name="name">hr.work.location.form.inherit</field>
+               <field name="model">hr.work.location</field>
+               <field name="inherit_id" ref="hr.hr_work_location_form_view"/>
+               <field name="arch" type="xml">
+                    <xpath expr="//field[@name='location_number']" position="after">
+                         <field name="longitude" digits="[16, 8]"/>
+                         <field name="latitude" digits="[16, 8]"/>
+                         <field name="allowed_distance"/>
+                    </xpath>
+               </field>
+          </record>
+     </data>
+</odoo>

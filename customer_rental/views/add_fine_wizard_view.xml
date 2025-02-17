@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="add_fine_wizard_form_view" model="ir.ui.view">
+            <field name="name">add fine wizard form view</field>
+            <field name="model">add.fine.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheer>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="product_id" string="Product"/>
+                                <field name="description"/>
+                                <field name="quantity"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="unit_of_measure" string="UoM"/>
+                                <field name="unit_price"/>
+                                <field name="customer_tax" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button string="save" name="save_button" class="oe_highlight" type="object"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

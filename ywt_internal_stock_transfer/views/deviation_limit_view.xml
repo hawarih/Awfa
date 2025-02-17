@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="deviation_limit_tree" model="ir.ui.view">
+            <field name="name">deviation.limit.tree</field>
+            <field name="model">deviation.limit</field>
+            <field name="arch" type="xml">
+                <tree string="Deviation Limit" editable="bottom">
+                    <field name="duplicated" invisible="True"/>
+                    <field name="date" readonly="1"/>
+                    <field name="from_location"/>
+                    <field name="to_location"/>
+                    <field name="km_limit"/>
+                    <field name="allowed_time" widget="float_time"/>
+                    <button name="duplicate_deviation_limit" type="object" string="Duplicate" class="oe_highlight" attrs="{'invisible':[('duplicated', '!=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

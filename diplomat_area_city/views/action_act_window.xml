@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_area_action" model="ir.actions.act_window">
+            <field name="name">Area</field>
+            <field name="res_model">stock.area</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="stock_city_action" model="ir.actions.act_window">
+            <field name="name">City</field>
+            <field name="res_model">stock.city</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

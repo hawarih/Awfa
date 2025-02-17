@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ywt_internal_stock_transfer.no_important_picking" model="res.groups">
+            <field name="name">Not Important Picking fields</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.stock_picking_group_categ"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.product_add" model="res.groups">
+            <field name="name">Add Product</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.set_to_draft" model="res.groups">
+            <field name="name">Set To Draft</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.smart_buttons" model="res.groups">
+            <field name="name">Smart Buttons</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.stock_picking_group_categ"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.transfer_cancel" model="res.groups">
+            <field name="name">Cancel Transfer</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.transfer_clear" model="res.groups">
+            <field name="name">Clear Transfer</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.transfer_close" model="res.groups">
+            <field name="name">Close Transfer</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.transfer_validate" model="res.groups">
+            <field name="name">Validate Transfer</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.picking_category"/>
+        </record>
+
+    </data>
+</odoo>

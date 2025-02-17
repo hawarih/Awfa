@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+card_scrap_wizard_name_id,card_scrap_wizard_name,model_card_scrap_wizard,,1,1,1,1
+card_vehicle_history_name_id,card_vehicle_history_name,model_card_vehicle_history,,1,1,1,1
+fleet_card_name_id,fleet_card_name,model_fleet_card,diplomat_card.card_creator,1,1,1,1
+fleet_card_user_name_id,fleet_card_user_name,model_fleet_card,base.group_user,1,0,0,0

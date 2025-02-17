@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_internal_stock_transfer_wizard_form" model="ir.ui.view">
+            <field name="name">ywt.internal.stock.transfer.wizard.form</field>
+            <field name="model">transfer.stock.line</field>
+            <field name="arch" type="xml">
+                <form string="Internal Stock Transfer Wizard">
+                    <group>
+                        <field name="maintenance_id" invisible="1"/>
+                        <field name="vehicle_id" invisible="1"/>
+                        <group>
+                            <field name="company_id" required="1"/>
+                            <field name="product_id" required="1"/>
+                            <field name="transfer_type" required="1"/>
+                            <field name="from_warehouse_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="driver_id" required="1"/>
+                            <field name="employee_id" required="1"/>
+                            <field name="destination" required="1"/>
+                        </group>
+                    </group>
+                    <group name="checklist_out" string="Checklist Out" col="4">
+                        <group>
+                            <field name="ac_out" required="1"/>
+                            <field name="radio_stereo_out" required="1"/>
+                            <field name="screen_out" required="1"/>
+                            <field name="spare_tire_tools_out" required="1"/>
+                            <field name="tires_out" required="1"/>
+                            <field name="spare_tires_out" required="1"/>
+                        </group>
+                        <group>
+                            <field name="speedometer_out" required="1"/>
+                            <field name="keys_out" required="1"/>
+                            <field name="car_seats_out" required="1"/>
+                        </group>
+                        <group>
+                            <field name="safety_triangle_out" required="1"/>
+                            <field name="fire_extinguisher_out" required="1"/>
+                            <field name="first_aid_kit_out" required="1"/>
+                            <field name="vehicle_status_out" required="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Create Stock Transfer" type="object" name="create_internal_stock_transfer" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

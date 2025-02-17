@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_doc_attachment_fleet" name="Vehicle Document" sequence="3" parent="fleet.fleet_vehicles" action="diplomat_vehicles_document.action_attachment_fleet"/>
+        <menuitem id="menu_doc_type_id" name="Document Types" sequence="3" parent="fleet.fleet_configuration" action="diplomat_vehicles_document.action_doc_type"/>
+    </data>
+</odoo>

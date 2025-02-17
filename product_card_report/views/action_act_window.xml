@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_product_card_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Product/Vehicle Moves Report</field>
+            <field name="res_model">product.card.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

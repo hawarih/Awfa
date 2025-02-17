@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="branch_branch_action" model="ir.actions.act_window">
+            <field name="name">Branch</field>
+            <field name="res_model">branch.branch</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        <record id="employee_group_action" model="ir.actions.act_window">
+            <field name="name">Employee Group</field>
+            <field name="res_model">employee.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        <record id="employee_subgroup_action" model="ir.actions.act_window">
+            <field name="name">Employee Subgroup</field>
+            <field name="res_model">employee.subgroup</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

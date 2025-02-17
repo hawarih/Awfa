@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="gps_menu" name="GPS" sequence="10" parent="fleet.menu_root" action="diplomat_gps.gps_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="insurance_policy_form_view" model="ir.ui.view">
+            <field name="name">insurance.policy.form.view</field>
+            <field name="model">insurance.policy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" groups="diplomat_insurance_policy.group_insurance_confirm" string="Confirm" class="oe_highlight" states="draft" type="object"/>
+                        <button name="action_create_bill" groups="diplomat_insurance_policy.group_insurance_confirm" string="Create Bill" attrs="{'invisible': ['|', '|', ('need_invoiced', '=', True),('state','!=','running'),('owned_by', '=', 'vendor')]}" type="object"/>
+                        <button name="action_create_bill" groups="diplomat_insurance_policy.group_insurance_confirm" string="Create Bill" attrs="{'invisible': ['|', '|', ('need_invoiced', '=', False),('state','!=','running'),('owned_by', '=', 'vendor')]}" class="oe_highlight" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,running,expired"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" groups="diplomat_insurance_policy.group_insurance_confirm" attrs="{'invisible': [('bill_count', '=', 0)]}" name="action_open_bill" type="object" icon="fa-bars">
+                                <field string="Bills" name="bill_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" groups="diplomat_insurance_policy.group_insurance_confirm" attrs="{'invisible': [('po_count', '=', 0)]}" name="action_open_po" type="object" icon="fa-bars">
+                                <field string="PO#" name="po_count" widget="statinfo"/>
+                            </button>
+
+                        </div>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="partner_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="number" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="related_user_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}" widget="many2many_tags"/>
+                                <field name="company_id"/>
+                                <field name="owned_by" required="True"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="stopped" invisible="1"/>
+                                <field name="need_invoiced" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="start_date" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="end_date" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="insurance_type" attrs="{'readonly': [('state', 'in', ('running', 'expired'))]}"/>
+                                <field name="deductible"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Insurance Lines">
+                                <field name="insurance_line_ids" widget="section_and_note_one2many" mode="tree" context="{'default_insurance_id': active_id, 'default_end_date': end_date}">
+                                    <tree editable="bottom">
+                                        <field name="days" optional="hide"/>
+                                        <field name="license_plate" force_save="1" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="chasis_num" force_save="1" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="card_number" attrs="{'required':[('vehicle_id','=', False)],'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="vehicle_id" force_save="1" attrs="{'required':[('card_number','=', False)],'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="product_id" invisible="1" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="start_date" force_save="1" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                                        <field name="end_date" force_save="1" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                                        <field name="qty" invisible="1"/>
+                                        <field name="price_unit" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use','=','purchase'), ('company_id', '=', parent.company_id)]" context="{'default_type_tax_use': 'purchase', 'search_view_ref': 'account.account_tax_view_search'}" options="{'no_create': True}" optional="show" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                        <field name="subtotal"/>
+                                        <field name="state" force_save="1"/>
+                                        <button string="Stop" type="object" name="action_stop" icon="fa-circle-o" confirm="do you want to stop it?" class="oe_highlight" groups="diplomat_insurance_policy.group_insurance_stop" attrs="{'invisible': [('state','in',('stop','draft'))]}"/>
+                                        <field name="tax_amount" invisible="1"/>
+                                        <field name="invoiced" invisible="1"/>
+                                        <field name="insurance_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Terms And Conditions">
+                                <field name="note" placeholder="Terms And Conditions"/>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="untaxed_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="tax_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline">
+                                <label for="total_amount"/>
+                            </div>
+                            <field name="total_amount" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="insurance_policy_tree_view" model="ir.ui.view">
+            <field name="name">insurance.policy.tree.view</field>
+            <field name="model">insurance.policy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="number"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="total_amount"/>
+                    <field name="stopped"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

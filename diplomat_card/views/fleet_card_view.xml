@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_card_form" model="ir.ui.view">
+            <field name="name">fleet.card.form</field>
+            <field name="model">fleet.card</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" states="draft" groups="diplomat_card.card_confirmer"/>
+                        <button name="action_confirm" type="object" string="Reassign" class="oe_highlight" states="not working" groups="diplomat_card.card_confirmer"/>
+                        <button name="action_reset_to_draft" type="object" string="Reset to Draft" attrs="{'invisible': ['|',('state', '=', 'draft'),('state', '=', 'lost')]}" groups="diplomat_card.card_reset_to_draft"/>
+                        <button name="action_clear" type="object" string="Clear" class="oe_highlight" states="working" groups="diplomat_card.card_clear"/>
+                        <button name="action_scrap_card" type="object" string="Scrap Card" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'not working')]}" groups="diplomat_card.card_scrap"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_scrap_ids" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('scrap_ids', '=', [])]}">
+                                <span>Scrap Card</span>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="lot_ids" invisible="1"/>
+                                <field name="lot_id" attrs="{'invisible': [('related_product', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="assign_gps" attrs="{                                        'required': [('state', '=', 'draft')],                                        'readonly': ['|', ('state', '=', 'working'),('state', '=', 'lost')]}"/>
+                                <field name="gps_id" invisible="True"/>
+                            </group>
+                            <group>
+                                <field name="related_product" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_location_id" invisible="1"/>
+                                <field name="location_id" domain="[('allowed_transfer', '!=', False)]" attrs="{'invisible': [('related_product', '=', False)], 'readonly': [('state', 'not in', ('working', 'not working'))]}" groups="diplomat_card.card_location" force_save="True"/>
+                                <field name="scrap_ids" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="fleet_card_tree" model="ir.ui.view">
+            <field name="name">fleet.card.tree</field>
+            <field name="model">fleet.card</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="lot_id"/>
+                    <field name="location_id"/>
+                    <field name="assign_gps"/>
+                    <field name="state"/>
+                    <field name="vehicle_id"/>
+                    <field name="gps_state" string="GPS State"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

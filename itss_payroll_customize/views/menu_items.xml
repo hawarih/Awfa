@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="hr_other_allowance_menu" name="Other Allowance" sequence="50" parent="hr_payroll.menu_hr_salary_configuration" action="itss_payroll_customize.hr_other_allowance_action"/>
+    </data>
+</odoo>

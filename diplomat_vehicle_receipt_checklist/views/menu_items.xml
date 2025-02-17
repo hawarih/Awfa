@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_vehicle_checklist_id" name="Checklists" sequence="5"
+                    parent="fleet.fleet_vehicles_configuration"
+                    action="diplomat_vehicle_receipt_checklist.action_vehicle_checklist"/>
+    </data>
+</odoo>

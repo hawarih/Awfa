@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ywt_internal_stock_transfer.stock_transfer_activity" model="mail.activity.type">
+            <field name="name">Stock Transfer Notification</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+            <field name="delay_count">0</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_label">0 days</field>
+            <field name="delay_from">previous_activity</field>
+            <field name="icon">fa-envelope</field>
+            <!-- <field name="res_model">ywt.internal.stock.transfer</field> -->
+            <field name="chaining_type">suggest</field>
+            <field name="category">default</field>
+            <!-- <field name="initial_res_model">ywt.internal.stock.transfer</field> -->
+        </record>
+    </data>
+</odoo>

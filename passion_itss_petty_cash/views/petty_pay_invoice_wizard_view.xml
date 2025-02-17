@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="petty_pay_invoice_wizard_from_view" model="ir.ui.view">
+            <field name="name">petty.pay.invoice.wizard.form.view</field>
+            <field name="model">petty.pay.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Pay With Petty Cash">
+                    <group>
+                        <field name="employee_id" invisible="1"/>
+                        <field name="petty_id" invisible="1"/>
+                        <!--                    <field name="petty_cash_ids" required="True" widget="many2many_tags" domain="[('balance', '!=', 0.0)]"/>-->
+                        <field name="petty_cash_ids" required="True" widget="many2many_tags" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
+                        <field name="journal_id"/>
+                        <field name="date" required="True"/>
+                        <!--                    <field name="hide_payment_method_line" invisible="1"/>-->
+                        <!--                    <field name="payment_method_id" attrs="{'invisible':[('hide_payment_method_line','=',True)]}"/>-->
+                        <field name="payment_method_id"/>
+                        <field name="invoice_id" invisible="1"/>
+                        <field name="partner_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="balance" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                    <footer>
+                        <button string="Post" name="petty_invoice_post_payment" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

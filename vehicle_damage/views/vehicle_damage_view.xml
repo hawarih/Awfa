@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_damage_form" model="ir.ui.view">
+            <field name="name">vehicle damage form</field>
+            <field name="model">vehicle.damage</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible' : [('state','not in',('waiting'))]}"/>
+                        <button name="cancel" string="Cancel" type="object" class="oe_highlight" attrs="{'invisible' : [('state','not in',('waiting'))]}"/>
+
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left" string="Vehicle Information">
+                                <field name="category_id" readonly="1"/>
+                                <field name="fleet_model_id" readonly="1"/>
+                                <field name="fleet_vehicle_id" readonly="1"/>
+                                <field name="licence_plate" readonly="1"/>
+                                <field name="evaluation_party" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                            </group>
+                            <group name="group_right" string="Evaluation Amount">
+                                <field name="rental_contract" readonly="1"/>
+                                <field name="customer" readonly="1"/>
+                                <field name="total_without_tax" readonly="1" force_save="1"/>
+                                <field name="tax" readonly="1" widget="many2many_tags"/>
+                                <field name="total_with_tax" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <field name="vehicle_damage_lines" no_label="1">
+                            <tree editable="bottom">
+                                <field name="repair_task" attrs="{'readonly' : [('parent.state','not in',('waiting'))]}"/>
+                                <field name="amount" attrs="{'readonly' : [('parent.state','not in',('waiting'))]}"/>
+                            </tree>
+                        </field>
+                        <group name="checklist" string="Checklist" col="4">
+                            <group>
+                                <field name="ac" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="radio_stereo" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="screen" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="spare_tire_tools" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="tires" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="spare_tires" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                            </group>
+                            <group>
+                                <field name="speedometer" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="keys" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="car_seats" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                            </group>
+                            <group>
+                                <field name="safety_triangle" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="fire_extinguisher" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="first_aid_kit" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                <field name="vehicle_status" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                            </group>
+                        </group>
+                        <group style="margin-top:100px;">
+                            <group>
+                                <group>
+                                    <field name="image1" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="image2" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="image3" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="image4" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="image5" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="image6" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>[2032, 'accident.res.config.settings.view.form']
+                                    <field name="image7" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="image8" widget="image" class="oe_avatar" attrs="{'readonly' : [('state','not in',('waiting'))]}"/>
+                                </group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_damage_tree" model="ir.ui.view">
+            <field name="name">vehicle.damage.tree</field>
+            <field name="model">vehicle.damage</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="licence_plate"/>
+                    <field name="rental_contract"/>
+                    <field name="customer"/>
+                    <field name="total_without_tax"/>
+                    <field name="total_with_tax"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

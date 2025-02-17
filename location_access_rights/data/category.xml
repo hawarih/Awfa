@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="location_access_rights.category_location_warehouse_restrictions" model="ir.module.category">
+            <field name="name">Restriction Category</field>
+        </record>
+
+    </data>
+</odoo>

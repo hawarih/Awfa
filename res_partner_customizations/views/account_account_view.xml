@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="account_account_form_inherit" model="ir.ui.view">
+            <field name="name">account account form inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allowed_journal_ids']" position="after">
+                    <field name="allowed_with_customer" optional="show"/>
+                    <field name="allowed_with_vendor" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_account_list_inherit" model="ir.ui.view">
+            <field name="name">account account list inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allowed_journal_ids']" position="after">
+                    <field name="allowed_with_customer" optional="show"/>
+                    <field name="allowed_with_vendor" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

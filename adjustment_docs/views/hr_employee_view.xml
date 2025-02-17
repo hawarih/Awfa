@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_employee_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.inherit.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="after">
+                    <field name="active" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button class="oe_stat_button" name="document_view" type="object" icon="fa-list-ol">
+                        <field string="Documents" name="document_count_new" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_hr_employee_inherit_2" model="ir.ui.view">
+            <field name="name">hr.employee.inherit.form.expiry</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="employee_documents_expiry.hr_employee_document_inherit_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]//button[@name='document_view']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

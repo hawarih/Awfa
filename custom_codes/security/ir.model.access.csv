@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+branch_branch_name_id,branch_branch_name,model_branch_branch,hr.group_hr_user,1,1,1,0
+branch_branch_manger_name_id,branch_branch_manger_name,model_branch_branch,hr.group_hr_manager,1,1,1,1
+employee_group_name_id,employee_group_name,model_employee_group,hr.group_hr_user,1,1,1,0
+employee_group_manger_name_id,employee_group_manger_name,model_employee_group,hr.group_hr_manager,1,1,1,1
+employee_subgroup_name_id,employee_subgroup_name,model_employee_subgroup,hr.group_hr_user,1,1,1,0
+employee_subgroup_manger_name_id,employee_subgroup_manger_name,model_employee_subgroup,hr.group_hr_manager,1,1,1,1

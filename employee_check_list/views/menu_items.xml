@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="employee_entry_checklist_menu" name="Entry Checklist" 
+                        action="action_entry_checklist" 
+                        parent="hr.menu_human_resources_configuration" sequence="3"/>
+
+        <menuitem id="employee_exit_checklist_menu" name="Exit Checklist" 
+                        action="action_exit_checklist" 
+                        parent="hr.menu_human_resources_configuration" sequence="4"/>
+    </data>
+</odoo>

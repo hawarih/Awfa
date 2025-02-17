@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="Rental Order Blacklist" groups="customer_blacklist.group_show_rental_order_blacklist">
+                        <group>
+                            <group string="Rental Order Blacklist" name="Blacklist" priority="1">
+                                <label for="blacklist_type" invisible="1"/>
+                                <field name="blacklist_type"/>
+                                <field name="message" placeholder="Type a message..." attrs="{'invisible': [('is_warning','=',False),('is_blacklist','=',False)]}"/>
+                            </group>
+                            <group style="padding-top: 25px; padding-right: 20px">
+                                <field name="is_warning" readonly="1"/>
+                                <field name="is_blacklist" readonly="1"/>
+                                <field name="date"/>
+                                <field name="blacklist_by" readonly="1"/>
+                                <field name="warning_by" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

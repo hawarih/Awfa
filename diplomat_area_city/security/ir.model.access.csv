@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stock_area_id,stock_area_name,model_stock_area,,1,1,1,1
+stock_city_id,stock_city_name,model_stock_city,,1,1,1,1

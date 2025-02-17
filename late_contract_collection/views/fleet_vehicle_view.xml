@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_form_inherit_generalization" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.inherit.generalization</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="after">
+                    <field name="is_waiting_generalization" invisible="1"/>
+                    <field name="is_generalized" invisible="1"/>
+                    <div style="float:right;padding:0 15px 0 0 ;">
+                        <div style="font-size:20px">
+                            <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|',('is_waiting_generalization','=',True),('is_generalized','=',False)]}">
+                            Generalized
+                            </div>
+                            <div class="badge rounded-pill text-bg-warning" attrs="{'invisible' : ['|',('is_waiting_generalization','=',False),('is_generalized','=',True)]}">
+                            Waiting Generalization
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

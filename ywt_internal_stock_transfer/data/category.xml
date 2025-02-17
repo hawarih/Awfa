@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ywt_internal_stock_transfer.picking_category" model="ir.module.category">
+            <field name="name">Stock Transfer</field>
+            <field name="sequence">11</field>
+            <field name="visible">True</field>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.stock_picking_group_categ" model="ir.module.category">
+            <field name="name">Stock Picking</field>
+            <field name="sequence">11</field>
+            <field name="visible">True</field>
+        </record>
+
+    </data>
+</odoo>

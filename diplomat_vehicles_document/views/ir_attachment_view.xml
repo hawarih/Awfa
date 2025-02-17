@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inhert_view_document_file_kanban" model="ir.ui.view">
+            <field name="name">ir.attachment.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="mail.view_document_file_kanban"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="doc_type_id"/>
+                    </xpath>
+                    <xpath expr="//div[@class='o_kanban_record_title']" position="after">
+                        <div t-att-title="record.doc_type_id.raw_value" class="o_kanban_record_title">
+                            <field name="doc_type_id" class="o_text_overflow"/>
+                        </div>
+                    </xpath>
+            </field>
+        </record>
+
+
+        <record id="type_view_attachment_form" model="ir.ui.view">
+            <field name="name">ir.attachment.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="replace">
+                    <group>
+                        <group>
+                            <field name="res_name"/>
+                            <field name="type"/>
+                            <field name="doc_type_id"/>
+                            <field name="fleet_doc" invisible="1"/>
+                            <field name="datas" filename="name" attrs="{'invisible':[('type','=','url')]}"/>
+                            <field name="url" widget="url" attrs="{'invisible':[('type','=','binary')]}"/>
+                            <field name="mimetype" groups="base.group_no_one" attrs="{'invisible':[('fleet_doc','=',True)]}"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="notify"/>
+                            <field name="num_days" attrs="{'invisible':[('notify','=',False)]}"/>
+                            <field name="related_user_ids" widget="many2many_tags" attrs="{'invisible':[('notify','=',False)]}"/>
+                        </group>
+                        <group string="Attached To" groups="base.group_no_one" attrs="{'invisible':[('fleet_doc','=',True)]}">
+                            <field name="res_model"/>
+                            <field name="res_field"/>
+                            <field name="res_id"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="public"/>
+                        </group>
+                        <group string="History" groups="base.group_no_one" attrs="{'invisible':[('create_date','=',False)]}">
+                            <label for="create_uid" string="Creation"/>
+                            <div name="creation_div">
+                                <field name="create_uid" readonly="1" class="oe_inline"/>
+ on
+                                <field name="create_date" readonly="1" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group name="description_group" string="Description" groups="base.group_no_one" colspan="4">
+                            <field name="description" nolabel="1"/>
+                        </group>
+                        <group groups="base.group_no_one" string="Indexed Content" colspan="4" attrs="{'invisible':[('fleet_doc','=',True)]}">
+                            <field name="index_content" nolabel="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="type_view_attachment_search" model="ir.ui.view">
+            <field name="name">ir.attachment.search</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_search"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='create_date']" position="after">
+                        <field name="doc_type_id"/>
+                    </xpath>
+                    <xpath expr="//filter[@name='creation_month']" position="after">
+                        <filter string="Document Type" name="doc_type" domain="[]" context="{'group_by':'doc_type_id'}"/>
+
+                        <!-- Add new fields here -->
+                    </xpath>
+            </field>
+        </record>
+        <record id="type_view_attachment_tree" model="ir.ui.view">
+            <field name="name">ir.attachment.tree</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='res_model']" position="before">
+                        <field name="res_name"/>
+                        <field name="fleet_doc" invisible="1"/>
+                        <field name="doc_type_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+
+                    </xpath>
+                    <xpath expr="//field[@name='res_model']" position="attributes">
+                        <attribute name="attrs">{'column_invisible':[('fleet_doc','=',True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='res_field']" position="attributes">
+                        <attribute name="attrs">{'column_invisible':[('fleet_doc','=',True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='res_id']" position="attributes">
+                        <attribute name="attrs">{'column_invisible':[('fleet_doc','=',True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='type']" position="attributes">
+                        <attribute name="attrs">{'column_invisible':[('fleet_doc','=',True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='file_size']" position="attributes">
+                        <attribute name="attrs">{'column_invisible':[('fleet_doc','=',True)]}</attribute>
+                    </xpath>
+
+                    <!--                <xpath expr="//field[@name='type']" position="after">-->
+                    <!--                </xpath>-->
+
+            </field>
+        </record>
+    </data>
+</odoo>

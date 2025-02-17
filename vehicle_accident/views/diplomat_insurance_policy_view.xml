@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_diplomat_insurance_policy_form" model="ir.ui.view">
+            <field name="name">inherit_diplomat_insurance_policy_form</field>
+            <field name="model">insurance.policy</field>
+            <field name="inherit_id" ref="diplomat_insurance_policy.insurance_policy_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='insurance_line_ids']/tree/field[@name='vehicle_id']" position="after">
+                    <field name="customer_deductible" optional="show" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

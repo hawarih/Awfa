@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="allowance_action" model="ir.actions.act_window">
+            <field name="name">Allowance</field>
+            <field name="res_model">allowance.deduction</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'allowance')]</field>
+            <field name="context">{'default_type': 'allowance'}</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="deduction_action" model="ir.actions.act_window">
+            <field name="name">Deduction</field>
+            <field name="res_model">allowance.deduction</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'deduction')]</field>
+            <field name="context">{'default_type': 'deduction'}</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

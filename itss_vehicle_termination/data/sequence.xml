@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="itss_vehicle_termination.vehicle_termination_Seq" model="ir.sequence">
+            <field name="name">Vehicle Termination Sequence</field>
+            <field name="code">vehicle.termination.seq</field>
+            <field name="implementation">standard</field>
+            <field name="active">True</field>
+            <field name="prefix">Termination/</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">0</field>
+        </record>
+    </data>
+</odoo>

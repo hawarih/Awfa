@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_other_allowance_form" model="ir.ui.view">
+            <field name="name">hr.other.allowance.form</field>
+            <field name="model">hr.other.allowance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_other_allowance_search" model="ir.ui.view">
+            <field name="name">hr.other.allowance.search</field>
+            <field name="model">hr.other.allowance</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Name" name="group_name" context="{'group_by':'name'}"/>
+                        <filter string="Code" name="group_code" context="{'group_by':'code'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="hr_other_allowance_tree" model="ir.ui.view">
+            <field name="name">hr.other.allowance.tree</field>
+            <field name="model">hr.other.allowance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

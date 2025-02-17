@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">view.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']/../.." position="before">
+                    <group attrs="{'invisible': ['|',('company_type', '!=', 'person'),('customer', '=', False)]}">
+                        <field name="national_identity_number"/>
+                        <field name="id_type_code"/>
+                        <field name="id_issue"/>
+                        <field name="id_expiry"/>
+                        <field name="license_number"/>
+                        <field name="license_expiry_date" attrs="{'required':[('company_type', '=', 'person'),('customer', '!=', False)]}"/>
+                    </group>
+                    <group attrs="{'invisible': ['|',('company_type', '!=', 'person'),('customer', '=', False)]}">
+                        <field name="id_version_num" attrs="{'required':[('company_type', '=', 'person'),('customer', '!=', False)]}"/>
+                        <field name="birth" attrs="{'required':[('company_type', '=', 'person'),('customer', '!=', False)]}"/>
+                        <field name="nationality" attrs="{'invisible': ['|',('company_type', '=', 'company'),('customer', '=', False)]}"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="commercial_register" attrs="{'invisible': [('company_type', '!=', 'company')]}"/>
+                    <field name="governmental_no" attrs="{'invisible': [('company_type', '!=', 'company')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

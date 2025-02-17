@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+employee_emergency_contact_name_id,employee_emergency_contact_name,model_employee_emergency_contact,,1,1,1,1
+employee_line_name_id,employee_line_name,model_employee_line,,1,1,1,1
+employee_religion_name_id,employee_religion_name,model_employee_religion,,1,1,1,1

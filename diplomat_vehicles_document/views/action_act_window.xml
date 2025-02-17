@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_attachment_fleet" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="res_model">ir.attachment</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_doc_type" model="ir.actions.act_window">
+            <field name="name">Document Types</field>
+            <field name="res_model">doc.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- =========================== Action Server ================================== -->
+        <record id="action_notification_vehicle_docs_ir_actions_server" model="ir.actions.server">
+            <field name="name">Generate vehicle Documents Notification</field>
+            <field name="model_id" ref="base.model_ir_attachment"/>
+            <field name="state">code</field>
+            <field name="code">action = model.notification_fleet_doc()</field>
+        </record>
+    </data>
+</odoo>

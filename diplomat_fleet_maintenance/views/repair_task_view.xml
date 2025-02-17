@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="repair_task_form" model="ir.ui.view">
+            <field name="name">repair.task.form</field>
+            <field name="model">repair.task</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="maintenance_workshop_ids" widget="many2many_tags"/>
+                                <field name="expected_cost_by_hour"/>
+                                <field name="expected_work_hours"/>
+                            </group>
+                            <group>
+                                <field name="currency_id"/>
+                                <field name="expected_no_of_workers"/>
+                                <field name="spare_part_ids" domain="[('is_spare_part', '=', True)]" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <span>------------------------------------------------------------------------</span>
+                        <h3>
+                            <label for="expected_total_cost"/>
+                            <field name="expected_total_cost" widget="monetary" nolabel="True"/>
+                        </h3>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="repair_task_tree" model="ir.ui.view">
+            <field name="name">repair.task.tree</field>
+            <field name="model">repair.task</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

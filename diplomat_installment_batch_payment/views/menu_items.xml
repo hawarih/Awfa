@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="installment_batch_payment_menu" name="Installment Batch Payment" sequence="2" 
+                            parent="purchase.menu_purchase_root" action="installment_batch_payment_action"/>
+    </data>
+</odoo>

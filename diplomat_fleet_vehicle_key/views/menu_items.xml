@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="fleet_vehicle_key" name="Keys" 
+                    action="fleet_vehicle_key_action" 
+                    parent="fleet.fleet_vehicles_configuration" sequence="30"/>
+    </data>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_rental_fine_wizard_form" model="ir.ui.view">
+            <field name="name">customer.rental.fine.wizard.form</field>
+            <field name="model">customer.rental.fine.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top">
+                            <field name="has_delay_penalty_admin_group" invisible="1"/>
+                            <group name="group_left">
+                                <div class="o_row">
+                                    <span style="white-space: nowrap;">Total Duration Days: </span>
+                                    <field name="total_duration_days"/>
+                                    <span style="margin : 0px 15px;padding: 0 25px;"> Hours: </span>
+                                    <field name="total_duration_hours"/>
+                                </div>
+                                <br/>
+                                <field name="allowed_hours" attrs="{'invisible': [('has_delay_penalty_admin_group', '=', False)]}"/>
+                                <div class="o_row">
+                                    <span style="white-space: nowrap;">Expected Duration Days: </span>
+                                    <field name="expected_duration_days"/>
+                                    <span style="margin : 0px 15px;padding: 0 25px;"> Hours:</span>
+                                    <field name="expected_duration_hours"/>
+                                </div>
+                                <br/>
+                                <field name="current_duration_amount" attrs="{'invisible': [('has_delay_penalty_admin_group', '=', False)]}" force_save="1"/>
+                                <field name="current_duration_amount_with_tax" attrs="{'invisible': [('has_delay_penalty_admin_group', '=', False)]}"/>
+                                <field name="km_in"/>
+                                <field name="total_km_extra_cost" readonly="1" force_save="1"/>
+                                <field name="contract_id" invisible="1"/>
+                                <field name="is_early" invisible="1"/>
+                                <field name="is_returned" invisible="1"/>
+                            </group>
+                            <group name="group_right">
+                                <div class="o_row" attrs="{'invisible': [('is_early', '=', True)]}">
+                                    <span style="white-space: nowrap;">Late Hours Days: </span>
+                                    <field name="late_days" attrs="{'invisible': [('is_early', '=', True)]}"/>
+                                    <span style="margin : 0px 15px;padding: 0 25px;"> Hours: </span>
+                                    <field name="late_hours_for_day" attrs="{'invisible': [('is_early', '=', True)]}"/>
+                                    <br/>
+                                </div>
+                                <field name="early_hours" invisible="1"/>
+                                <div class="o_row" attrs="{'invisible': ['|',('is_early', '=', False),('early_hours','=',0)]}">
+                                    <span>Early Hours Days: </span>
+                                    <field name="early_days" attrs="{'invisible': ['|',('is_early', '=', False),('early_hours','=',0)]}"/>
+                                    <span style="margin : 0px 15px;padding: 0 25px;"> Hours: </span>
+                                    <field name="early_hours_for_day" attrs="{'invisible': ['|',('is_early', '=', False),('early_hours','=',0)]}"/>
+                                    <br/>
+                                </div>
+                                <br/>
+                                <field name="late_hours_cost" attrs="{'invisible': [('is_early', '=', True)]}"/>
+                                <field name="late_hours_without_penalty" attrs="{'invisible': [('is_early', '=', True)]}"/>
+                                <field name="late_hours_invoiced" invisible="1"/>
+                                <field name="already_invoiced" invisible="1"/>
+                                <field name="charged_late_hours" invisible="1"/>
+                                <field name="total_due_amount"/>
+                                <field name="tax" attrs="{'invisible': ['|',('is_early', '=', True),('has_delay_penalty_admin_group', '=', False)]}" widget="many2many_tags"/>
+                                <field name="tax_amount"/>
+                                <field name="total_due_amount_with_tax"/>
+                                <field name="total_paid"/>
+                                <field name="result"/>
+                                <field name="due_amount_table" no_label="1" readonly="1" force_save="1">
+                                    <tree no_create="1" no_open="1" delete="false">
+                                        <field name="name"/>
+                                        <field name="amount" force_save="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

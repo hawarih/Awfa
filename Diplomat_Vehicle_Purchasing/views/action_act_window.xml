@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="leasing_payment_action" model="ir.actions.act_window">
+            <field name="name">Leasing Payment</field>
+            <field name="res_model">leasing.payment</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="purchase_type_action" model="ir.actions.act_window">
+            <field name="name">Purchase Type</field>
+            <field name="res_model">purchase.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

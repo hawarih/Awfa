@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="adjustment_docs.mail_activity_document_notification" model="mail.activity.type">
+            <field name="name">Hr Document Notification</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+            <field name="delay_count">0</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_label">0 days</field>
+            <field name="delay_from">previous_activity</field>
+            <field name="icon">fa-file-text-o</field>
+            <!-- <field name="res_model">hr.document.notification</field> -->
+            <field name="chaining_type">suggest</field>
+            <field name="category">default</field>
+            <field name="initial_res_model">hr.document.notification</field>
+        </record>
+    </data>
+</odoo>

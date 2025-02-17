@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <data noupdate="1">
+                <record id="itss_payroll_customize.hr_salary_rule_assigned" model="hr.salary.rule">
+                        <field name="name">Assigned</field>
+                        <field name="code">ASSiGN</field>
+                        <field name="sequence">60</field>
+                        <field name="quantity">1.0</field>
+                        <field name="struct_id" ref="hr_attendance_sheet.structure_itss"/>
+                        <field name='category_id' ref="hr_payroll.ALW" />
+                        <field name="appears_on_payslip">True</field>
+                        <field name="condition_select">python</field>
+                        <field name="condition_range">contract.wage</field>
+                        <field name="condition_python">result=bool(payslip.is_assigned)
+                        </field>
+                        <field name="amount_select">code</field>
+                        <field name="amount_python_compute">result = contract.assigned
+                        </field>
+                </record>
+
+                <record id="itss_payroll_customize.hr_salary_rule_att_gosi" model="hr.salary.rule">
+                        <field name="name">GOSI</field>
+                        <field name="code">GOSI</field>
+                        <field name="sequence">60</field>
+                        <field name="quantity">1.0</field>
+                        <field name="struct_id" ref="hr_attendance_sheet.structure_itss"/>
+                        <field name='category_id' ref="hr_payroll.DED" />
+                        <field name="appears_on_payslip">True</field>
+                        <field name="condition_select">python</field>
+                        <field name="condition_range">contract.wage</field>
+                        <field name="condition_python">result=bool(employee.saudi)
+                        </field>
+                        <field name="amount_select">code</field>
+                        <field name="amount_python_compute">result = -(contract.wage + contract.housing) * 0.10
+                        </field>
+                </record>
+
+                <record id="itss_payroll_customize.hr_salary_rule_att_housing" model="hr.salary.rule">
+                        <field name="name">Housing</field>
+                        <field name="code">Housing</field>
+                        <field name="sequence">60</field>
+                        <field name="quantity">1.0</field>
+                        <field name="struct_id" ref="hr_attendance_sheet.structure_itss"/>
+                        <field name='category_id' ref="hr_payroll.ALW"/>
+                        <field name="appears_on_payslip">True</field>
+                        <field name="condition_select">none</field>
+                        <field name="condition_range">contract.wage</field>
+                        <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET > categories.NET * 0.10
+                        </field>
+
+                        <field name="amount_select">code</field>
+                        <field name="amount_python_compute">result = (contract.housing / 30) * (30 - (worked_days.ABS.number_of_days + worked_days.UNPL.number_of_days + employee.difference)) if (employee.join_this_month) else contract.housing
+                        </field>
+                </record>
+        </data>
+</odoo>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="accident_vehicle_view_action" model="ir.actions.act_window">
+            <field name="name">Accident Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('state_id.type', '=', 'accident')]</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="account_payment_view_action" model="ir.actions.act_window">
+            <field name="name">Payments</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="add_deduct_wizard_action" model="ir.actions.act_window">
+            <field name="name">add deduct wizard</field>
+            <field name="res_model">add.deduct.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="add_fine_wizard_action" model="ir.actions.act_window">
+            <field name="name">add fine wizard</field>
+            <field name="res_model">add.fine.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="closed_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Closed Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="domain">[('state', '=', 'closed')],</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="customer_rental_fine_wizard_action" model="ir.actions.act_window">
+            <field name="name">Delay penalty</field>
+            <field name="res_model">customer.rental.fine.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="customer_rental_plan_action" model="ir.actions.act_window">
+            <field name="name">Rental Plan</field>
+            <field name="res_model">customer.rental.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="customer_rental_policy_action" model="ir.actions.act_window">
+            <field name="name">Rental Policy</field>
+            <field name="res_model">customer.rental.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="customer_rental_pricing_action" model="ir.actions.act_window">
+            <field name="name">Rental Pricing</field>
+            <field name="res_model">customer.rental.pricing</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="customer_rental_return_wizard_action" model="ir.actions.act_window">
+            <field name="name">Validate a Return</field>
+            <field name="res_model">customer.rental.return.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="customer_rental_setting_action" model="ir.actions.act_window">
+            <field name="name">Customer Rental Setting</field>
+            <field name="res_model">customer.rental.setting</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="extend_contract_payment_wizard_action" model="ir.actions.act_window">
+            <field name="name">Confirm Payment</field>
+            <field name="res_model">extend.contract.payment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="extend_wizard_action" model="ir.actions.act_window">
+            <field name="name">extend wizard</field>
+            <field name="res_model">extend.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="held_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Held Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="domain">[('state', '=', 'hold')],</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="indebet_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Delivered Indebet Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="domain">[('state', '=', 'delivered_indebet')],</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="invoices_view_action" model="ir.actions.act_window">
+            <field name="name">Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="late_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Late Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="maintenance_vehicle_view_action" model="ir.actions.act_window">
+            <field name="name">Maintenance Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('state_id.type', '=', 'maintenance')]</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="new_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">New Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="domain">[('state', '=', 'draft')],</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="opened_rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Opened Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="domain">[('state', '=', 'open')],</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="ready_vehicle_view_action" model="ir.actions.act_window">
+            <field name="name">Ready Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="rental_additional_service_action" model="ir.actions.act_window">
+            <field name="name">rental additional service</field>
+            <field name="res_model">rental.additional.service</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="rental_contract_action" model="ir.actions.act_window">
+            <field name="name">Rental Contract</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="rental_contract_apply_penalty_contract" model="ir.actions.act_window">
+            <field name="name">Apply Penalty Confirmation</field>
+            <field name="res_model">confirmation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="rented_vehicle_view_action" model="ir.actions.act_window">
+            <field name="name">Rented Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="res_partner_view_action" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <!-- ====================== Server Actions for customer_rental ======================= -->
+        <record id="change_rental_pricing_state_ir_actions_server" model="ir.actions.server">
+            <field name="name">Change Rental Pricing State</field>
+            <field name="model_id" ref="customer_rental.model_customer_rental_pricing"/>
+            <field name="state">code</field>
+            <field name="code">action = model.change_rental_pricing_states()</field>
+        </record>
+        
+        <record id="compute_is_late_for_rental_contracts_ir_actions_server" model="ir.actions.server">
+            <field name="name">Compute Is Late For Rental Contracts</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = model.compute_is_late_for_contracts()</field>
+        </record>
+
+        <record id="correct_invoices_amount_ir_actions_server" model="ir.actions.server">
+            <field name="name">Correct Invoices Amount</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = model.correct_invoices_amount()</field>
+        </record>
+
+        <record id="create_monthly_invoices_for_rental_contracts_ir_actions_server" model="ir.actions.server">
+            <field name="name">Create Monthly Invoices For Rental Contracts</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = model.create_monthly_invoices()</field>
+        </record>
+
+        <record id="model_customer_rental_pricing_archive_state" model="ir.actions.server">
+            <field name="name">Archive Contract</field>
+            <field name="model_id" ref="customer_rental.model_customer_rental_pricing"/>
+            <field name="state">code</field>
+            <field name="code">action = action = records.archive()</field>
+        </record>
+
+        <record id="model_customer_rental_pricing_confirm_state" model="ir.actions.server">
+            <field name="name">Confirm State</field>
+            <field name="model_id" ref="customer_rental.model_customer_rental_pricing"/>
+            <field name="state">code</field>
+            <field name="code">action = records.confirm()</field>
+        </record>
+
+        <record id="model_rental_contract_add_deduct" model="ir.actions.server">
+            <field name="name">Add Deduct</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.add_deduct_view()</field>
+        </record>
+
+        <record id="model_rental_contract_add_fine" model="ir.actions.server">
+            <field name="name">Add Fine</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.add_fine_view()</field>
+        </record>
+
+        <record id="model_rental_contract_cancel_contract" model="ir.actions.server">
+            <field name="name">Cancel Contract</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">records.action_cancel()</field>
+        </record>
+
+        <record id="model_rental_contract_correct_invoices_lines" model="ir.actions.server">
+            <field name="name">Correct Invoices Lines</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.correct_invoices_lines()</field>
+        </record>
+
+        <record id="model_rental_contract_extend_contract" model="ir.actions.server">
+            <field name="name">Extend Contract</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.extend_contract()</field>
+        </record>
+
+        <record id="model_rental_contract_fine_and_deduct_invoices" model="ir.actions.server">
+            <field name="name">Fine and Deduct Invoices</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.fine_and_deduct_invoices()</field>
+        </record>
+
+        <record id="model_rental_contract_fix_km_open_and_fuel_cost" model="ir.actions.server">
+            <field name="name">Fix Km Open and Fuel Cost</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.fix_km_open_and_fuel_cost()</field>
+        </record>
+
+        <record id="open_contract_action" model="ir.actions.server">
+            <field name="name">Open Contract</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.open_contract()</field>
+        </record>
+
+        <record id="recompute_contract_state_ir_actions_server" model="ir.actions.server">
+            <field name="name">Recompute Contract State</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.recompute_contract_state()</field>
+        </record>
+
+        <record id="reconcile_contract_invoices_ir_actions_server" model="ir.actions.server">
+            <field name="name">Reconcile Contract Invoices With Payments</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.action_cron_reconcile()</field>
+        </record>
+
+        <record id="reconcile_invoices" model="ir.actions.server">
+            <field name="name">Reconcile Invoices</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.reconcile_invoices()</field>
+        </record>
+    </data>
+</odoo>

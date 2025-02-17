@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_allowances_and_deductions.group_admin_approve" model="res.groups">
+            <field name="name">Allowances and Deductions Approve</field>
+            <field name='category_id' ref="hr_allowances_and_deductions.category_allowance_deduction"/>
+        </record>
+
+        <record id="hr_allowances_and_deductions.group_request_approve" model="res.groups">
+            <field name="name">Request Approve</field>
+            <field name='category_id' ref="hr_allowances_and_deductions.category_allowance_deduction"/>
+        </record>
+    </data>
+</odoo>

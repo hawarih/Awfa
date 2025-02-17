@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_attendance_pivot" model="ir.ui.view">
+            <field name="name">hr.attendance.pivot</field>
+            <field name="model">hr.attendance</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="employee_id" type="row"/>
+                    <field name="department_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="inherit_hr_attendance_search" model="ir.ui.view">
+            <field name="name">inherit.hr.attendance.search</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+            <field name="arch" type="xml">
+                <filter name="nocheckout" position="after">
+                    <filter string="No Check In" name="nocheckin" domain="[('check_in', '=', False)]"/>
+                </filter>
+
+                <group position="inside">
+                    <filter string="Department" name="groupby_department_id" context="{'group_by': 'department_id'}"/>
+                    <filter string="job position" name="groupby_job_id" context="{'group_by': 'job_id'}"/>
+                    <filter string="branch" name="groupby_branch_id" context="{'group_by': 'branch_id'}"/>
+                </group>
+            </field>
+        </record>
+
+        <record id="inherit_hr_attendance_report_search" model="ir.ui.view">
+            <field name="name">inherit.hr.attendance.report.search</field>
+            <field name="model">hr.attendance.report</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_report_view_search"/>
+            <field name="arch" type="xml">
+                <filter name="groupby_check_in" position="after">
+                    <filter string="No Check In" name="nocheckin" domain="[('check_in', '=', False)]"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

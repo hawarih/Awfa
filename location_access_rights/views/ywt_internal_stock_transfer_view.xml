@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ywt_internal_stock_transfer_location_form_inherit" model="ir.ui.view">
+            <field name="name">ywt internal stock transfer location form inherit</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="inherit_id" ref="ywt_internal_stock_transfer.ywt_stock_transfer_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='to_warehouse_id']" position="after">
+                        <field name="user_location_ids" invisible="1"/>
+                        <field name="user_allowed_location_ids" invisible="1"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='from_warehouse_id']" position="attributes">
+                        <attribute name="domain">[('lot_stock_id','in',user_location_ids)]</attribute>
+                    </xpath>
+                    <!--            <xpath expr="//field[@name='from_warehouse_id']" position="attributes">-->
+                    <!--                <attribute name="domain">[('lot_stock_id','in',user_allowed_location_ids)]</attribute>-->
+                    <!--            </xpath>-->
+
+
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

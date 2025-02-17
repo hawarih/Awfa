@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_deviation_limit" name="Deviation Limit" sequence="10" parent="stock.menu_stock_config_settings" action="ywt_internal_stock_transfer.deviation_limit_action"/>
+        <menuitem id="menu_vehicle_driver" name="Driver" sequence="10" parent="fleet.fleet_configuration" action="ywt_internal_stock_transfer.vehicle_driver_action"/>
+        <menuitem id="ywt_internal_stock_transfer_menu" name="Internal Transfer" sequence="6" parent="stock.menu_stock_root"/>
+        <menuitem id="ywt_internal_stock_transfer_menu_child" name="Internal Stock Transfer" sequence="10" parent="ywt_internal_stock_transfer.ywt_internal_stock_transfer_menu" action="ywt_internal_stock_transfer.ywt_internal_stock_transfer_action"/>
+        <menuitem id="ywt_stock_transfer_menu" name="Stock Transfer" sequence="10" parent="ywt_internal_stock_transfer.ywt_internal_stock_transfer_menu" action="ywt_internal_stock_transfer.ywt_stock_transfer_action"/>
+    </data>
+</odoo>

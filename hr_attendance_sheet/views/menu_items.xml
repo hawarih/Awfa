@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_hr_public_holiday" name="Public Holidays" 
+                    groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
+                    parent="hr_holidays.menu_hr_holidays_root" sequence="96"/>
+        <menuitem id="menu_action_public_holiday" name="Public Holidays" 
+                    action="action_hr_public_holiday" parent="menu_hr_public_holiday" sequence="96"/>
+
+        <menuitem id="menu_hr_attendance_sheet" name="Attendance sheets" 
+                    action="action_attendance_sheet" parent="hr_attendance.menu_hr_attendance_root" sequence="20"/>
+        <menuitem id="menu_hr_attendance_rules" name="Attendance Rules" 
+                    parent="hr_attendance.menu_hr_attendance_root" sequence="50"/>
+        <menuitem id="menu_hr_attendance_policies" name="Attendance Policies" 
+                    parent="hr_attendance.menu_hr_attendance_root" sequence="40"/>
+
+        <menuitem id="menu_hr_absence_rule" name="Absence Rules" 
+                    action="action_hr_absence_rule" parent="menu_hr_attendance_rules" sequence="50"/>
+        <menuitem id="menu_hr_diff_rules" name="Difference Time Rules" 
+                    action="action_diff_rules" parent="menu_hr_attendance_rules" sequence="50"/>
+        <menuitem id="menu_hr_late_rules" name="Late In Rules" 
+                    action="action_late_rules" parent="menu_hr_attendance_rules" sequence="50"/>
+        <menuitem id="menu_hr_overtime_rules" name="OverTime Rules" 
+                    action="action_overtime_rules" parent="menu_hr_attendance_rules" sequence="50"/>
+
+        <menuitem id="menu_hr_attendance_policy_action" name="Attendances Policies" 
+                    action="action_hr_attendance_policy" parent="menu_hr_attendance_policies" sequence="40"/>
+
+    </data>
+</odoo>

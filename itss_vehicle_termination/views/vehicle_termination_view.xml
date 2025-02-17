@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_termination_form_view" model="ir.ui.view">
+            <field name="name">vehicle.termination.form.view</field>
+            <field name="model">vehicle.termination</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button class="oe_stat_button oe_highlight" type="object" name="generate" string="Generate"/>
+                        <button class="oe_stat_button oe_highlight" type="object" name="confirm" string="Confirm" states="draft"/>
+                        <button class="oe_stat_button oe_highlight" type="object" name="reset" string="Reset To Draft" states="confirm"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <div name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_view_related_assets" icon="fa-id-card-o" attrs="{'invisible':[('termination_type','not in', ('sell','total_damage'))]}">
+                                <field name="asset_count" string="Assets" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_view_related_expense" icon="fa-id-card-o" attrs="{'invisible':[('termination_type','=', False)]}">
+                                <field name="expense_count" string="Expenses" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_view_credit_note" icon="fa-list" attrs="{'invisible':[('termination_type','not in', ('sell', 'transfer'))]}">
+                                <field name="credit_note_count" string="Credit Note" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <label for="request_number" string="Request Number"/>
+                        <h1>
+                            <field name="request_number"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date" attrs="{'readonly':[('state', '=', 'confirm')]}"/>
+                                <field name="product_ids" widget="many2many_tags" domain="[('vehicle_id', '!=', False)]" attrs="{'readonly':[('state', '=', 'confirm')], 'invisible':[('termination_type','=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="termination_type" attrs="{'readonly':[('state', '=', 'confirm')]}"/>
+                            </group>
+                        </group>
+                        <notebook attrs="{'invisible':[('termination_type','=', False)]}">
+                            <page name="asset_line" string="Assets" attrs="{'invisible':[('termination_type','in', ('transfer'))]}">
+                                <field name="asset_line_ids" attrs="{'readonly':[('state', '=', 'confirm')]}">
+                                    <tree editable="bottom" create="0" delete="0">
+                                        <field name="currency_id" invisible="True"/>
+                                        <field name="company_id" invisible="True"/>
+                                        <field name="gain_or_loss"/>
+                                        <field name="asset_id"/>
+                                        <field name="book_value"/>
+                                        <field name="modify_action" attrs="{'readonly':[('id', '!=', False)]}" string="Action"/>
+                                        <field name="date" required="True"/>
+                                        <field name="invoice_ids" widget="many2many_tags" domain="[('move_type', '=', 'out_invoice'), ('state', '=', 'posted')]" attrs="{                                            'column_invisible': [('parent.termination_type', 'not in', ('sell'))],                                            'required': [('parent.termination_type', 'in', ('sell'))]                                            }"/>
+                                        <field name="invoice_line_ids" widget="many2many_tags" domain="[('move_id', 'in', invoice_ids), ('display_type', '=', 'product')]" attrs="{                                            'column_invisible': [('parent.termination_type', 'not in', ('sell'))],                                            'required': [('parent.termination_type', 'in', ('sell'))]                                            }"/>
+                                        <field name="loss_account_id" attrs="{                                            'readonly': [('gain_or_loss', '!=', 'loss')],                                            'required': [('parent.termination_type', 'not in', ('sell'))]                                            }"/>
+                                        <field name="gain_account_id" attrs="{                                            'readonly': [('gain_or_loss', '!=', 'gain')],                                            'column_invisible': [('parent.termination_type', 'not in', ('sell'))]                                            }"/>
+                                        <field name="state" attrs="{'readonly':[('id', '!=', False)]}"/>
+                                        <button name="sell_dispose" string="Sell" class="oe_highlight" type="object" attrs="{'invisible': ['|','|',                                             ('state','in', ('confirm')), ('parent.state','!=', 'confirm'),                                             ('parent.termination_type', 'not in', ('sell'))]}"/>
+                                        <button name="sell_dispose" string="Dispose" class="oe_highlight" type="object" attrs="{'invisible': ['|','|',                                             ('state','in', ('confirm')), ('parent.state','!=', 'confirm'),                                             ('parent.termination_type', 'not in', ('total_damage'))]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="expense_line" string="Expense">
+                                <field name="expense_line_ids" attrs="{'readonly':[('state', '=', 'confirm')]}">
+                                    <tree editable="bottom" create="0" delete="0">
+                                        <field name="currency_id" invisible="True"/>
+                                        <field name="company_id" invisible="True"/>
+                                        <field name="credit_created" invisible="True"/>
+                                        <field name="expense_id"/>
+                                        <field name="book_value" string="Deferred Expense Amount"/>
+                                        <field name="modify_action" string="Action"/>
+                                        <field name="date"/>
+                                        <field name="partner_id" attrs="{                                            'column_invisible': [('parent.termination_type', 'not in', ('sell', 'transfer'))]                                            }"/>
+                                        <field name="state"/>
+                                        <button name="pause" string="Pause" class="oe_highlight" type="object" attrs="{'invisible':['|','|',                                             ('state','not in', ('draft')),                                             ('parent.state','not in', ('confirm')),                                             ('parent.termination_type', 'not in', ('sell', 'transfer'))]}"/>
+                                        <button name="create_credit" string="Create Credit" class="oe_highlight" type="object" attrs="{'invisible':['|','|',('parent.state','!=', 'confirm'), ('credit_created','=', True),                                             ('parent.termination_type', 'not in', ('sell','transfer'))]}"/>
+                                        <button name="sell_dispose" string="Dispose" class="oe_highlight" type="object" attrs="{'invisible': ['|','|',                                             ('state','not in', ('draft')),                                             ('parent.state','not in', ('confirm')),                                             ('parent.termination_type', 'not in', ('total_damage'))]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="vehicle_termination_tree_view" model="ir.ui.view">
+            <field name="name">vehicle.termination.tree.view</field>
+            <field name="model">vehicle.termination</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="request_number"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="petty_cash_adj_form_view" model="ir.ui.view">
+            <field name="name">petty.cash.adj.form.view</field>
+            <field name="model">petty.cash.adj</field>
+            <field name="arch" type="xml">
+                <form string="Petty Cash Adjustment">
+                    <header>
+                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight"/>
+                        <button name="action_draft" states="approved" string="Set To Draft" type="object" class="oe_highlight"/>
+                        <button name="action_register_petty_adj_payment" type="object" string="Register Payment" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'approved')]}"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,paid"/>
+                    </header>
+                    <sheet>
+
+
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Petty Cash Adjustment Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="petty_id" attrs="{'readonly':[('state', '!=' ,'draft')]}" required="1" domain="[('state','=','paid')]"/>
+                                <field name="type_id"/>
+                                <field name="journal_id"/>
+                                <field name="pay_journal_id" attrs="{'invisible':[('state', '=' ,'draft')],'required':[('state', '!=' ,'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly':[('state', '!=' ,'draft')]}" required="1"/>
+                            </group>
+
+                        </group>
+
+                        <notebook>
+                            <page string="Definition">
+                                <group>
+                                    <group>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="employee_id"/>
+                                        <field name="amount" options="{'currency_field': 'currency_id'}" attrs="{'readonly':[('state', 'not in' ,['draft'])]}"/>
+                                    </group>
+                                    <group attrs="{'invisible':[('state', 'in' ,['draft','approve'])]}">
+                                        <field name="account_move_id" readonly="1"/>
+                                    </group>
+
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="petty_cash_adj_tree_view" model="ir.ui.view">
+            <field name="name">petty.cash.tree.view</field>
+            <field name="model">petty.cash.adj</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

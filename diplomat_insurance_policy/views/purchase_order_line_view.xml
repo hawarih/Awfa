@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="insurance_purchase_order_line_search" model="ir.ui.view">
+            <field name="name">insurance.purchase.order.line.search</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="vehicle_id"/>
+                    <field name="license_plate"/>
+                    <field name="vin_sn"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="insurance_purchase_order_line_tree" model="ir.ui.view">
+            <field name="name">insurance.purchase.order.line.tree</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_history_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_approve']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_id']" position="after">
+                    <field name="vehicle_id"/>
+                    <field name="license_plate"/>
+                    <field name="vin_sn"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

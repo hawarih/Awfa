@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="elkhodr_rental_reports.report_rental_contract">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="o" t-value="o.with_context(lang='ar_001')" />
+                <t t-call="web.basic_layout">
+                    <div class="page" dir="rtl" style="page-break-inside: avoid;font-size :16px;">
+                        <link rel="stylesheet" href="/elkhodr_rental_reports/static/src/css/font_css.css" />
+                        <t t-call="elkhodr_rental_reports.rental_contract_top_template_id" />
+                        <br />
+                        <t t-call="elkhodr_rental_reports.rental_contract_second_template_id" />
+                        <br />
+                        <t t-call="elkhodr_rental_reports.rental_contract_body_template_id" />
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="rental_contract_top_template_id">
+        <div class="row">
+            <div class="col-4 text-end" style="text-align:end;">
+                <Strong>
+                    رقم العقد:
+                </Strong>
+                <Strong t-field="o.name"/>
+                <br/>
+                <Strong>
+                    حالة العقد:
+                </Strong>
+                <Strong t-if="o.state == 'draft'">مسوده</Strong>
+                <Strong t-if="o.state == 'open'">مفتوح</Strong>
+                <Strong t-if="o.state == 'hold'">مستلم - معلق</Strong>
+                <Strong t-if="o.state == 'delivered_indebet'">مستلم - مطالبة</Strong>
+                <Strong t-if="o.state == 'closed'">مستلم - مسدد</Strong>
+                <!--                <Strong t-esc="o.state_translate"/>-->
+            </div>
+            <div class="col-4 text-center" style="font-size :30px;text-align:center;">
+                <Strong>
+                    عقد ايجار سيارة
+                </Strong>
+            </div>
+            <div class="col-4 text-center" dir="ltr">
+                <div style="width:80%;border:2px solid black;border-radius:10px;background-color:#c0c0c0;">
+                    <Strong>
+                        عقد ايجار مركبة
+                    </Strong>
+                    <br/>
+                    <Strong>
+                        Rental Contract
+                    </Strong>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="rental_contract_second_template_id">
+        <div class="row">
+            <div class="col-4 text-end" style="text-align:end;margin-left:10px">
+                <div class="row">
+                    <div class="col-4 text-center" style="text-align:center;border:2px solid black;border-radius:10px;background-color:#c0c0c0;">
+                        <strong>
+                            نوع السيارة
+                        </strong>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-7 row" style="border:2px solid black;border-radius:10px;">
+                        <div class="col-5 text-center" style="text-align:center;">
+                            <span t-esc="o.fleet_vehicle_id.brand_id.name"/>
+                        </div>
+                        <div class="col-1 vertical"/>
+                        <div class="col-5 text-center" style="text-align:center;">
+                            <span t-esc="o.fleet_vehicle_id.model_id.model"/>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-4 text-center" style="text-align:center;border:2px solid black;border-radius:10px;background-color:#c0c0c0;">
+                        <strong>رقم اللوحة</strong>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-7 text-center" style="border:2px solid black;border-radius:10px;text-align:center;">
+                        <div>
+                            <span t-field="o.licence_plate"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 text-center" style="text-align:center;margin-left:10px">
+                <div class="row">
+                    <div class="col-5 text-center" style="text-align:center;border:2px solid black;border-radius:10px;background-color:#c0c0c0;">
+                        <strong>
+                            اللون
+                        </strong>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-6 text-center" style="border:2px solid black;border-radius:10px;text-align:center;">
+                        <!--                        <span t-esc="o.fleet_vehicle_id.color_in_side"/>-->
+                        <Strong t-field="o.fleet_vehicle_id.color"/>
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'white'">الابيض</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'light_blue'">ازرق فاتح</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'blue'">ازرق</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'black'">الاسود</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'red'">الاحمر</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'blue_white'">ازرق فاتح</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'dark_blue'">ازرق داكن</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'black_and_white'">اسود وابيض</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'grey'">رمادي</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'light_grey'">رمادي فاتح</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'light_brown'">البني الفاتح</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'brown'">بني</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'dark_grey'">الرمادي الداكن</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'beige'">البيج</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'silver'">فضي</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'green'">اخضر</Strong>-->
+<!--                        <Strong t-if="o.fleet_vehicle_id.color_in_side == 'blue_and_white'">ازرق و ابيض</Strong>-->
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-5 text-center" style="text-align:center;border:2px solid black;border-radius:10px;background-color:#c0c0c0;">
+                        <strong>الموديل</strong>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-6 text-center" style="border:2px solid black;border-radius:10px;text-align:center;">
+                        <span t-field="o.fleet_vehicle_id.model_year"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 text-right" dir="rtl">
+                <Strong>
+                    اسم الفرع:
+                </Strong>
+                <Strong>
+                    <Strong t-esc="o.pickup_branch_id.complete_name"/>
+                </Strong>
+                <br/>
+                <Strong>
+                    رقم جوال الفرع:
+                </Strong>
+                <Strong>
+                    <Strong t-esc="env['res.company']._company_default_get().phone"/>
+                </Strong>
+                <br/>
+                <Strong>
+                    تاريخ انتهاء العقد:
+                </Strong>
+                <Strong>
+                    <Strong t-esc="o.actual_monthly_invoice.date()"/>
+                </Strong>
+                <br/>
+            </div>
+        </div>
+    </template>
+
+    <template id="rental_contract_body_template_id">
+        <div style="font-size:14px">
+            <table class="table table-sm table-bordered" style="border: 2px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:center;">
+                <tr>
+                    <td>
+                        <Strong>
+                            اسم المستأجر:
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Renter's Name:
+                        </Strong>
+                    </td>
+                    <td colspan="3">
+                        <Strong t-field="o.customer_id"/>
+                    </td>
+                    <td colspan="4" style="background-color:#c0c0c0;">
+                        <div class="d-flex">
+                            <div style="text-align:right;" class="col-6">
+                                <Strong>
+                                    خروج السيارة
+                                </Strong>
+                            </div>
+                            <div style="text-align:left;" class="col-6">
+                                <Strong>
+                                    Exit The Car
+                                </Strong>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            إقامة / هوية وطنية
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Iqama /ID
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            تاريخ الانتهاء
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Expire Date
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            مصدرها
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Issue At
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            الجنسية
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Nationality
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            قيمة الإيجار
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Rent Day
+                        </Strong>
+                    </td>
+
+                    <td>
+                        <Strong t-field="o.vehicle_cost"/>
+                    </td>
+                    <td>
+                        <Strong>
+                            سعر الساعة الزائدة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Time Overload
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            0.0
+                        </Strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.customer_id.national_identity_number"/>
+                    </td>
+                    <td>
+                        <span t-field="o.customer_id.id_expiry"/>
+                    </td>
+                    <td>
+                        <!--                         <span t-field="o.customer_id.nationality"/>  مصدرها هتبقي هنا-->
+                    </td>
+                    <td>
+                        <span t-field="o.customer_id.nationality"/>
+                    </td>
+                    <td>
+                        <Strong>
+                            كم مسموح يومياً
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Days Allowed
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.rental_pricing.km_free"/>
+                    </td>
+                    <td>
+                        <Strong>
+                            سعر الكيلو الزائدة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            KM Overload
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.rental_pricing.km_extra_cost"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            رقم رخصة القيادة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Driving License
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            تاريخ الانتهاء
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Expire Date
+                        </Strong>
+                    </td>
+                    <td colspan="2">
+                        <Strong>
+                            مصدرها
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Issue At
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            تاريخ الخروج
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Date Out
+                        </Strong>
+                    </td>
+
+                    <td>
+                        <Strong t-esc="o.pickup_date.date()"/>
+                    </td>
+                    <td>
+                        <Strong>
+                            وقت الخروج
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Time Out
+                        </Strong>
+                    </td>
+
+                    <td>
+                        <Strong t-esc="o.pickup_date.time()"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.customer_id.license_number"/>
+                    </td>
+                    <td>
+                        <span t-field="o.customer_id.license_expiry_date"/>
+                    </td>
+                    <td colspan="2">
+                    </td>
+                    <td>
+                        <Strong>
+                            منطقة الاستخدام
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Range Area
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.pickup_branch_id.name"/>
+                    </td>
+                    <td>
+                        <Strong>
+                            عداد الخروج
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            KM Out
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.km_out"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            رقم الجوال
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Mobile Number
+                        </Strong>
+                    </td>
+                    <td colspan="3">
+                        <span t-field="o.customer_id.customized_mobile"/>
+                    </td>
+                    <td colspan="4" style="background-color:#c0c0c0;">
+                        <div class="d-flex">
+                            <div style="text-align:right;" class="col-6">
+                                <Strong>
+                                    عودة السيارة
+                                </Strong>
+                            </div>
+                            <div style="text-align:left;" class="col-6">
+                                <Strong>
+                                    Return The Car
+                                </Strong>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            عنوان العمل
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Work Address
+                        </Strong>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            تاريخ العودة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Date Of Arrival
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-esc="o.actual_monthly_invoice.date()"/>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            وقت العودة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Time Of Arrival
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-esc="o.actual_monthly_invoice.time().strftime('%H:%M')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            عنوان السكن
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Home Address
+                        </Strong>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            عداد العودة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Km In
+                        </Strong>
+                    </td>
+                    <td>
+                        <t t-if="o.km_in != 0.0">
+                            <Strong t-field="o.km_in"/>
+                        </t>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            عدد ايام الإيجار
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Qty Days Rent
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.duration"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            السائق الإضافي
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Extra Driver
+                        </Strong>
+                    </td>
+                    <td colspan="3">
+                        <Strong t-field="o.extra_driver"/>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            كيلو متر زائدة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Extra Km
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.total_km_extra"/>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            عدد الساعات الزائدة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Extra Hour Cost
+                        </Strong>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Strong>
+                            رقم رخصة القيادة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Driving License
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong>
+                            تاريخ الانتهاء
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Expire Date
+                        </Strong>
+                    </td>
+                    <td colspan="2">
+                        <Strong>
+                            مصدرها
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Issue At
+                        </Strong>
+                    </td>
+                    <td colspan="4" style="background-color:#c0c0c0;">
+                        <div class="d-flex">
+                            <div style="text-align:right;" class="col-6">
+                                <Strong>
+                                    المحاسبة
+                                </Strong>
+                            </div>
+                            <div style="text-align:left;" class="col-6">
+                                <Strong>
+                                    Accounting
+                                </Strong>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.extra_driver.license_number"/>
+                    </td>
+                    <td>
+                        <span t-field="o.extra_driver.license_expiry_date"/>
+                    </td>
+                    <td colspan="2">
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            مجموع اﻹيجار
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Rent Amount
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-esc="&quot;{:.2f}&quot;.format(o.total_per_day)"/>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            مبلغ الساعات الزائدة
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Extra Hour Cost
+                        </Strong>
+                    </td>
+                    <td>
+                        <!--                        <Strong t-field="o.duration"/>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="10" colspan="4">
+                        <span>
+                            كيفية تغطية الأضرار الناتجة عن الحوادث كالآتي:
+                        </span>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;">
+                            <Strong>
+                                موافقة المستأجر علي التغطية التأمينية
+                            </Strong>
+                            <br/>
+                            <br/>
+                            <Strong>
+                                التوقيع
+                            </Strong>
+                            <br/>
+                            <br/>
+                            <Strong>
+                                رقم بطاقة التشغيل
+                            </Strong>
+                            <span t-field="o.fleet_vehicle_id.card_number"/>
+                            <br/>
+                            <br/>
+                            <Strong>
+                                تاريخ الانتهاء
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                نوع الوقود السيارة
+                            </Strong>
+                            <span t-field="o.fleet_vehicle_id.fuel_type"/>
+                            <br/>
+                            <br/>
+                            <div class="d-flex">
+                                <div class="col-2">
+                                    <Strong>
+                                        كمية الوقود
+                                    </Strong>
+                                </div>
+                                <div class="col-3">
+                                    <span t-field="o.fuel_out"/>
+                                </div>
+                                <div class="col-7" style="text-align:left;">
+                                    <img src="/elkhodr_rental_reports/static/q.png" height="150px" width="200px"/>
+                                </div>
+
+                            </div>
+                            <br/>
+                        </div>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            اجمالي قيمة كم زائد
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Additional Km Charge
+                        </Strong>
+                    </td>
+                    <td>
+                        <Strong t-field="o.total_km_extra_cost"/>
+                    </td>
+                    <td style="color:#ff0000">
+                        <Strong>
+                            المخالفات المرورية
+                        </Strong>
+                        <br/>
+                        <Strong>
+                            Traffic Violations
+                        </Strong>
+                    </td>
+                    <td>
+
+                    </td>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                اﻹصلاحات
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Reforms
+                            </Strong>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                قيمة الشحن
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Shipping Value
+                            </Strong>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                قسط التحمل
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                endurance installment
+                            </Strong>
+                        </td>
+                        <td>
+                            <t t-foreach="o.fleet_vehicle_id.insurance_id.insurance_line_ids" t-as="insurance">
+                                <t t-if="insurance.state == 'run' and insurance.license_plate == o.licence_plate">
+                                    <Strong t-field="insurance.customer_deductible"/>
+                                </t>
+                            </t>
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                تفويض دولي
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Travel Authorization
+                            </Strong>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                نسبة الضريبة
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                VAT Rate
+                            </Strong>
+                        </td>
+                        <td>
+                            <t t-foreach="o.rental_order_lines" t-as="line">
+                                <t t-if="line.product_id.rental_product_type == 'is_trip'">
+                                    <t t-foreach="line.product_id.taxes_id" t-as="tax">
+                                        <Strong t-esc="tax.amount"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                الخصم
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Discount
+                            </Strong>
+                        </td>
+                        <td>
+                            <Strong t-field="o.discount_amount"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                مبلغ القيمة المضافة
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                VAT
+                            </Strong>
+                        </td>
+                        <td>
+                            <t t-set="vat" t-value="0"/>
+                            <t t-set="total_vat" t-value="0"/>
+                            <t t-foreach="o.rental_order_lines" t-as="line">
+                                <t t-set="vat" t-value="line.subtotal_with_tax - line.subtotal_without_tax"/>
+                                <t t-set="total_vat" t-value="total_vat + vat"/>
+                            </t>
+                            <Strong t-esc="&quot;{:.2f}&quot;.format(total_vat)"/>
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                اجمالي ما قبل الضريبة
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Total Before VAT
+                            </Strong>
+                        </td>
+                        <td>
+                            <t t-set="total_before_vat" t-value="0"/>
+                            <t t-foreach="o.rental_order_lines" t-as="line">
+                                <t t-set="total_before_vat" t-value="total_before_vat + line.subtotal_without_tax"/>
+                            </t>
+                            <Strong t-esc="&quot;{:.2f}&quot;.format(total_before_vat)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                المبلغ المدفوع
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Amount Paid
+                            </Strong>
+                        </td>
+                        <td>
+                            <Strong t-field="o.paid_amount"/>
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                المجموع الكلي
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Total Amount
+                            </Strong>
+                        </td>
+                        <td>
+                            <Strong t-esc="&quot;{:.2f}&quot;.format(o.total_amount)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                المبلغ المردود
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Refund
+                            </Strong>
+                        </td>
+                        <td>
+                            <t t-set="current_refund" t-value="0"/>
+                            <t t-foreach="o.payment_ids" t-as="payment">
+                                <t t-if="payment.payment_type == 'outbound'">
+                                    <t t-set="current_refund" t-value="current_refund + payment.amount"/>
+                                </t>
+                            </t>
+                            <Strong t-esc="current_refund"/>
+                        </td>
+                        <td style="color:#ff0000">
+                            <Strong>
+                                المبلغ المتبقي
+                            </Strong>
+                            <br/>
+                            <Strong>
+                                Remaining Amount
+                            </Strong>
+                        </td>
+                        <td>
+                            <Strong t-field="o.due_amount"/>
+                        </td>
+                    </tr>
+                    <tr rowspan="4">
+                        <td colspan="4">
+                            <div class="row col-12">
+                                <div class="col-7" dir="ltr">
+                                    <div class="row col-6">
+                                        <div>
+                                            <Strong t-field="o.customer_id"/>
+                                        </div>
+                                        <div>
+                                            <Strong>
+                                                اسم المستاجر
+                                            </Strong>
+                                            <br/>
+                                            <Strong>
+                                                Renters Name
+                                            </Strong>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="row col-6">
+                                        <div>
+                                            <Strong t-field="o.create_uid"/>
+                                        </div>
+                                        <div>
+                                            <Strong>
+                                                موظف الفرع
+                                            </Strong>
+                                            <br/>
+                                            <Strong>
+                                                Branch Employee
+                                            </Strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <table class="table table-bordered" style="border: 1px solid black;width:100%;margin-left:auto;margin-right:auto;text-align:center;">
+                                        <tr>
+                                            <td height="12">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="12">
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-2">
+                                    <Strong>
+                                        التوقيع
+                                    </Strong>
+                                    <br/>
+                                    <Strong>
+                                        Sgin
+                                    </Strong>
+                                </div>
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </tr>
+
+            </table>
+        </div>
+    </template>
+
+    <record id="elkhodr_rental_reports.action_report_rental_contract" model="ir.actions.report">
+        <field name="name">Rental Contract</field>
+        <field name="model">rental.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">elkhodr_rental_reports.report_rental_contract</field>
+        <field name="report_file">elkhodr_rental_reports.report_rental_contract</field>
+        <field name="binding_model_id" ref="model_rental_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

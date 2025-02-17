@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+allowed_attendance_location_id,allowed_attendance_location,model_allowed_attendance_location,,1,1,1,1
+notification_log_id,notification_log,model_notification_log,,1,1,1,1
+mobile.terms.policy_id,mobile.terms.policy,model_mobile_terms_policy,,1,1,1,1

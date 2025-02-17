@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_hr_payslip_form" model="ir.ui.view">
+            <field name="name">inherit.hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="attendance_sheet_batch_id"/>
+                    <!--                <button name="action_create_payment" type="object" string="Payment"/>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_hr_payslip_tree" model="ir.ui.view">
+            <field name="name">inherit.hr.payslip.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+            <field name="arch" type="xml">
+                <field name="employee_id" position="after">
+                    <field name="attendance_sheet_batch_id"/>
+                </field>
+
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="move_state"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

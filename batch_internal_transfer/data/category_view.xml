@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="batch_internal_transfer.category_batch_internal_transfer" model="ir.module.category">
+            <field name="name">Batch Internal Transfer</field>
+        </record>
+    </data>
+</odoo>

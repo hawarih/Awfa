@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="vehicle_damage_menu" name="Damage" sequence="10" 
+                    parent="vehicle_accident.vehicle_accident_menu" 
+                    groups="vehicle_damage.damaged_admin_group" />
+                    
+        <menuitem id="vehicle_damage_submenu" name="Damages" sequence="10" 
+                    parent="vehicle_damage.vehicle_damage_menu" 
+                    action="vehicle_damage.vehicle_damage_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_petty_cash_report" name="Petty Report" 
+                    action="view_petty_report_wizard_action" 
+                    parent="account.menu_finance_reports" sequence="10"/>
+    </data>
+</odoo>

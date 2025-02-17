@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_account_petty_cash_payment" model="ir.actions.act_window">
+            <field name="name">Register Payment</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="action_view_petty_cash" model="ir.actions.act_window">
+            <field name="name">Petty Cash</field>
+            <field name="res_model">petty.cash</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_view_petty_cash_adj" model="ir.actions.act_window">
+            <field name="name">Petty Cash Adjustment</field>
+            <field name="res_model">petty.cash.adj</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_view_petty_cash_type" model="ir.actions.act_window">
+            <field name="name">Petty Cash Types</field>
+            <field name="res_model">petty.cash.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_view_petty_pay_invoice_wizard" model="ir.actions.act_window">
+            <field name="name">Pay With Petty Cash</field>
+            <field name="res_model">petty.pay.invoice.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

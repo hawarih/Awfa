@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_create_vehicle_wizard_id,access_create_vehicle_wizard,model_create_vehicle_wizard,purchase.group_purchase_user,1,1,1,1
+access_export_vehicle_excel_id,access_export_vehicle_excel,model_export_vehicle_excel,,1,1,1,0
+access_purchase_data_wizard_id,access_purchase_data_wizard,model_purchase_data,,1,1,1,1
+access_vehicle_data_wizard_id,access_vehicle_data_wizard,model_vehicle_data,purchase.group_purchase_user,1,1,1,1
+access_installement_line_id,access_installement_line,model_installment_line,base.group_user,1,1,1,1
+leasing_payment_name_id,leasing_payment_name,model_leasing_payment,,1,1,1,1
+purchase_type_name_id,purchase_type_name,model_purchase_type,,1,1,1,1

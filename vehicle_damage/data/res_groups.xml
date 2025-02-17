@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_damage.damaged_admin_group" model="res.groups">
+            <field name="name">Damaged Admin</field>
+            <field name='category_id' ref="vehicle_damage.damaged_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+    </data>
+</odoo>

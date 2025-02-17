@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_status.change_vehicle_state" model="res.groups">
+            <field name="name">Change Vehicle State</field>
+            <field name="category_id" ref="base.module_category_human_resources_fleet" />
+        </record>
+    </data>
+</odoo>

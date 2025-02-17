@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='partner_id'][2]" position="replace">
+
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field readonly="0" string="Vendor" name="partner_id_rel" 
+                            domain="[('supplier','=',True),('company_id','in',[company_id,False])]" 
+                            context="{'res_partner_search_mode': (context.get('default_move_type', 'entry') in ('out_invoice', 'out_refund', 'out_receipt') and 'customer') or (context.get('default_move_type', 'entry') in ('in_invoice', 'in_refund', 'in_receipt') and 'supplier') or False, 'show_address': 1, 'default_is_company': True, 'show_vat': True, 'default_supplier': True}" 
+                            attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))], 'readonly':[('state', '!=', 'draft')]}"
+                            />
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="domain">[('customer','=',True),('company_id','in',[company_id,False])]</attribute>
+                    <attribute name="context">{'res_partner_search_mode': (context.get('default_move_type', 'entry') in
+                        ('out_invoice', 'out_refund', 'out_receipt') and 'customer') or
+                        (context.get('default_move_type', 'entry') in ('in_invoice', 'in_refund', 'in_receipt') and
+                        'supplier') or False,
+                        'show_address': 1, 'default_is_company': True, 'show_vat': True, 'default_customer': True}
+                    </attribute>
+                    <attribute name="attrs">{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund',
+                        'out_receipt'))]}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="groups">partner_customizations.no_important_bill</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='purchase_vendor_bill_id']" position="attributes">
+                    <attribute name="groups">partner_customizations.no_important_bill</attribute>
+                </xpath>
+                <xpath expr="//label[@for='purchase_vendor_bill_id']" position="attributes">
+                    <attribute name="groups">partner_customizations.no_important_bill</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_purchase_account_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase"/>
+            <field name="arch" type="xml">               
+                <xpath expr="//field[@name='purchase_vendor_bill_id']" position="attributes">
+                    <attribute name="groups">partner_customizations.no_important_bill</attribute>
+                </xpath>
+                <xpath expr="//label[@for='purchase_vendor_bill_id']" position="attributes">
+                    <attribute name="groups">partner_customizations.no_important_bill</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

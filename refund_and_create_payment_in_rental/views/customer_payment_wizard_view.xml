@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_payment_wizard_form" model="ir.ui.view">
+            <field name="name">customer.payment.wizard.form</field>
+            <field name="model">customer.payment.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <!--<field name="journals" invisible="1"/>-->
+                                <field name="enable_payment_method" invisible="1"/>
+                                <field name="journal_id" required="1"/>
+                                <!-- domain="[('id','in',journals)]" -->
+                                <field name="date" required="1"/>
+                                <field name="journal_payment_method" attrs="{'invisible': [('enable_payment_method','=',False)],                                        'required': [('enable_payment_method','=',True)]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="amount" required="1"/>
+                                <field name="memo_rel"/>
+                                <field name="approval_code" attrs="{'invisible': [('enable_payment_method','=',False)],                                        'required': [('enable_payment_method','=',True)]}"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button string="pay" name="button_pay" class="oe_highlight" type="object"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

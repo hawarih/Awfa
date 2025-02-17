@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_hr_attendance_sheet_batch" name="Attendance sheet Batches" 
+                    action="att_sheet_batch.action_attendance_sheet_batch_action" 
+                    parent="hr_attendance.menu_hr_attendance_root" sequence="12"/>
+    </data>
+</odoo>

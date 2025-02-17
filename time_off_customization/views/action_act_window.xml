@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_ticket_configuration" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="cut_wizard_action" model="ir.actions.act_window">
+            <field name="name">Time off Cut</field>
+            <field name="res_model">cut.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="hr_leave_completion_action" model="ir.actions.act_window">
+            <field name="name">Time off Completion</field>
+            <field name="res_model">hr.leave.completion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="hr_leave_cut_action" model="ir.actions.act_window">
+            <field name="name">Time off cut</field>
+            <field name="res_model">hr.leave.cut</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="register_payment_action" model="ir.actions.act_window">
+            <field name="name">Register Payment</field>
+            <field name="res_model">register.payment</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

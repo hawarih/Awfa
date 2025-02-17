@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data>
+          <record id="view_extend_wizard_form_inherit" model="ir.ui.view">
+               <field name="name">extend.wizard.form.inherit</field>
+               <field name="model">extend.wizard</field>
+               <field name="inherit_id" ref="customer_rental.extend_wizard_form_view"/>
+               <field name="arch" type="xml">
+                    <xpath expr="//field[@name='extended_days']" position="after">
+                         <field name="opt_value"/>
+                    </xpath>
+               </field>
+          </record>
+     </data>
+</odoo>

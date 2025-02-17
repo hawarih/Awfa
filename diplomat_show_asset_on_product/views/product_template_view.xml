@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_product_template_form_view" model="ir.ui.view">
+            <field name="name">inherit.product.template.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" string="Related Assets" name="action_view_related_assets" type="object" icon="fa-list">
+                    </button>
+                    <button class="oe_stat_button" string="Related Expense" name="action_view_related_expense" type="object" icon="fa-list">
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

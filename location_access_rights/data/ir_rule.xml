@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="location_access_rights.customer_rental_pickup_branch_rule" model="ir.rule">
+            <field name="name">Customer Rental Pickup Branch Rule</field>
+            <field name='model_id' ref="customer_rental.model_rental_contract"/>
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[('pickup_branch_id','in',user.location_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.customer_rental_pickup_branch_rule_admin" model="ir.rule">
+            <field name="name">Customer Rental Pickup Branch Rule Admin</field>
+            <field name='model_id' ref="customer_rental.model_rental_contract"/>
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.gps_related_user_locations" model="ir.rule">
+            <field name="name">GPS Related User Locations</field>
+            <field name='model_id' ref="diplomat_gps.model_gps_gps"/>
+            <field name="domain_force">[('location_id','in',user.location_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">True</field>
+        </record>
+
+        <record id="location_access_rights.stock_move_line_related_admin_locations_rule" model="ir.rule">
+            <field name="name">stock_move_line_related_admin_locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_move_line" />
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_move_line_related_user_locations_rule" model="ir.rule">
+            <field name="name">stock_move_line_related_user_locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_move_line" />
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|',('location_id','in',user.location_ids.ids)
+                ,('location_dest_id','in',user.location_ids.ids)]
+            </field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_move_related_admin_locations_rule" model="ir.rule">
+            <field name="name">stock_move_related_admin_locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_move" />
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_move_related_user_locations_rule" model="ir.rule">
+            <field name="name">stock_move_related_user_locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_move" />
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|',('location_id','in',user.location_ids.ids)
+                ,('location_dest_id','in',user.location_ids.ids)]
+            </field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_picking_rule_manager" model="ir.rule">
+            <field name="name">Stock Picking Related User Locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_picking" />
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_picking_rule_user" model="ir.rule">
+            <field name="name">Stock Picking Related User Locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_picking" />
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[('picking_type_id','in',user.picking_type_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_picking_type_location_rule_admin" model="ir.rule">
+            <field name="name">Stock Picking Type Admin Rule</field>
+            <field name='model_id' ref="stock.model_stock_picking_type" />
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_picking_type_location_rule_user" model="ir.rule">
+            <field name="name">Stock Picking Type Related User Locations Rule</field>
+            <field name='model_id' ref="stock.model_stock_picking_type" />
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[('id','in',user.picking_type_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_quant_locations_admin_rule" model="ir.rule">
+            <field name="name">Stock Quant Locations Admin Rule</field>
+            <field name='model_id' ref="stock.model_stock_quant" />
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.stock_quant_locations_user_rule" model="ir.rule">
+            <field name="name">Stock Quant Locations User Rule</field>
+            <field name='model_id' ref="stock.model_stock_quant" />
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[('location_id','in',user.location_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.vehicle_related_user_locations_user" model="ir.rule">
+            <field name="name">Vehicle Related User Locations</field>
+            <field name='model_id' ref="fleet.model_fleet_vehicle" />
+            <field name="domain_force">[('location_id_store','in',user.location_ids.ids)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">True</field>
+            <field name="active">False</field>
+        </record>
+
+        <record id="location_access_rights.ywt_related_admin_locations_rule" model="ir.rule">
+            <field name="name">ywt_related_admin_locations Rule</field>
+            <field name='model_id' ref="ywt_internal_stock_transfer.model_ywt_internal_stock_transfer"/>
+            <field name='groups' eval="[(4, ref('location_access_rights.group_warehouse_restriction_manager'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+
+        <record id="location_access_rights.ywt_related_user_locations_rule" model="ir.rule">
+            <field name="name">ywt_related_user_locations Rule</field>
+            <field name='model_id' ref="ywt_internal_stock_transfer.model_ywt_internal_stock_transfer"/>
+            <field name='groups' eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|',('from_warehouse_id.lot_stock_id','in',user.location_ids.ids)
+                ,('to_warehouse_id.lot_stock_id','in',user.location_ids.ids)]
+            </field>
+            <field name="perm_read">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="global">False</field>
+        </record>
+    </data>
+</odoo>

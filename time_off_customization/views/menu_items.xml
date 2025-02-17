@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_hr_leave_completion_action" name="Time off Completion" 
+                    action="time_off_customization.hr_leave_completion_action" 
+                    parent="hr_holidays.menu_hr_holidays_approvals" sequence="3"/>
+
+        <menuitem id="menu_hr_leave_cut_action" name="Time off Cut" 
+                    action="time_off_customization.hr_leave_cut_action" 
+                    parent="hr_holidays.menu_hr_holidays_configuration" sequence="30"/>
+
+        <menuitem id="menu_settings_new_open_action" name="Settings" 
+                    action="time_off_customization.action_ticket_configuration" 
+                    parent="hr_holidays.menu_hr_holidays_configuration" sequence="0"/>
+    </data>
+</odoo>

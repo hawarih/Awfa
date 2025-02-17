@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_adjustment.group_stock_adjustment_approval" model="res.groups">
+            <field name="name">Stock Adjustment approval</field>
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="stock_adjustment.group_stock_adjustment_cancel" model="res.groups">
+            <field name="name">Stock Cancel Adjustment</field>
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="stock_adjustment.group_stock_adjustment_creator" model="res.groups">
+            <field name="name">Stock Adjustment Creator</field>
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="stock_adjustment.group_stock_adjustment_print_count_sheet" model="res.groups">
+            <field name="name">Stock Adjustment Print Count Sheet</field>
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="stock_adjustment.group_stock_adjustment_validate" model="res.groups">
+            <field name="name">Stock Adjustment validate</field>
+            <field name='implied_ids' eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

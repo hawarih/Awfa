@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="group_rental_journal_restriction_administrator" model="res.groups">
+            <field name="name">Rental Journal Restriction Administrator</field>
+            <field name='category_id' ref="elkhodr_journal_restrictions.category_rental_journal_restriction"/>
+        </record>
+
+        <record id="group_rental_journal_restriction_user" model="res.groups">
+            <field name="name">Rental Journal Restriction User</field>
+            <field name='category_id' ref="elkhodr_journal_restrictions.category_rental_journal_restriction"/>
+        </record>
+    </data>
+</odoo>

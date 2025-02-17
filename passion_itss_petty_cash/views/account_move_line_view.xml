@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_account_move_line_tree" model="ir.ui.view">
+            <field name="name">inherit.account.move.line.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='balance']" position="after">
+                    <field name="petty_partner_id" optional="hide"/>
+                    <field name="partner_group_id" string="Employee" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.select</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <filter name="groupby_date" position="after">
+                    <filter string="Partner Group" name="groupby_partner_group_id" domain="[]" context="{'group_by': 'partner_group_id'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

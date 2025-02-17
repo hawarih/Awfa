@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="group_attendance_sheet_user" model="res.groups">
+            <field name="name">User</field>
+            <field name='category_id' ref="hr_attendance_sheet.module_category_attendance_sheet" />
+        </record>
+
+        <record id="group_attendance_sheet_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name='category_id' ref="hr_attendance_sheet.module_category_attendance_sheet" />
+            <field name='implied_ids' eval="[(4, ref('hr_attendance_sheet.group_attendance_sheet_user'))]" />
+        </record>
+
+    </data>
+</odoo>

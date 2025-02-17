@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_stock.group_add_product_picking" model="res.groups">
+            <field name="name">Add Product In Picking</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.stock_picking_group_categ"/>
+        </record>
+
+        <record id="diplomat_stock.group_show_button_picking" model="res.groups">
+            <field name="name">Show Buttons In Picking</field>
+            <field name='category_id' ref="ywt_internal_stock_transfer.stock_picking_group_categ"/>
+        </record>
+
+    </data>
+</odoo>

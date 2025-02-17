@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="Diplomat_Vehicle_Purchasing.send_mail_and_lock_for_group" model="res.groups">
+            <field name="name">Send Mail and Lock Buttons</field>
+            <field name='category_id' ref="Diplomat_Vehicle_Purchasing.purchase_groups_for_category" />
+        </record>
+    </data>
+</odoo>

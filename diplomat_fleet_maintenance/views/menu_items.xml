@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="maintenance_config_settings_menu" name="Settings" 
+                    action="diplomat_fleet_maintenance.maintenance_config_settings" 
+                    parent="maintenance.menu_maintenance_configuration" sequence="0"/>
+
+        <menuitem id="maintenance_workshop_menu" name="Maintenance Workshop" 
+                    action="diplomat_fleet_maintenance.maintenance_workshop_action" 
+                    parent="maintenance.menu_maintenance_configuration" sequence="15"/>
+
+        <menuitem id="preventive_maintenance_plan_menu" name="Preventive Maintenance Plan" 
+                    action="diplomat_fleet_maintenance.preventive_maintenance_plan_action" 
+                    parent="maintenance.menu_maintenance_configuration" sequence="20"/>
+
+        <menuitem id="repair_task_menu" name="Repair Task" 
+                    action="diplomat_fleet_maintenance.repair_task_action" 
+                    parent="maintenance.menu_maintenance_configuration" sequence="10"/>
+
+        <menuitem id="vehicle_preventive_maintenance_menu" name="Preventive Maintenance" 
+                    action="diplomat_fleet_maintenance.vehicle_preventive_maintenance_action" 
+                    parent="fleet.fleet_vehicles_configuration" sequence="99"/>
+
+    </data>
+</odoo>

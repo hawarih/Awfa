@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="rental_return_wizard_form_inherit" model="ir.ui.view">
+            <field name="name">Rental Return Wizard Form Inherit</field>
+            <field name="model">customer.rental.return.wizard</field>
+            <field name="inherit_id" ref="customer_rental.customer_rental_return_wizard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='drop_off_branch_id']" position="after">
+                    <field name="user_allowed_location_ids" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='drop_off_branch_id']" position="attributes">
+                    <attribute name="domain">[('id','in',user_allowed_location_ids)]</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

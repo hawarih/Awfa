@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_checklist_form_view" model="ir.ui.view">
+            <field name="name">vehicle.checklist.form.view</field>
+            <field name="model">vehicle.checklist</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="picking_code" invisible="True"/>
+                            <field name="stock_move_id" invisible="True"/>
+                        </group>
+                        <group name="checklist" string="Checklist" col="3">
+                            <group>
+                                <field name="ac" required="True"/>
+                                <field name="radio_stereo" required="True"/>
+                                <field name="screen" required="True"/>
+                                <field name="spare_tire_tools" required="True"/>
+                                <field name="tires" required="True"/>
+                                <field name="spare_tires" required="True"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="speedometer" required="True"/>
+                                <field name="keys" required="True"/>
+                                <field name="car_seats" required="True"/>
+                                <field name="oil_change_km_distance" invisible="not context.get('is_purchase', True)" required="context.get('is_purchase', True)"/>
+                                <field name="fuel_type_code" invisible="not context.get('is_purchase', True)" required="context.get('is_purchase', True)"/>
+                                <field name="number_of_keys" invisible="not context.get('is_purchase', True)" required="context.get('is_purchase', True)"/>
+                            </group>
+                            <group>
+                                <field name="safety_triangle" required="True"/>
+                                <field name="fire_extinguisher" required="True"/>
+                                <field name="first_aid_kit" required="True"/>
+                                <field name="oil_type_id" invisible="not context.get('is_purchase', True)" required="context.get('is_purchase', True)" domain="[('is_oil', '!=', False)]"/>
+                                <field name="oil_change_date" invisible="not context.get('is_purchase', True)" required="context.get('is_purchase', True)"/>
+                                <field name="vehicle_status"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Check" type="object" name="action_check" class="btn btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="vehicle_checklist_tree_view" model="ir.ui.view">
+            <field name="name">vehicle.checklist.tree.view</field>
+            <field name="model">vehicle.checklist</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="vehicle_id"/>
+                    <field name="ac"/>
+                    <field name="radio_stereo"/>
+                    <field name="screen"/>
+                    <field name="speedometer"/>
+                    <field name="keys"/>
+                    <field name="car_seats"/>
+                    <field name="safety_triangle"/>
+                    <field name="fire_extinguisher"/>
+                    <field name="first_aid_kit"/>
+                    <field name="spare_tire_tools"/>
+                    <field name="tires"/>
+                    <field name="spare_tires"/>
+                    <field name="oil_change_km_distance"/>
+                    <field name="fuel_type_code"/>
+                    <field name="oil_type_id" domain="[('is_oil', '!=', False)]"/>
+                    <field name="oil_change_date"/>
+                    <field name="vehicle_status"/>
+                    <field name="number_of_keys"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

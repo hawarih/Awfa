@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_hr_payslip_input_type_form" model="ir.ui.view">
+            <field name="name">inherit.hr.payslip.input.type.form</field>
+            <field name="model">hr.payslip.input.type</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_input_type_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="type"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook attrs="{'invisible':[('type','!=','deduction')]}">
+                        <page name="Repeat Times" string="Repeat Times">
+                            <!-- add context="{'default_field' : field}" to set default value -->
+                            <field name="input_times_ids">
+                                <tree editable="bottom">
+                                    <!-- add domain="[('id','=',parent.field)]" to set default domain -->
+                                    <field name="repeat"/>
+                                    <field name="rate"/>
+                                    <field name="input_type_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

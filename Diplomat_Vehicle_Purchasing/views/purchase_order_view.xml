@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_incoterm_view_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='incoterm_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='incoterm_location']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_view_purchase_order_form_vehicle" model="ir.ui.view">
+            <field name="name">inherit.purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <field name="add_insurance" invisible="1"/>
+                    <field name="show_add_insurance" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='print_quotation'][1]" position="after">
+                    <button name="create_vehicle" type="object" string="Create Vehicle" class="oe_highlight" attrs="{'invisible': ['|','|',('type','=', 'spar'),('allow_create_vehicle','=', False),('state','not in',('draft'))]}"/>
+                    <button name="create_bill_info" type="object" string="Bill Information" class="oe_highlight" attrs="{'invisible': ['|','|',('type','=', 'spar'),('check_invoice','=', True),('state','not in',('purchase'))]}"/>
+                    <button name="delete_vehicle" string="Delete Vehicle" type="object" confirm="Are you sure that you want to delete vehicle ?" class="oe_highlight" attrs="{'invisible': ['|','|',('type','=', 'spar'),('allow_create_vehicle','=', False),('state','=','purchase')]}"/>
+                    <button name="create_down_payment" string="Create Down Payment" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|',('state','not in',['purchase','done']),('type','=', 'spar'), ('check_line_state', '=', True),('show_create_down_payment', '=', False)]}"/>
+                    <button name="create_install" string="Create Installment" type="object" class="oe_highlight" attrs="{'invisible':['|','|','|',('state','!=','purchase'),('type','=', 'spar'),('cash_purchasing','=', True),('check_line_state', '=', True)]}"/>
+                    <button name="print_vehicle_excel" type="object" string="Print Vehicle" states="purchase"/>
+                </xpath>
+
+                <xpath expr="//button[@name='button_done']" position="attributes">
+                    <attribute name="groups">Diplomat_Vehicle_Purchasing.send_mail_and_lock_for_group</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_rfq_send'][1]" position="attributes">
+                    <attribute name="groups">Diplomat_Vehicle_Purchasing.send_mail_and_lock_for_group</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_rfq_send'][2]" position="attributes">
+                    <attribute name="groups">Diplomat_Vehicle_Purchasing.send_mail_and_lock_for_group</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_rfq_send'][3]" position="attributes">
+                    <attribute name="groups">Diplomat_Vehicle_Purchasing.send_mail_and_lock_for_group</attribute>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='order_line']/tree[1]" position="inside">
+                    <button name="delete_vehicle" string="Delete Vehicle" type="object" attrs="{'invisible':['|',('parent.type','=', 'spar'),('parent.state','not in',['draft', 'cancel'])]}" confirm="Are you sure that you want to delete vehicle ?" class="oe_highlight"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='order_line']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('create_vehicle_po','=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_vehicles" icon="fa-car" attrs="{'invisible':['|','|',('type','=', 'spar'),('allow_create_vehicle','=', False),('vehicle_count','=', 0)]}">
+                        <field string="Vehicles" name="vehicle_count" widget="statinfo"/>
+                    </button>
+                    <button class="oe_stat_button" type="object" name="get_payment" icon="fa-calendar" attrs="{'invisible':['|',('type','=', 'spar'),('payment_count','=', 0)]}">
+                        <field string="Payments" name="payment_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <widget name="web_ribbon" title="Not Paid" bg_color="bg-danger" attrs="{'invisible': [('active_not_paid', '=', False)]}"/>
+                    <field name="active_not_paid" invisible="1"/>
+                    <widget name="web_ribbon" title="Paid" bg_color="bg-success" attrs="{'invisible': [('active_paid', '=', False)]}"/>
+                    <field name="active_paid" invisible="1"/>
+                    <widget name="web_ribbon" title="Partial" bg_color="bg-info" attrs="{'invisible': [('active_partial', '=', False)]}"/>
+                    <field name="active_partial" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_ref']" position="after">
+                    <field name="purchase_type_id" attrs="{'readonly':[('state','=', 'purchase')]}"/>
+                    <field name="check_install" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_ref']" position="after">
+                    <field name="check_line_state" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_ref']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state','=','purchase')]}</attribute>
+                </xpath>
+                <xpath expr="//div[@name='date_approve']" position="after">
+                    <field name="picking_type_id" position="move"/>
+                </xpath>
+                <xpath expr="//sheet//group" position="after">
+                    <group string="Installment Info" attrs="{'invisible':['|',('type','!=', 'vehicle'),('cash_purchasing','=', True)]}">
+                        <field name="number_installment" attrs="{'readonly':[('state','=','purchase')],'invisible':[('payment_instalment','=', False),('is_leasing','=', False)]}"/>
+                        <field name="no_months" attrs="{'readonly':[('state','=','purchase')],'invisible':[('payment_instalment','=', False),('is_leasing','=', False)]}"/>
+                        <field name="type" invisible="1"/>
+                        <field name="price_sum" invisible="1"/>
+                        <field name="payment_instalment" invisible="1"/>
+                        <field name="is_leasing" invisible="1"/>
+                        <field name="all_types" invisible="1"/>
+                        <field name="owner_ship_check" invisible="1"/>
+                        <field name="add_insurance" invisible="1"/>
+                        <field name="check_invoice" invisible="1"/>
+                        <field name="cash_purchasing" invisible="1"/>
+                        <field name="allow_create_vehicle" invisible="1"/>
+                        <field name="interest_amount" attrs="{'readonly':[('state','=','purchase')],'invisible':[('payment_instalment','=', False),('is_leasing','=', False)]}"/>
+                        <field name="start_date" attrs="{'readonly':[('state','=','purchase')],'invisible':[('payment_instalment','=', False),('is_leasing','=', False)]}"/>
+                        <field name="installment_date" readonly="1"/>
+                        <field name="create_vehicle_po" invisible="1"/>
+                        <field name="show_create_down_payment" invisible="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_planned']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div[@name='reminder']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                    <field name="model_id" optional="hide" options="{'no_open': True, 'no_create': True, 'no_create_edit':True}"/>
+                    <field name="license_plate" invisible="1"/>
+                    <field name="vehicle_id" invisible="1"/>
+                    <field name="product_ids" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('purchase_ok', '=', True),('id', 'in', product_ids) ]
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="admin_fee" attrs="{'column_invisible':['|',('parent.type','=', 'spar'),('parent.cash_purchasing','=', True)]}"/>
+                    <field name="plates_fee" attrs="{'column_invisible':[('parent.type','=', 'spar')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="interest" attrs="{'column_invisible':['|',('parent.type','=', 'spar'),('parent.cash_purchasing','=', True)]}"/>
+                    <field name="insurance" attrs="{'column_invisible':[('parent.type','=', 'spar')]}"/>
+                    <field name="owner_ship" attrs="{'column_invisible':['|',('parent.type','=', 'spar'),('parent.is_leasing','=', False)]}"/>
+                </xpath>
+                <xpath expr="//page[@name='products']" position="inside">
+                    <group class="oe_subtotal_footer oe_right" attrs="{'invisible':['|','|',('purchase_type_id','=', False),('cash_purchasing','!=', False),('all_types','=', True)]}">
+                        <field name="total_admin_after_taxes" string="Total Adminstrative Fee"/>
+                        <field name="total_plates_after_taxes" string="Total Plates Fee"/>
+                        <field name="total_insurance_after_taxes" attrs="{'invisible':[('cash_purchasing','=',True)]}" string="Total insurance"/>
+                        <field name="total_interest_after_taxes" string="Total Interest"/>
+                        <field name="final_total" string="Total"/>
+                        <field name="total_payment"/>
+                        <field name="allowed_down_payment"/>
+                    </group>
+                    <group class="oe_subtotal_footer oe_right" attrs="{'invisible':['|','|',('purchase_type_id','=', False),('cash_purchasing','=', False),('all_types','=', True)]}">
+                        <field name="total_plates_after_taxes" string="Total Plates Fee"/>
+                        <field name="total_insurance_after_taxes" attrs="{'invisible':[('cash_purchasing','=',True)]}" string="Total insurance"/>
+                        <field name="final_total" string="Total"/>
+                    </group>
+                    <group class="oe_subtotal_footer_separator" attrs="{'invisible':['|','|',('purchase_type_id','=', False),('cash_purchasing','=', True),('all_types','=', True)]}">
+                        <field name="down_payment" attrs="{'invisible':[('type','=', 'spar')]}" readonly="1"/>
+                        <field name="owner_ship_amount" attrs="{'invisible':[('payment_instalment','=', True)]}"/>
+                        <field name="remaining"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Installments" name="installments" attrs="{'invisible':['|',('type','!=', 'vehicle'),('cash_purchasing','=', True)]}">
+                        <field name="installment_ids">
+                            <tree create="0">
+                                <field name="no_installment"/>
+                                <field name="due_date"/>
+                                <field name="amount" sum="amount"/>
+                                <field name="paid" sum="paid"/>
+                                <field name="paid_amount" invisible="1"/>
+                                <field name="remaining" sum="remaining"/>
+                                <field name="owner_check" invisible="1"/>
+                                <field name="po_name" invisible="1"/>
+                                <field name="owner_ship_check" invisible="1"/>
+                                <field name="state" widget="badge" decoration-success="state == 'paid'" decoration-danger="state == 'not_paid'" decoration-muted="state == 'partial'"/>
+                                <button name="create_payment" type="object" string="Create Payment" class="oe_highlight" attrs="{'invisible':['|',('state','=','paid'),('owner_ship_check','=',True)]}"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="no_installment" readonly="1"/>
+                                    <field name="due_date" readonly="1"/>
+                                    <field name="amount" readonly="1"/>
+                                    <field name="paid" readonly="1"/>
+                                    <field name="remaining" readonly="1"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'paid'" decoration-danger="state == 'not_paid'" decoration-muted="state == 'partial'"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Totals" name="totals" attrs="{'invisible':[('type','!=', 'vehicle')]}">
+                        <group>
+                            <group string="Adminstrative fee" attrs="{'invisible':[('cash_purchasing','=', True)]}">
+                                <field name="untaxed_total_admin_fee"/>
+                                <field name="tax_admin_fee"/>
+                                <field name="total_admin_after_taxes"/>
+                            </group>
+                            <group string="Plates fee">
+                                <field name="untaxed_total_plates_fee"/>
+                                <!--                            <field name="tax_plates_fee"/>-->
+                                <field name="total_plates_after_taxes"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Insurance" attrs="{'invisible':[('cash_purchasing','=',True)]}">
+                                <field name="untaxed_total_insurance"/>
+                                <field name="tax_insurance"/>
+                                <field name="total_insurance_after_taxes"/>
+                            </group>
+                            <group string="Interest" attrs="{'invisible':[('cash_purchasing','=', True)]}">
+                                <field name="untaxed_total_interest"/>
+                                <!--                            <field name="tax_interest"/>-->
+                                <field name="total_interest_after_taxes"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Payments" name="payments" invisible="1">
+                        <field name="payment_ids"/>
+                    </page>
+                </xpath>
+                <xpath expr="//button[@name='print_quotation'][1]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//button[@name='print_quotation'][2]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//button[@name='confirm_reminder_mail']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="edit_insurance_purchase_order_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="diplomat_insurance_policy.insurance_purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_add_insurance']" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                    <attribute name="attrs">{'invisible':['|','|',('state', '!=', 'purchase'),('add_insurance', '!=',
+                    True), ('show_add_insurance', '=', False)]}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_view_form_inherited" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherited</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="domain">[('code','=','incoming'),('has_checklist','!=',False), '|', ('warehouse_id', '=', False), ('warehouse_id.company_id', '=', company_id)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

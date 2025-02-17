@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+action_closed_user_id,action_closed_user,model_action_closed,,1,1,1,1
+add_product_user_id,add_product_user,model_add_product,,1,1,1,1
+deviation_limit_user_id,deviation_limit_user,model_deviation_limit,,1,1,1,1
+vehicle_driver_user_id,vehicle_driver_user,model_vehicle_driver,,1,1,1,1
+ywt_internal_stock_transfer_line_manager_id,ywt_internal_stock_transfer_line_manager,model_ywt_internal_stock_transfer_line,stock.group_stock_manager,1,1,1,1
+ywt_internal_stock_transfer_manager_id,ywt_internal_stock_transfer_manager,model_ywt_internal_stock_transfer,stock.group_stock_manager,1,1,1,1

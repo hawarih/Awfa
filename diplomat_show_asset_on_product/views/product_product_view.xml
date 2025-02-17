@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_product_product_form_inherit" model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" string="Related Assets" name="action_view_related_assets" type="object" icon="fa-list">
+                    </button>
+                    <button class="oe_stat_button" string="Related Expense" name="action_view_related_expense" type="object" icon="fa-list">
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_product_form_readonly" model="ir.ui.view">
+            <field name="name">product.product.form.readonly</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                    <attribute name="delete">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_purchase_requisition" name="Requisitions"/>
+        <menuitem id="menu_item_purchase_requisition" name="Purchase Requisition" sequence="10" parent="menu_purchase_requisition"/>
+        <menuitem id="menu_action_purchase_requisition" name="Purchase Requisitions" sequence="10" parent="menu_item_purchase_requisition" action="diplomat_material_purchase_requisition.action_material_purchase_requisition"/>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="close_wizard_form_id" model="ir.ui.view">
+            <field name="name">close.wizard.form</field>
+            <field name="model">close.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Close">
+                    <sheet>
+                        <group col="4">
+                            <field name="advance_id" attrs="{'invisible': [('is_at_line', '!=', False)],'required':[('is_at_line','=', False)]}"/>
+                            <field name="employee_id" attrs="{'invisible': [('is_at_line', '!=', False)],'required':[('is_at_line','=', False)]}"/>
+                            <field name="journal_id"/>
+                            <field name="remaining" force_save="1" readonly="0" attrs="{'required':[('is_at_line','=', False)]}"/>
+                            <field name="company_id" attrs="{'invisible': [('is_at_line', '!=', False)]}"/>
+                            <field name="close_date"/>
+                            <field name="is_at_line" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_close" string="Close Advance" type="object" class="oe_highlight" attrs="{'invisible': [('is_at_line', '!=', False)]}"/>
+                        <button name="action_close_at_line" string="Close Advance" type="object" class="oe_highlight" attrs="{'invisible': [('is_at_line', '=', False)]}"/>
+                        or
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

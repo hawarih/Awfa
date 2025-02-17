@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_view_form_inherited" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.inherited</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='return_action_to_open']" position="after">
+                    <button name="action_open_maintenance_request" type="object" class="oe_stat_button" icon="fa-wrench" attrs="{'invisible': [('maintenance_request_count', '&lt;=', 0)]}">
+                        <field name="maintenance_request_count" widget="statinfo" string="Maintenance Request"/>
+                    </button>
+                    <button name="action_open_vehicle_preventive_maintenance" type="object" class="oe_stat_button" icon="fa-wrench" attrs="{'invisible': [('vehicle_preventive_maintenance_count', '&lt;=', 0)]}">
+                        <field name="vehicle_preventive_maintenance_count" widget="statinfo" string="Preventive Maintenance"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

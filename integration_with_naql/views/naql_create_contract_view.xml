@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="naql_create_contract_form" model="ir.ui.view">
+            <field name="name">naql.create.contract.form</field>
+            <field name="model">naql.create.contract</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="otp"/>
+                    </group>
+                    <footer>
+                        <button string="Create Contract" class="btn-primary" type="object" name="action_create_contract"/>
+                        <button string="Cancel" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

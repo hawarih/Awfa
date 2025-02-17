@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+separate_picking_name_id,separate_picking_name,model_separate_picking,,1,1,1,1
+separate_picking_line_name_id,separate_picking_line_name,model_separate_picking_line,,1,1,1,1

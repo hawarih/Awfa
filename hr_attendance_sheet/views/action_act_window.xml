@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_hr_public_holiday" model="ir.actions.act_window">
+            <field name="name">Public Holidays</field>
+            <field name="res_model">hr.public.holiday</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_att_data_change" model="ir.actions.act_window">
+            <field name="name">Change Attendance Data</field>
+            <field name="res_model">attendance.sheet.line.change</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_attendance_sheet" model="ir.actions.act_window">
+            <field name="name">Attendance Sheets</field>
+            <field name="res_model">attendance.sheet</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_diff_rules" model="ir.actions.act_window">
+            <field name="name">Difference Time Rules</field>
+            <field name="res_model">hr.diff.rule</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_hr_absence_rule" model="ir.actions.act_window">
+            <field name="name">Absence Rules</field>
+            <field name="res_model">hr.absence.rule</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_hr_attendance_policy" model="ir.actions.act_window">
+            <field name="name">Attendance Policies</field>
+            <field name="res_model">hr.attendance.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_late_rules" model="ir.actions.act_window">
+            <field name="name">Late In Rules</field>
+            <field name="res_model">hr.late.rule</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_overtime_rules" model="ir.actions.act_window">
+            <field name="name">OverTime Rules</field>
+            <field name="res_model">hr.overtime.rule</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <!-- ============================== Server actions =============================== -->
+        <record id="action_hr_payroll_draft_entry_payroll" model="ir.actions.server">
+            <field name="name">Draft Entry</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">
+            if records:
+                records.action_payslips_done()
+            </field>
+        </record>
+    </data>
+</odoo>

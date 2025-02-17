@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="partner_view_account_buttons_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.res_partner_view_purchase_account_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(purchase.act_res_partner_2_supplier_invoices)d']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('company_type', '!=', 'person'),('supplier', '=',
+                        False)]}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_account_invoices_buttons_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('company_type', '!=', 'person'),('customer', '=',
+                        False)]}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_account_reports_buttons_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_reports.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='open_partner_ledger']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type', '!=', 'person')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_buttons_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.res_partner_view_purchase_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(purchase.act_res_partner_2_purchase_order)d']" position="attributes">
+                    <field name="supplier" invisible="True"/>
+                    <attribute name="attrs">{'invisible': ['|',('company_type', '!=', 'person'),('supplier', '=',
+                        False)]}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_due_button_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_followup.res_partner_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='open_action_followup']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.other_smart_buttons</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_meeting_button_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="calendar.view_partners_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='schedule_meeting']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.other_smart_buttons</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_on_time__button_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase_stock.res_partner_view_purchase_buttons_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(purchase_stock.action_purchase_vendor_delay_report)d']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.other_smart_buttons</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="partner_view_sale_button_form_inherit" model="ir.ui.view">
+            <field name="name">partner_customizations_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_sale_order']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('company_type', '!=', 'person'),('customer', '=',
+                        False)]}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_customizations_form_inherit" model="ir.ui.view">
+            <field name="name">res_partner_customizations.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title mb24']" position="after">
+                    <div class="g-col-sm-2" attrs="{'invisible': ['|',('customer', '=', False),('company_type', '=', 'company')]}">
+                        <div class="o_horizontal_separator mt-4 mb-3 text-uppercase fw-bolder small">
+                            Basic Information
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//group[field[@name='vat']]" position="before">
+                    <div class="g-col-sm-2" style="width: 100%;">
+                        <div class="o_horizontal_separator mb-4 mt-3 text-uppercase fw-bolder small">
+                            Other Information
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='street2']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <!--                <xpath expr="//field[@name='city']" position="attributes">-->
+                <!--                    <attribute name="invisible">True</attribute>-->
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='zip']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="accounting_page_group" invisible="1"/>
+                    <field name="sales_purchases_group" invisible="1"/>
+                    <field name="account" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='mobile']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.contact_addresses</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('sales_purchases_group', '=', False)]}</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='internal_notes']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.internal_notes</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_customizations_form_inherited" model="ir.ui.view">
+            <field name="name">res_partner_customizations.inherited.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="diplomat_partner_customizations.view_partner_form_inherited" />
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='birth']" position="after">
+                    <field name="age"/>
+                    <field name="customized_mobile" attrs="{'required': [('customer', '=', True),('company_type', '=', 'person')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='national_identity_number']" position="attributes">
+                    <attribute name="attrs">{'required': [('customer', '=', True),('company_type', '=', 'person')]}
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='id_type_code']" position="attributes">
+                    <attribute name="attrs">{'required': [('customer', '=', True),('company_type', '=', 'person')]}
+                    </attribute>
+                </xpath>
+                <!--                <xpath expr="//field[@name='id_issue']" position="attributes">-->
+                <!--                    <attribute name="attrs">{'required': [('customer', '=', True),('company_type', '=', 'person')]}</attribute>-->
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='id_expiry']" position="attributes">
+                    <attribute name="attrs">{'required': [('customer', '=', True),('company_type', '=', 'person')]}
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='license_number']" position="attributes">
+                    <attribute name="attrs">{'required': [('customer', '=', True),('company_type', '=', 'person')]}
+                    </attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='nationality']" position="after">
+                    <field name="city" position="move"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_res_partner_customizations_property_form" model="ir.ui.view">
+            <field name="name">res.partner.customizations.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('accounting_page_group', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='accounting_disabled']" position="attributes">
+                    <attribute name="groups">res_partner_customizations.accounting_disabled</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

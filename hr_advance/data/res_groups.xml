@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_advance.advance_salary_general_manager" model="res.groups">
+            <field name="name">General Manager</field>
+            <field name='category_id' ref="hr_advance.advance_salary_groups" />
+        </record>
+
+        <record id="hr_advance.advance_salary_hr_manager" model="res.groups">
+            <field name="name">Hr Manager</field>
+            <field name='category_id' ref="hr_advance.advance_salary_groups" />
+        </record>
+
+        <record id="hr_advance.advance_salary_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name='category_id' ref="hr_advance.advance_salary_groups" />
+        </record>
+
+        <record id="hr_advance.advance_salary_requester" model="res.groups">
+            <field name="name">Requester</field>
+            <field name='category_id' ref="hr_advance.advance_salary_groups" />
+        </record>
+
+    </data>
+</odoo>

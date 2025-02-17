@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+employee.checklist.emp_id,employee.checklist.emp,model_employee_checklist,base.group_user,1,1,1,0
+employee.checklist.user_id,employee.checklist.user,model_employee_checklist,hr.group_hr_user,1,1,1,1
+hr.employee.document_employee_id,hr.employee.document_employee,model_hr_employee_document,base.group_user,1,1,1,0
+hr.employee.document_manager_id,hr.employee.document_manager,model_hr_employee_document,hr.group_hr_manager,1,1,1,1
+hr.employee.document_user_id,hr.employee.document_user,model_hr_employee_document,hr.group_hr_user,1,1,1,0

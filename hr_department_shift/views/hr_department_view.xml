@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_department_shift_form_inherited" model="ir.ui.view">
+            <field name="name">hr.department.shift.form</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="after">
+                    <notebook>
+                        <page string="Shift">
+                            <field name="hr_shifts">
+                                <tree editable="bottom">
+                                    <field name="hr_department_id" invisible="1"/>
+                                    <field name="work_schedule" required="True"/>
+                                    <field name="start_date"/>
+                                    <field name="start_date_hijri" string="Start Hijri Date" optional="hide"/>
+                                    <field name="end_date"/>
+                                    <field name="end_date_hijri" string="End Hijri Date" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="attach_fleet_vehicle_view_form" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-file-text-o" type="object" context="{'default_fleet_doc': True}">
+                        <field name="attachment_number" widget="statinfo" string="Vehicle Doc" options="{'reload_on_button': true}"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

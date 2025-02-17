@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="accident_config_settings" model="ir.actions.act_window">
+            <field name="name">Setting</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="accident_menu_action" model="ir.actions.act_window">
+            <field name="name">Accidents</field>
+            <field name="res_model">vehicle.accident</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_add_discount" model="ir.actions.act_window">
+            <field name="name">Add Discount</field>
+            <field name="res_model">accident.discount.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="action_add_follower" model="ir.actions.act_window">
+            <field name="name">Add Follower</field>
+            <field name="res_model">accident.follower.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <record id="customer_partner_menu_action" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="discount_follower_action" model="ir.actions.act_window">
+            <field name="name">Follower</field>
+            <field name="res_model">accident.follower.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="discount_wizard_action" model="ir.actions.act_window">
+            <field name="name">Discount</field>
+            <field name="res_model">accident.discount.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="evaluation_party_menu_action" model="ir.actions.act_window">
+            <field name="name">Evaluation Party</field>
+            <field name="res_model">evaluation.party</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="insurance_reasons_menu_action" model="ir.actions.act_window">
+            <field name="name">Insurance Reasons</field>
+            <field name="res_model">not.insurance.reason</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="invoice_partner_menu_action" model="ir.actions.act_window">
+            <field name="name">Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="payment_partner_menu_action" model="ir.actions.act_window">
+            <field name="name">Payments</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="supplier_partner_menu_action" model="ir.actions.act_window">
+            <field name="name">Suppliers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="vehicle_accident_menu_action" model="ir.actions.act_window">
+            <field name="name">Accident Action</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="vehicle_menu_action" model="ir.actions.act_window">
+            <field name="name">Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+cut_wizard_name_id,cut_wizard_name,model_cut_wizard,,1,1,1,1
+hr_leave_completion_name_id,hr_leave_completion_name,model_hr_leave_completion,,1,1,1,1
+hr_leave_cut_name_id,hr_leave_cut_name,model_hr_leave_cut,,1,1,1,1
+register_payment_name_id,register_payment_name,model_register_payment,,1,1,1,1

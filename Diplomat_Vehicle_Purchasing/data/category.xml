@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="Diplomat_Vehicle_Purchasing.purchase_groups_for_category" model="ir.module.category">
+            <field name="name">Purchase</field>
+            <field name="module_nr">0</field>
+            <field name="sequence">0</field>
+            <field name="visible">True</field>
+        </record>
+    </data>
+</odoo>

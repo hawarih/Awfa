@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_insurance_policy" model="ir.actions.act_window">
+            <field name="name">Insurance Policy</field>
+            <field name="res_model">insurance.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_po_insurance_line_wizard" model="ir.actions.act_window">
+            <field name="name">Add For Insurance</field>
+            <field name="res_model">po.insurance.line</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ================================= Server Action ================================ -->
+        <record id="action_notification_vehicle_docs_ir_actions_server" model="ir.actions.server">
+            <field name="name">Generate Insurance Notification</field>
+            <field name="model_id" ref="diplomat_insurance_policy.model_insurance_policy"/>
+            <field name="state">code</field>
+            <field name="code">action = model.notification_insurance()</field>
+        </record>
+    </data>
+</odoo>

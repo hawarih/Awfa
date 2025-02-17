@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_petty_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Petty Cash Report</field>
+            <field name="res_model">petty.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="pay_wizard_form_id" model="ir.ui.view">
+            <field name="name">pay.wizard.form</field>
+            <field name="model">pay.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Payment">
+                    <sheet>
+                        <group col="4">
+                            <field name="advance_id"/>
+                            <field name="employee_id"/>
+                            <field name="journal_id"/>
+                            <field name="remaining"/>
+                            <field name="company_id"/>
+                            <field name="payment_date"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_pay" string="Pay" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

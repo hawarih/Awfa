@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="maintenance_team_view_form_inherited" model="ir.ui.view">
+            <field name="name">maintenance.team.form.inherited</field>
+            <field name="model">maintenance.team</field>
+            <field name="inherit_id" ref="maintenance.maintenance_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="picking_type_id" string="Operation Type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maintenance_team_view_tree_inherited" model="ir.ui.view">
+            <field name="name">maintenance.team.tree.inherited</field>
+            <field name="model">maintenance.team</field>
+            <field name="inherit_id" ref="maintenance.maintenance_team_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="editable"/>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="picking_type_id" string="Operation Type"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

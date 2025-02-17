@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_leave_cut_form" model="ir.ui.view">
+            <field name="name">hr.leave.cut.form</field>
+            <field name="model">hr.leave.cut</field>
+            <field name="arch" type="xml">
+                <form string="Time off cut">
+                    <header>
+                        <button name="action_submit" string="Submit" type="object" attrs="{'invisible':[('state', '!=', 'draft')]}" class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" attrs="{'invisible':[('state', '!=', 'to_approve')]}" class="btn-primary"/>
+                        <button name="action_refuse" string="Refuse" type="object" attrs="{'invisible':[('state', 'not in', ['draft','to_approve','approved'])]}"/>
+                        <button name="set_to_draft" string="Set to Draft" type="object" attrs="{'invisible':[('state', '!=', 'rejected')]}" class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved" clickable="1"/>
+                    </header>
+                    <sheet>
+                        <group name="col_left">
+                            <field name="leave_id" readonly="1"/>
+                            <field name="employee_id" readonly="1"/>
+                            <label for="date_from" string="Dates"/>
+                            <div class="o_row">
+                                <span class="text-muted">From</span>
+                                <field name="date_from" class="oe_inline" readonly="1" widget="daterange" options="{'related_end_date': 'request_date_to'}"/>
+                                <span class="text-muted">To</span>
+                                <field name="date_to" class="oe_inline" readonly="1" widget="daterange" options="{'related_end_date': 'request_date_from'}"/>
+                            </div>
+                            <field name="return_date" readonly="1"/>
+
+                            <label for="returned_days" string="Returned Days"/>
+                            <div name="duration_display">
+                                <div class="o_row">
+                                    <field name="returned_days" class="oe_inline" readonly="1"/>
+                                    <span>Days</span>
+                                </div>
+                            </div>
+                            <field name="cut_reason" readonly="1"/>
+                        </group>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="hr_leave_cut_tree" model="ir.ui.view">
+            <field name="name">hr.leave.cut.tree</field>
+            <field name="model">hr.leave.cut</field>
+            <field name="arch" type="xml">
+                <tree string="Time off Cut">
+                    <field name="leave_id"/>
+                    <field name="employee_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="return_date"/>
+                    <field name="returned_days"/>
+                    <field name="cut_reason"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

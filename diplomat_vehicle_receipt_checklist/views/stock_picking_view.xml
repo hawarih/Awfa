@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_form_inherited" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherited</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='picking_type_id']" position="after">
+                        <field name="has_checklist" invisible="True"/>
+                        <field name="is_vehicle_picking" invisible="True"/>
+                    </xpath>
+                    <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                        <field name="vehicle_id" invisible="True"/>
+                    </xpath>
+                    <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity_done']" position="after">
+                        <field name="vehicle_checklist_id" invisible="True"/>
+                        <field name="checklist_state" attrs="{ 'column_invisible':['|',('parent.has_checklist','=', False), ('parent.is_vehicle_picking','=', False)], 'invisible':[('vehicle_id','=', False)],                        }"/>
+                    </xpath>
+                    <xpath expr="//field[@name='move_ids_without_package']/tree/field[last()]" position="after">
+                        <field name="can_check" invisible="True"/>
+                        <button name="action_open_checklist" type="object" string="Check" class="oe_highlight" attrs="{'invisible':['|','|','|',('vehicle_id','=', False),('can_check', '=', False),('checklist_state','!=','draft'),('parent.has_checklist','=', False)]}"/>
+                        <button name="action_open_checklist" type="object" string="Edit Checklist" class="oe_highlight" attrs="{'invisible':['|','|','|',('vehicle_id','=', False),('can_check', '=', False),('checklist_state','!=','done'),('parent.has_checklist','=', False)]}" groups="diplomat_vehicle_receipt_checklist.group_edit_checklist"/>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

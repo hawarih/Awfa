@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ywt_internal_stock_transfer.ywt_internal_stock_transfer_seq" model="ir.sequence">
+            <field name="name">Internal Stock Transfer</field>
+            <field name="code">ywt.internal.stock.transfer</field>
+            <field name="active">True</field>
+            <field name="prefix">IST/</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.ywt_stock_transfer_maintenance_seq" model="ir.sequence">
+            <field name="name">Stock Transfer</field>
+            <field name="code">ywt.stock.transfer.maintenance</field>
+            <field name="active">True</field>
+            <field name="prefix">STM/</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="ywt_internal_stock_transfer.ywt_stock_transfer_seq" model="ir.sequence">
+            <field name="name">Stock Transfer</field>
+            <field name="code">ywt.stock.transfer</field>
+            <field name="active">True</field>
+            <field name="prefix">ST/</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_rental.group_allow_discount" model="res.groups">
+            <field name="name">Allow Discount</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental" />
+        </record>
+
+        <record id="customer_rental.group_delay_penalty_admin" model="res.groups">
+            <field name="name">Delay Penalty Admin</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental" />
+        </record>
+
+        <record id="customer_rental.group_edit_trip_days_price" model="res.groups">
+            <field name="name">Edit Trip Days Price</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental" />
+        </record>
+
+        <record id="customer_rental.group_remove_rental_order_lines" model="res.groups">
+            <field name="name">Remove Rental Order Lines</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental" />
+        </record>
+
+        <record id="customer_rental.group_rental_invoices_dates_admin" model="res.groups">
+            <field name="name">Rental Invoices Dates Admin</field>
+            <field name='category_id' ref="customer_rental.category_customer_rental" />
+        </record>
+    </data>
+</odoo>

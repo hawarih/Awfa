@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_accident.accident_group" model="res.groups">
+            <field name="name">Vehicle Accident</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_calculation_group" model="res.groups">
+            <field name="name">Accident Calculation Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_canceling_group" model="res.groups">
+            <field name="name">Accident Canceling Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_closing_group" model="res.groups">
+            <field name="name">Accident Closing Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_documentation_group" model="res.groups">
+            <field name="name">Accident Documentation Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_evaluation_group" model="res.groups">
+            <field name="name">Accident Evaluation Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_previous_group" model="res.groups">
+            <field name="name">Accident Previous Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+        <record id="vehicle_accident.accident_reporting_group" model="res.groups">
+            <field name="name">Accident Reporting Admin</field>
+            <field name='category_id' ref="vehicle_accident.accident_groups" />
+            <field name='implied_ids' eval="([4, ref('base.group_user')])" />
+        </record>
+
+    </data>
+</odoo>

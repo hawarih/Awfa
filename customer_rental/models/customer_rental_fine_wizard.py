@@ -1,0 +1,42 @@
+from odoo import api, fields, models
+
+
+class CustomerRentalFineWizard(models.TransientModel):
+    _name = 'customer.rental.fine.wizard'
+    _description = 'Customer Rental Fine Wizard'
+
+    allowed_hours = fields.Integer(string='Allowed Hours', readonly=True, store=True)
+    already_invoiced = fields.Float(string='Already Invoiced', readonly=True, store=True)
+    charged_late_hours = fields.Float(string='Charged Late Hours', readonly=True, store=True)
+    contract_id = fields.Many2one(comodel_name='rental.contract', string='Contract', copy=True, store=True)
+    current_duration_amount = fields.Float(string='Current Duration Amount', copy=True, readonly=True, store=True)
+    current_duration_amount_with_tax = fields.Float(string='Current Duration Amount With Tax', readonly=True, store=True)
+    due_amount_table = fields.One2many(comodel_name='delay.due.amount.lines', inverse_name='rental_fine_wizard', string='Due Amount Table', store=True)
+    early_days = fields.Integer(string='Early Days', readonly=True, store=True)
+    early_hours = fields.Float(string='Early Hours', readonly=True, store=True)
+    early_hours_cost = fields.Float(string='Early Hours Cost', readonly=True, store=True)
+    early_hours_for_day = fields.Integer(string='Hours', readonly=True, store=True)
+    expected_duration = fields.Integer(string='Expected Duration', readonly=True, store=True)
+    expected_duration_days = fields.Integer(string='Expected Days', readonly=True, store=True)
+    expected_duration_hours = fields.Integer(string='Expected Hours', readonly=True, store=True)
+    has_delay_penalty_admin_group = fields.Boolean(string='Has Delay Penalty Admin Group', readonly=True)
+    is_early = fields.Boolean(string='Is Early', readonly=True, store=True)
+    is_returned = fields.Boolean(string='Returned', related='contract_id.is_returned', readonly=True, store=True)
+    km_in = fields.Integer(string='Km In', copy=True, store=True)
+    last_invoice_id = fields.Many2one(comodel_name='account.move', string='Last Invoice', copy=True, store=True)
+    late_days = fields.Integer(string='Late Days', readonly=True, store=True)
+    late_hours = fields.Integer(string='Late Hours', readonly=True, store=True)
+    late_hours_cost = fields.Float(string='Late Hours Cost', readonly=True, store=True)
+    late_hours_for_day = fields.Integer(string='Hours', readonly=True, store=True)
+    late_hours_invoiced = fields.Float(string='Late Hours Invoiced', readonly=True, store=True)
+    late_hours_without_penalty = fields.Float(string='Late Hours Without Penalty', copy=True, readonly=True, store=True)
+    result = fields.Float(string='Result', readonly=True)
+    tax = fields.Many2many(comodel_name='account.tax', string='Tax', readonly=True, relation='account_tax_customer_rental_fine_wizard_rel', column1='customer_rental_fine_wizard_id', column2='account_tax_id', store=True)
+    tax_amount = fields.Float(string='Tax Amount', readonly=True)
+    total_due_amount = fields.Float(string='Total Due Amount', readonly=True, store=True)
+    total_due_amount_with_tax = fields.Float(string='Total Due Amount With Tax', readonly=True, store=True)
+    total_duration = fields.Integer(string='Total Duration', readonly=True, store=True)
+    total_duration_days = fields.Integer(string='Total Days', readonly=True, store=True)
+    total_duration_hours = fields.Integer(string='Total Hours', readonly=True, store=True)
+    total_km_extra_cost = fields.Float(string='Total Km Extra Cost', copy=True, store=True)
+    total_paid = fields.Float(string='Total Paid', readonly=True)

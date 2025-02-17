@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_customizations.accounting" model="res.groups">
+            <field name="name">accounting_page_group</field>
+        </record>
+
+        <record id="res_partner_customizations.accounting_disabled" model="res.groups">
+            <field name="name">accounting_disabled_page_group</field>
+        </record>
+
+        <record id="res_partner_customizations.contact_addresses" model="res.groups">
+            <field name="name">contact_addresses_page_group</field>
+        </record>
+
+        <record id="res_partner_customizations.internal_notes" model="res.groups">
+            <field name="name">internal_notes_page_group</field>
+        </record>
+
+        <record id="res_partner_customizations.other_smart_buttons" model="res.groups">
+            <field name="name">other smart buttons</field>
+        </record>
+
+        <record id="res_partner_customizations.sales_purchases" model="res.groups">
+            <field name="name">sales_purchases_page_group</field>
+        </record>
+
+    </data>
+</odoo>

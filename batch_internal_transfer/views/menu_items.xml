@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="batch_internal_transfer_menu" name="Batch Internal Transfer" sequence="10" parent="account.menu_finance_payables" action="batch_internal_transfer.batch_internal_transfer_action"/>
+    </data>
+</odoo>

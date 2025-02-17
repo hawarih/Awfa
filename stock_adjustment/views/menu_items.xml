@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_action_inventory_form"
+            name="Stock Adjustments"
+            action="stock_adjustment.action_inventory_form"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="20"/>
+    </data>
+</odoo>

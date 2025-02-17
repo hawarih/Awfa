@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="customer_payment_wizard_action" model="ir.actions.act_window">
+            <field name="name">Add Customer Payment</field>
+            <field name="res_model">customer.payment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="refund_wizard_action" model="ir.actions.act_window">
+            <field name="name">Refund</field>
+            <field name="res_model">refund.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ============================= Actions Server ============================= -->
+        <record id="create_payment_action" model="ir.actions.server">
+            <field name="name">Create Payment</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.create_payment()</field>
+        </record>
+
+        <record id="refund_action" model="ir.actions.server">
+            <field name="name">Refund</field>
+            <field name="model_id" ref="customer_rental.model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.refund()</field>
+        </record>
+    </data>
+</odoo>

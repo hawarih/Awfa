@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="diplomat_gps.gps_clear" model="res.groups">
+            <field name="name">GPS Clear</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+        <record id="diplomat_gps.gps_confirmer" model="res.groups">
+            <field name="name">GPS Confirmer</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+        <record id="diplomat_gps.gps_creator" model="res.groups">
+            <field name="name">GPS Creator</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+        <record id="diplomat_gps.gps_location" model="res.groups">
+            <field name="name">GPS Location</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+        <record id="diplomat_gps.gps_reset_to_draft" model="res.groups">
+            <field name="name">GPS Reset to Draft</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+        <record id="diplomat_gps.gps_scrap" model="res.groups">
+            <field name="name">GPS Scrap</field>
+            <field name='category_id' ref="diplomat_gps.gps_category" />
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_naql_suspend_code_form" model="ir.ui.view">
+            <field name="name">naql.suspend.code.form</field>
+            <field name="model">naql.suspend.code</field>
+            <field name="arch" type="xml">
+                <form string="MODEL" create="true" duplicate="true" edit="true" delete="true">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="arabic_name"/>
+                            <field name="naql_id"/>
+                            <field name="naql_code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_naql_suspend_code_tree" model="ir.ui.view">
+            <field name="name">naql.suspend.code.tree</field>
+            <field name="model">naql.suspend.code</field>
+            <field name="arch" type="xml">
+                <tree create="true" duplicate="true" edit="true" delete="true">
+                    <field name="name"/>
+                    <field name="arabic_name"/>
+                    <field name="naql_id"/>
+                    <field name="naql_code"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

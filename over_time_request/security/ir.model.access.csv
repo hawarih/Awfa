@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_model_name_1_id,access_ir_model_name_1,base.model_ir_model,over_time_request.hr_manger_group,1,1,1,1
+hr_overtime_request_name_id,hr_overtime_request_name,model_hr_overtime_request,,1,1,1,1

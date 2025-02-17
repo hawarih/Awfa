@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_overtime_request_action" model="ir.actions.act_window">
+            <field name="name">OverTime Request</field>
+            <field name="res_model">hr.overtime.request</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

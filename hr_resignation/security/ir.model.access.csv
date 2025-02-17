@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+name_hr_eos_resignation_user_id,name_hr_eos_resignation_user,model_hr_eos_resignation,,1,1,1,1
+name.hr.resignation.reason.officer_id,name.hr.resignation.reason.officer,model_hr_resignation_reason,hr.group_hr_user,1,1,1,1
+name_hr_resignation_reason_rule_user_id,name_hr_resignation_reason_rule_user,model_hr_resignation_reason_rule,base.group_user,1,1,1,1
+view.hr.employee_id,view.hr.employee,model_hr_employee,base.group_user,1,1,1,0
+view.hr.resignation_id,view.hr.resignation,model_hr_resignation,base.group_user,1,1,1,0

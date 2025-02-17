@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gps_gps_name_id,gps_gps_name,model_gps_gps,diplomat_gps.gps_creator,1,1,1,1
+gps_scrap_wizard_name_id,gps_scrap_wizard_name,model_gps_scrap_wizard,,1,1,1,1
+gps_user_name_id,gps_user_name,model_gps_gps,base.group_user,1,0,0,0
+gps_vehicle_history_name_id,gps_vehicle_history_name,model_gps_vehicle_history,,1,1,1,1

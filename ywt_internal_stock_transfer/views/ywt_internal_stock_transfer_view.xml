@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ywt_internal_stock_transfer_form_view" model="ir.ui.view">
+            <field name="name">ywt.inter.stock.transfer.form.view</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Internal Stock Transfer">
+                    <header>
+                        <button name="action_button_stock_transfer_validate" states="draft" string="Validate" type="object" class="oe_highlight" groups="ywt_internal_stock_transfer.transfer_validate"/>
+                        <button name="action_button_stock_transfer_cancel" states="processed" string="Cancel" type="object" class="oe_highlight" groups="ywt_internal_stock_transfer.transfer_cancel"/>
+                        <button name="action_button_closed" string="Closed" type="object" class="oe_highlight" invisible="1"/>
+
+                        <button name="action_button_stock_transfer_draft" states="cancel" string="Set to Draft" type="object" class="oe_highlight" groups="ywt_internal_stock_transfer.set_to_draft"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,processed,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_stock_picking" string="Pickings" type="object" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('state','=', 'draft')]}"/>
+                        </div>
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="res_company_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','=','closed')]}"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="from_warehouse_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="from_location_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','!=','draft')]}" invisible="1"/>
+                                <field name="product_ids" widget="many2many_tags" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="to_warehouse_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="to_location_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','!=','draft')]}" invisible="1"/>
+                                <field name="contact" required="1"/>
+                                <field name="respo_vendor" string="Responsible" attrs="{'invisible': [('contact','!=','vendor')]}" domain="[('supplier', '=', True)]"/>
+                                <field name="respo_employee" string="Responsible" attrs="{'invisible': [('contact','!=','employee')]}"/>
+                                <field name="transfer_number"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Internal Stock Tranfer Lines">
+                                <field name="internal_stock_transfer_line_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                    <tree editable="bottom">
+                                        <field name="internal_stock_transfer_id" invisible="1"/>
+                                        <field name="product_id" domain="[('id', 'in', new_product_ids)]"/>
+                                        <field name="new_product_ids" widget="many2many_tags" invisible="1"/>
+                                        <field name="quantity_on_hand" readonly="1"/>
+                                        <field name="available_quantity" optional="hide"/>
+                                        <field name="qty"/>
+                                    </tree>
+                                    <form>
+                                        <field name="internal_stock_transfer_id" invisible="1"/>
+                                        <field name="product_id" domain="[('id', 'in', new_product_ids)]"/>
+                                        <field name="new_product_ids" widget="many2many_tags" invisible="1"/>
+                                        <field name="quantity_on_hand" readonly="1"/>
+                                        <field name="available_quantity" optional="hide"/>
+                                        <field name="qty"/>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ywt_internal_stock_transfer_search" model="ir.ui.view">
+            <field name="name">ywt.internal.stock.transfer.search</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="driver_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Driver" name="group_driver_id" context="{'group_by':'driver_id'}"/>
+                        <filter string="From Warehouse" name="group_by_from_warehouse_id" context="{'group_by':'from_warehouse_id'}"/>
+                        <filter string="To Warehouse" name="group_by_to_warehouse_id" context="{'group_by':'to_warehouse_id'}"/>
+                        <filter string="Transfer Type" name="group_by_transfer_type" context="{'group_by':'transfer_type'}"/>
+                        <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="ywt_internal_stock_transfer_tree_view" model="ir.ui.view">
+            <field name="name">ywt.inter.stock.transfer.view.tree</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Internal Stock Transfer">
+                    <field name="name"/>
+                    <field name="from_warehouse_id"/>
+                    <field name="from_location_id" invisible="1"/>
+                    <field name="to_warehouse_id"/>
+                    <field name="to_location_id" invisible="1"/>
+                    <field name="state"/>
+                    <field name="transfer_type" optional="show"/>
+                    <field name="driver_id" optional="show"/>
+                    <field name="employee_id" optional="show"/>
+                    <field name="vehicle_ids" widget="many2many_tags" optional="show"/>
+                    <field name="deviation_states" optional="show"/>
+                    <field name="vendor_id" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="ywt_stock_transfer_form_view" model="ir.ui.view">
+            <field name="name">stock.transfer.form.view</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Stock Transfer">
+                    <header>
+                        <button name="action_button_stock_transfer_validate" string="Validate" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '!=', 'draft'),'&amp;' ,('transfer_type', '!=', 'external'), ('product_added', '=', False)]}" groups="ywt_internal_stock_transfer.transfer_validate"/>
+                        <button name="action_add_product" string="Add Product" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|',('state', '!=', 'draft'),('transfer_type', 'in', ['external', False]), ('product_added', '=', True)]}" groups="ywt_internal_stock_transfer.product_add"/>
+                        <button name="action_clear" string="Clear" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|',('state', '!=', 'draft'),('transfer_type', 'in', ['external', False]), ('product_added', '=', False)]}" groups="ywt_internal_stock_transfer.transfer_clear"/>
+                        <button name="action_button_stock_transfer_cancel" string="Cancel" type="object" class="oe_highlight" attrs="{'invisible': ['|',('transfer_type', 'in', ['custody', 'task']), ('state', '!=', 'processed')]}" groups="ywt_internal_stock_transfer.transfer_cancel"/>
+                        <button name="action_button_closed" string="Closed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'processed'),('transfer_type', 'not in', ['custody','task','maintenance'])]}" groups="ywt_internal_stock_transfer.transfer_close"/>
+                        <button name="action_button_stock_transfer_draft" states="cancel" string="Set to Draft" type="object" class="oe_highlight" groups="ywt_internal_stock_transfer.set_to_draft"/>
+                        
+                        <field name="state" widget="statusbar" statusbar_visible="draft,processed,cancel,closed"/>
+                        <field name="is_vehicle" invisible="1"/>
+                        <field name="product_added" invisible="1"/>
+                        <field name="maintenance_id" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_stock_picking" string="Pickings" type="object" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('picking_ids','=', [])]}"/>
+
+                            <field name="bill_id" invisible="1"/>
+                        </div>
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="res_company_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','=','closed')]}"/>
+                                <field name="transfer_type" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="vendor_id" attrs="{'invisible': [('transfer_type', 'not in', ['external', 'return'])], 'required': [('transfer_type', 'in', ['external', 'return'])],'readonly': [('state','!=','draft')]}"/>
+                                <field name="vehicle_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="driver_id" domain="[('state', '=', 'free')]" attrs="{'readonly': [('state','!=','draft')],                                         'invisible': [('transfer_type', 'in', ['custody', 'task', 'external'])],'required': [('transfer_type', '=', 'internal')]}"/>
+                                <field name="date_in" readonly="True" attrs="{'invisible':['|',('transfer_type', '=', 'external'), ('date_in', '=', False)]}"/>
+                                <field name="date_out" readonly="True" attrs="{'invisible':['|',('transfer_type', '=', 'external'), ('date_out', '=', False)]}"/>
+                                <field name="picking_ids" invisible="1"/>
+                                <field name="employee_id" attrs="{'readonly': [('state','!=','draft')], 'invisible': [('transfer_type', 'not in', ['custody', 'task','maintenance'])], 'required': [('transfer_type', 'in', ['custody', 'task'])]}"/>
+                                <field name="destination" attrs="{'readonly': [('state','!=','draft')], 'invisible': [('transfer_type', 'not in', ['custody', 'task','maintenance'])], 'required': [('transfer_type', 'in', ['custody', 'task'])]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <div class="o_td_label">
+                                    <label for="from_warehouse_id" string="From Warehouse"/>
+                                </div>
+                                <div class="o_row">
+                                    <field nolabel="1" name="from_warehouse_id" options="{'no_create':True}" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <!--                                    <label for="km_out"-->
+                                    <!-- attrs="{'invisible': [('transfer_type', 'not in', ['external', 'return'])]}"/>-->
+                                    <!--                                    <field name="km_out" nolabel="1" force_save="1"-->
+                                    <!-- attrs="{'invisible': [('transfer_type', 'not in', ['external', 'return'])]}"/>-->
+                                </div>
+                                <field name="second_product_ids" widget="many2many_tags" invisible="1"/>
+
+                            </group>
+                            <group>
+                                <div class="o_td_label">
+                                    <label for="to_warehouse_id" attrs="{'invisible': [('transfer_type', 'in', ['return', 'task', 'custody','maintenance'])]}"/>
+                                </div>
+                                <div class="o_row">
+                                    <field name="to_warehouse_id" options="{'no_create':True}" attrs="{'readonly': [('state','!=','draft')], 'required': [('transfer_type', 'in', ['external', 'internal'])],
+                                                                       'invisible': [('transfer_type', 'in', ['return', 'task', 'custody','maintenance'])]}" nolabel="1"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="from_location_id" options="{'no_create':True}" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="to_location_id" options="{'no_create':True}" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Internal Stock Transfer Lines">
+                                <field name="internal_stock_transfer_line_ids" attrs="{'readonly': ['|', ('state','!=','draft'), ('transfer_type', 'not in', ['external'])]}">
+                                    <tree editable="bottom">
+                                        <field name="internal_stock_transfer_id" invisible="1"/>
+                                        <field name="product_ids" invisible="1"/>
+                                        <field name="second_product_ids" invisible="1"/>
+                                        <field name="product_id" required="1" domain="[('id', 'in', second_product_ids)]"/>
+                                        <field name="quantity_on_hand" invisible="1"/>
+                                        <field name="qty" invisible="1"/>
+                                        <field name="driver_in" attrs="{'column_invisible': [('parent.transfer_type', '!=', 'external')]}" optional="hide"/>
+                                        <field name="driver_out" attrs="{'column_invisible': [('parent.transfer_type', '!=', 'external')]}" optional="hide"/>
+                                        <field name="date_in" attrs="{'column_invisible':[('parent.transfer_type', '!=', 'external')]}" optional="hide"/>
+                                        <field name="date_out" attrs="{'column_invisible':[('parent.transfer_type', '!=', 'external')]}" optional="hide"/>
+                                    </tree>
+                                    <form>
+                                        <field name="internal_stock_transfer_id" invisible="1"/>
+                                        <field name="product_ids" invisible="1"/>
+                                        <field name="second_product_ids" invisible="1"/>
+                                        <field name="product_id" required="1" domain="[('id', 'in', second_product_ids)]"/>
+                                        <field name="quantity_on_hand" invisible="1"/>
+                                        <field name="qty" invisible="1"/>
+                                    </form>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4">
+                                        <field colspan="2" name="note" nolabel="1" placeholder="Notes..."/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="deviation" string="Deviations" attrs="{'invisible': ['|',('state', 'in', ['draft', 'cancel']), ('transfer_type', '!=', 'internal')]}">
+                                <field name="deviation_ids">
+                                    <tree editable="bottom" class="tree_side" create="0" delete="0">
+                                        <field name="km_out" force_save="1"/>
+                                        <field name="odometer" invisible="1"/>
+                                        <field name="km_in" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="traveled_distance" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="km_limit" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="diff" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="deviation_state" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="allowed_time" widget="float_time" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                        <field name="consumed_time" widget="float_time" attrs="{'column_invisible': [('parent.state', '!=', 'closed')]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="checklist_out" string="Checklist out" attrs="{'invisible': ['|',('product_added','=', False),('transfer_type', 'not in', ['internal','task', 'custody','maintenance'])]}">
+                                <group col="3">
+                                    <group>
+                                        <field name="ac_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="radio_stereo_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="screen_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="tires_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="checklist_km_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])]}" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="speedometer_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="keys_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="car_seats_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])],'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="first_aid_kit_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="spare_tire_tools_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="safety_triangle_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="fire_extinguisher_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="spare_tires_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody','maintenance'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="vehicle_status_out" attrs="{'required': [('product_added', '=', True),('transfer_type', 'in', ['internal','task', 'custody'])], 'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="checklist_user"/>
+                                    </group>
+                                </group>
+                                <group col="4">
+                                    <group>
+                                        <field name="image_out_1" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="image_out_5" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_out_2" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="image_out_6" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_out_3" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="image_out_7" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_out_4" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="image_out_8" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="checklist_in" string="Checklist In" attrs="{'invisible': ['|',('state','not in',['closed','processed']),('transfer_type','in',['external','return'])]}">
+                                <group col="3">
+                                    <group>
+                                        <field name="ac_in" attrs="{'readonly': ['|', ('transfer_type', '=', 'internal'), ('state', 'in', ['closed'])],'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="radio_stereo_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="screen_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="tires_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="checklist_km_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="speedometer_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="keys_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="car_seats_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="first_aid_kit_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="spare_tire_tools_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="safety_triangle_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="fire_extinguisher_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="spare_tires_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="vehicle_status_in" attrs="{'readonly': ['|',('transfer_type', '=', 'internal'),('state', 'in', ['closed'])],
+                                                                  'required': [('transfer_type', 'in', ['maintenance']), ('state', 'in', ['processed'])]}"/>
+                                        <field name="checklist_user"/>
+                                    </group>
+                                </group>
+                                <group col="4">
+                                    <group>
+                                        <field name="image_in_1" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                        <field name="image_in_5" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_in_2" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                        <field name="image_in_6" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_in_3" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                        <field name="image_in_7" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="image_in_4" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                        <field name="image_in_8" widget="image" class="oe_avatar" options="{'size': [130, 130]}" attrs="{'readonly': [('state', 'in', ['closed'])]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="ywt_stock_transfer_tree_view" model="ir.ui.view">
+            <field name="name">stock.transfer.view.tree</field>
+            <field name="model">ywt.internal.stock.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Transfer">
+                    <field name="name"/>
+                    <field name="from_warehouse_id"/>
+                    <field name="from_location_id" invisible="1"/>
+                    <field name="to_warehouse_id"/>
+                    <field name="to_location_id" invisible="1"/>
+                    <field name="state"/>
+                    <field name="transfer_type" optional="show"/>
+                    <field name="driver_id" optional="show"/>
+                    <field name="employee_id" optional="show"/>
+                    <field name="vehicle_ids" widget="many2many_tags" optional="show"/>
+                    <field name="deviation_states" optional="show"/>
+                    <field name="vendor_id" optional="show"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

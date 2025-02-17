@@ -1,0 +1,116 @@
+fleet_status                    This should be installed for ywt_internal_stock_transfer.                                                              Done
+
+
+
+mail.activity
+
+Uncomment res_model field (Temporarily commented to install module.)
+                module              
+    1.  adjustment_docs
+    2.  ywt_internal_stock_transfer
+    3.  hr_allowances_and_deductions        (In TODO)    
+
+
+Module:     Customer Rental
+rental_contract_view.xml
+    Domain removed from     "fleet_vehicle_id"              (add it)
+        domain="[('state_id.type', '=', 'ready_rent')]"
+        
+        
+        
+
+
+modules_created_and_installed = [                                                        
+        'adjustment_docs',
+        'advanced_web_domain_widget',
+        'batch_internal_transfer',                                                                                        
+        'chassis_number_analytic',
+        'custom_codes',
+        'customer_blacklist',
+        'customer_rental',
+        'diplomat_installment_batch_payment',
+        'diplomat_insurance_policy',
+        'diplomat_journal_payment_method',
+        'diplomat_material_purchase_requisition',
+        'diplomat_partner_customizations',
+        'diplomat_purchase_order_separate_picking',
+        'diplomat_related_vehicle_product_and_model_category',
+        'diplomat_show_asset_on_product',
+        'diplomat_stock',
+        'Diplomat_Vehicle_Purchasing',
+        'diplomat_vehicles_document',
+        'elkhodr_journal_restrictions',
+        'elkhodr_rental_reports',
+        'fleet_analytic_account',
+        'hr_advance',
+        'hr_allowances_and_deductions',
+        'integration_with_naql',
+        'itss_payroll_customize',
+        'jubeen_edit_employee',
+        'late_contract_collection',
+        'link_wh_with_rental_location',
+        'location_access_rights',
+        'over_time_request',
+        'partner_config_account',
+        'product_min_max',
+        'refund_and_create_payment_in_rental',
+        'res_partner_customizations',
+        'sick_leave_saudi_arabia',
+        'simplify_access_management',
+        'stock_analytic_account',
+        'time_off_customization',
+        'time_off_inherit',
+        'vehicle_accident',
+        'vehicle_damage',
+        'ywt_internal_stock_transfer',
+        'diplomat_vehicle_checklist'  ,                                          
+]
+
+
+modules_with_itss_author_and_not_created = [
+        'branch_work_location',
+        'hr_mobile_api',
+        'passion_petty_cash_report_pdf',
+        'product_card_report',
+        'diplomat_fleet_maintenance',
+        'diplomat_fleet_vehicle_key',
+        'edit_in_attendance_sheet',
+        'automatic_allocation',
+        'diplomat_area_city',
+        'additional_naql_fields',
+        'hijri_date_abstract',
+        'diplomat_maintenance_purchase_requisition',
+        'itss_vehicle_termination',
+        'modifications_in_attendance',
+        'refund_and_create_payment_in_rental',
+        'time_off_modification',
+        'hr_department_shift',
+        
+        
+        
+        'employee_check_list',                          in the dependencies of 'hr_department_shift'
+]
+
+
+
+
+  Modules created but not installed on staging (No module depends on these)
+                                                                Not Installed on stagging
+ 'attendance_request',                                                  True
+ 'customer_rental_membership',                                          True
+ 'edit_invoice_print_out',                                              True
+ 'hr_end_of_services',                                                  True
+ 'hr_experiment',                                                       True
+ 'itss_tax_on_down_payment',                                            True
+ 'leave_customization',                                                 True
+ 'leaves_cycle',                                                        True
+ 'multiple_scrap_orders',                                               True
+ 'ywt_internal_stock_transfer_hr',                                      True
+
+
+
+
+
+
+ location_id_store is made readonly:'False' to test 
+                May be this field is set by some python implementation.

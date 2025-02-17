@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="evaluation_party_form_view" model="ir.ui.view">
+            <field name="name">evaluation.party.form.view</field>
+            <field name="model">evaluation.party</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="evaluation_party_tree_view" model="ir.ui.view">
+            <field name="name">evaluation.party.tree.view</field>
+            <field name="model">evaluation.party</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

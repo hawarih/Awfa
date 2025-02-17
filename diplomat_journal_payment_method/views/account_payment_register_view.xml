@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_payment_register_form_inherited" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherited</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='communication']" position="after">
+                    <field name="enable_payment_method" invisible="True"/>
+                    <field name="approval_code" attrs="{'invisible': [('enable_payment_method','=', False)], 
+                                                            'required': [('enable_payment_method','=', True)]}"/>
+                    <field name="payment_revenue_type" attrs="{ 'invisible':[('payment_type','!=', 'inbound')], 'required':[('payment_type','=', 'inbound')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_bank_id']" position="after">
+                    <field name="journal_method_id" attrs="{'invisible': [('enable_payment_method','=', False)], 
+                                                                'required': [('enable_payment_method','=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

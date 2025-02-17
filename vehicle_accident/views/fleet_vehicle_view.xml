@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_form_inherit_accident" model="ir.ui.view">
+            <field name="name">fleet vehicle inherit accident</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="after">
+                    <div style="float:right;padding:0 15px 0 0 ;">
+                        <div style="font-size:20px">
+                            <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : [('is_ready_to_maintenance','=',False)]}">
+                                Ready To Maintenance
+                            </div>
+                            <field name="is_ready_to_maintenance" invisible="1"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

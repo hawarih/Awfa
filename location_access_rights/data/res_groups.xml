@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="location_access_rights.group_warehouse_restriction_manager" model="res.groups">
+            <field name="name">Warehouse Restriction Manager</field>
+            <field name='category_id' ref="location_access_rights.category_location_warehouse_restrictions"/>
+        </record>
+    </data>
+</odoo>

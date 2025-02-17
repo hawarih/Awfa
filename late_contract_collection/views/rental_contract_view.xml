@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="rental_contract_form_late_inherit" model="ir.ui.view">
+            <field name="name">Rental Contract Form Late Inherit</field>
+            <field name="model">rental.contract</field>
+            <field name="inherit_id" ref="customer_rental.rental_contract_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('text-bg-success')]" position="after">
+                    <field name="is_generalized" invisible="1"/>
+                    <field name="is_waiting_generalization" invisible="1"/>
+                    <field name="arrest_warrant_canceled" invisible="1"/>
+                    <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|','|',('is_waiting_generalization','=',True), ('is_generalized','=',False),('state','not in',['open','closed','hold','delivered_indebet'])]}">
+                    Generalized
+                    </div>
+                    <div class="badge rounded-pill text-bg-warning" attrs="{'invisible' : ['|','|',('state','not in',['open','closed','hold','delivered_indebet']) ,('is_waiting_generalization','=',False),('is_generalized','=',True),                     ]}">
+                    Waiting Generalization
+                    </div>
+                    <div class="badge rounded-pill text-bg-success" attrs="{'invisible' : ['|',('state','not in',['open','closed','hold','delivered_indebet']) ,('arrest_warrant_canceled','=',False)]}">
+                    Arrest Warrant Canceled
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='return_date']" position="after">
+                    <field name="late_entry_time" attrs="{'invisible':['|',('state','!=','open'),('is_late','=',False)]}"/>
+                    <field name="duration_late_contract" attrs="{'invisible':['|',('state','!=','open'),('is_late','=',False)]}" string="Late Days"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="statement" string="Statements" groups="late_contract_collection.allow_add_statement_group">
+                        <field name="statement_ids" readonly="1">
+                            <tree no_create="1">
+                                <field name="statement"/>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="generalization" string="Generalization" groups="late_contract_collection.allow_add_generalization_group">
+                        <field name="generalization_ids" readonly="1">
+                            <tree no_create="1">
+                                <field name="generalization_number"/>
+                                <field name="date"/>
+                                <field name="location"/>
+                                <field name="follower"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="arrest_warrant" string="Arrest Warrant" groups="late_contract_collection.cancellation_of_arrest_warrant_group">
+                        <field name="cancel_arrest_warrant_ids" readonly="1">
+                            <tree no_create="1">
+                                <field name="cancellation_number"/>
+                                <field name="date"/>
+                                <field name="notes"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="rental_contract_tree_inherit" model="ir.ui.view">
+            <field name="name">rental contract tree inherit</field>
+            <field name="model">rental.contract</field>
+            <field name="inherit_id" ref="customer_rental.rental_contract_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='paid_amount']" position="after">
+                    <field name="late_entry_time" optional="hide"/>
+                    <field name="duration_late_contract" optional="hide" string="Late Days"/>
+                    <field name="last_statement" optional="hide"/>
+                    <field name="last_statement_date" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

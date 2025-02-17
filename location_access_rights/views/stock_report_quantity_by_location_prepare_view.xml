@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_report_quantity_from_inherit" model="ir.ui.view">
+            <field name="name">stock.report.quantity.by.location.prepare.form.inherit</field>
+            <field name="model">stock.report.quantity.by.location.prepare</field>
+            <field name="inherit_id" ref="stock_report_quantity_by_location.stock_report_quantity_by_location_prepare_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_ids']" position="after">
+                    <field name="user_location_ids" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='location_ids']" position="attributes">
+                    <attribute name="domain">[('id','in',user_location_ids)]</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

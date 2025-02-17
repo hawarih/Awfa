@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO res_model field error -->
+<odoo>
+    <data>
+        <record id="stock_adjustment.adjustment_approval_activity_type" model="mail.activity.type">
+            <field name="name">Adjustment Approval</field>
+            <field name="sequence">1</field>
+            <field name="active">True</field>
+            <field name="delay_count">0</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_label">0 days</field>
+            <field name="delay_from">previous_activity</field>
+            <field name="icon">fa-envelope</field>
+            <!-- <field name="res_model">stock.inventory</field> -->
+            <field name="chaining_type">suggest</field>
+            <field name="category">default</field>
+            <field name="initial_res_model">stock.inventory</field>
+        </record>
+
+        <record id="stock_adjustment.adjustment_validation_activity_type" model="mail.activity.type">
+            <field name="name">Adjustment validation</field>
+            <field name="sequence">2</field>
+            <field name="active">True</field>
+            <field name="delay_count">0</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_label">0 days</field>
+            <field name="delay_from">previous_activity</field>
+            <field name="icon">fa-envelope</field>
+            <!-- <field name="res_model">stock.inventory</field> -->
+            <field name="chaining_type">suggest</field>
+            <field name="category">default</field>
+            <field name="initial_res_model">stock.inventory</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_attendance_policy_form_view" model="ir.ui.view">
+            <field name="name">hr.attendance.form.view</field>
+            <field name="model">hr.attendance.policy</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group string="Overtime Rules">
+                            <field name="overtime_rule_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="active_after" widget="float_time"/>
+                                    <field name="rate"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Difference Time Rule">
+                            <div colspan="12">
+                                <p class="oe_grey">
+                                    The Early Out time or leaving during the working time period
+                                </p>
+                            </div>
+                            <field name="diff_rule_id" nolabel="1"/>
+                        </group>
+                        <group string="Late In Rule">
+                            <field name="late_rule_id" nolabel="1"/>
+                        </group>
+                        <group string="Absence Rule">
+                            <field name="absence_rule_id" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="hr_attendance_policy_tree_view" model="ir.ui.view">
+            <field name="name">hr.attendance.tree.view</field>
+            <field name="model">hr.attendance.policy</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

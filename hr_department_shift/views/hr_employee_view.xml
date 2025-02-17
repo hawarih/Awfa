@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_employee_shift_form_inherited" model="ir.ui.view">
+            <field name="name">hr.employee.shift.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="employee_check_list.hr_employee_inherit_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='checklist']" position="after">
+                    <page string="Shift">
+                        <field name="hr_shifts" context="{'default_hr_employee_id':id}" domain="[('hr_department_id','=',department_id),('hr_employee_id','=',False)]">
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="hr_employee_id" readonly="1"/>
+                                        <field name="work_schedule"/>
+                                        <field name="start_date"/>
+                                        <field name="start_date_hijri" string="Start Hijri Date"/>
+                                        <field name="end_date"/>
+                                        <field name="end_date_hijri" string="End Hijri Date"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="hr_department_id" invisible="1"/>
+                                <field name="work_schedule" attrs="{'readonly':[('hr_department_id','!=',False)]}"/>
+                                <field name="start_date" attrs="{'readonly':[('hr_department_id','!=',False)],'required':True}"/>
+                                <field name="start_date_hijri" string="Start Hijri Date" optional="hide"/>
+                                <field name="end_date" attrs="{'readonly':[('hr_department_id','!=',False)],'required':True}"/>
+                                <field name="end_date_hijri" string="End Hijri Date" optional="hide"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

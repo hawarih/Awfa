@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_allowed_attendance_location_action" model="ir.actions.act_window">
+            <field name="name">Allowed Attendance Location</field>
+            <field name="res_model">allowed.attendance.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="view_mobile_terms_policy_action" model="ir.actions.act_window">
+            <field name="name">Mobile Terms and Policy</field>
+            <field name="res_model">mobile.terms.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

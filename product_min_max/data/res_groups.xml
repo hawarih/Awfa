@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="product_min_max.requisition_administrator" model="res.groups">
+            <field name="name">Requisition Administrator</field>
+            <field name='category_id' ref="diplomat_material_purchase_requisition.module_category_purchase_requisition" />
+        </record>
+
+        <record id="product_min_max.requisition_no_important" model="res.groups">
+            <field name="name">No Important Requisition</field>
+            <field name='category_id' ref="diplomat_material_purchase_requisition.module_category_purchase_requisition" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_view_search_inherited" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.search</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='groupby_make']" position="after">
+                    <filter string="GPS Status" name="gps_status" context="{'group_by': 'gps_status'}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='tag_ids']" position="before">
+                    <field name="gps_status"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_view_tree_inherited" model="ir.ui.view">
+            <field name="name">fleet.vehicle.tree.inherited</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acquisition_date']" position="after">
+                    <field name="gps_status" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_fleet_vehicle_info_form" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.info.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="diplomat_related_vehicle_product_and_model_category.inherit_fleet_vehicle_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[4]" position="after">
+                    <group col="3" string="owner info">
+                        <group>
+                            <field name="owner_hip_type"/>
+                        </group>
+                        <group>
+                            <field name="owner_name" attrs="{'invisible': [('owner_hip_type', 'not in', ['borrowed', 'sponsored'])]}"/>
+                        </group>
+                        <group>
+                            <field name="owner_id_no" attrs="{'invisible': [('owner_hip_type', '=', False)]}"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='fuel_type']" position="after">
+                    <field name="transmission_type"/>
+                </xpath>
+                <xpath expr="//field[@name='horse_power']" position="after">
+                    <field name="engine_capacity"/>
+                </xpath>
+                <xpath expr="//field[@name='color']" position="after">
+                    <field name="color_in_side"/>
+                    <field name="seats"/>
+                </xpath>
+
+                <xpath expr="//group[5]" position="after">
+                    <group col="3" string="gps info">
+                        <group>
+                            <field name="gps_name"/>
+                        </group>
+                        <group>
+                            <field name="related_product"/>
+                        </group>
+                        <group>
+                            <field name="serial_no"/>
+                        </group>
+                        <group>
+                            <field name="gps_status"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

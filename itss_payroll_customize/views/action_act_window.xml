@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_other_allowance_action" model="ir.actions.act_window">
+            <field name="name">Hr Other Allowance</field>
+            <field name="res_model">hr.other.allowance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

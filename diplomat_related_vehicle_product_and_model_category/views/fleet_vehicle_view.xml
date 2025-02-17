@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fleet_vehicle_pivot" model="ir.ui.view">
+            <field name="name">fleet.vehicle.pivot</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="arch" type="xml">
+                <pivot string="Fleet Vehicle" display_quantity="True" sample="1">
+                    <field name="name" type="row"/>
+                    <field name="car_value" type="measure"/>
+                    <field name="odometer" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="inherit_fleet_vehicle_form" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/group[1]" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/group[1]" position="after">
+                    <group col="3" string="model info">
+                        <group>
+                            <field name="category_id"/>
+                            <field name="model_year" string="Year"/>
+                        </group>
+                        <group>
+                            <field name="brand_id"/>
+                        </group>
+                        <group>
+                            <field name="model_id"/>
+                        </group>
+                    </group>
+
+
+                    <group col="3" string="purchase info">
+                        <group>
+                            <field name="net_car_value" string="Purchase Price"/>
+                        </group>
+                        <group>
+                            <field name="purchase_date"/>
+                        </group>
+                        <group>
+                            <field name="trim_level"/>
+                        </group>
+                    </group>
+
+                    <group col="3" string="engineering info">
+                        <group>
+                            <field name="fuel_type"/>
+                        </group>
+                        <group>
+                            <field name="horse_power"/>
+                        </group>
+                        <group>
+                            <field name="power"/>
+                            <field name="fuel"/>
+                        </group>
+                    </group>
+
+                    <group col="3" string="Vehicle Information">
+                        <group>
+                            <field name="license_plate" string="Plate Number"/>
+                            <field name="card_number" string="Card Number"/>
+                            <field name="analytic_account_id"/>
+                            <field name="odometer"/>
+                        </group>
+                        <group>
+                            <field name="vin_sn"/>
+                            <field name="serial_number"/>
+                            <field name="product_id"/>
+                            <field name="location_id"/>
+                            <field name="location_id_store" readonly="True" groups="base.group_no_one"/>
+                        </group>
+                        <group>
+                            <field name="color"/>
+                            <field name="usage_type"/>
+                            <field name="license_type"/>
+                        </group>
+                    </group>
+
+                    <group col="3" string=".">
+                        <group>
+                            <field name="insurance_number"/>
+                            <field name="insurance_company" domain="[('is_company', '=', True)]"/>
+                        </group>
+                        <group>
+                            <field name="insurance_number_attachment_ids" widget="many2many_binary"/>
+                        </group>
+                        <group>
+                            <field name="license_number" invisible="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_fleet_vehicle_search" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.search</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='groupby_status']" position="before">
+                    <filter string="Source Document" name="group_source_document" context="{'group_by': 'source_document'}"/>
+                    <filter string="Location" name="group_location_id_store" context="{'group_by': 'location_id_store'}"/>
+                    <filter string="Year" name="group_model_year" context="{'group_by': 'model_year'}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="vin_sn"/>
+                    <field name="license_plate"/>
+                    <field name="serial_number"/>
+                    <field name="card_number"/>
+                    <field name="location_id_store" string="Location"/>
+                    <field name="source_document"/>
+                    <field name="model_year"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ser_fleet_vehicle_view_tree" model="ir.ui.view">
+            <field name="name">fleet.vehicle.tree</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vin_sn']" position="after">
+                    <field name="serial_number" optional="show"/>
+                </xpath>
+
+                <xpath expr="//field[@name='model_id']" position="after">
+                    <field name="location_id" optional="show"/>
+                    <field name="location_id_store" optional="hide" groups="base.group_no_one"/>
+                </xpath>
+
+                <xpath expr="//field[@name='acquisition_date']" position="after">
+                    <field name="model_year" optional="show"/>
+                </xpath>
+
+                <xpath expr="//field[@name='driver_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='future_driver_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

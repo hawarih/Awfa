@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <data>
+        <menuitem id="stock_area_menu" name="Area" 
+                    action="stock_area_action" 
+                    parent="stock.menu_stock_config_settings" sequence="10"/>
+        <menuitem id="stock_city_menu" name="City" 
+                    action="stock_city_action" 
+                    parent="stock.menu_stock_config_settings" sequence="10"/>
+    </data>
+</odoo>

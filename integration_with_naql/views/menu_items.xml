@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="extended_coverage_menu" name="Extended Coverage" sequence="40" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.extended_coverage_action"/>
+        <menuitem id="menuitem_get_lookup" name="Get Lookup" sequence="10" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.view_get_data_action"/>
+        <menuitem id="menuitem_main_close_reasons" name="Close Reasons" sequence="50" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.view_naql_main_close_code_action"/>
+        <menuitem id="menuitem_naql_lookup" name="Naql Lookup" sequence="10" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.view_naql_lookups_action"/>
+        <menuitem id="menuitem_sub_close_reason" name="Sub Close Reasons" sequence="50" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.view_naql_sub_close_code_action"/>
+        <menuitem id="menuitem_suspend_reasons" name="Suspend Reasons" sequence="100" parent="customer_rental.customer_rental_config_menu" action="integration_with_naql.view_naql_suspend_code_action"/>
+    </data>
+</odoo>

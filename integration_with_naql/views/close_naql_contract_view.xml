@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_close_naql_contract_form" model="ir.ui.view">
+            <field name="name">close.naql.contract.form</field>
+            <field name="model">close.naql.contract</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="oil_change_cost"/>
+                            <field name="main_close_code_id"/>
+                            <field name="sub_close_code_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_apply" string="Apply" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
