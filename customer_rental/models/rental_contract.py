@@ -8,11 +8,10 @@ class RentalContract(models.Model):
     
     
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    
 
-    ac = fields.Selection(string='AC Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True,
-                                                 default='1', required=True, store=True)
-    ac_in = fields.Selection(string='AC In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')],
-                                                 default='1', copy=True, store=True)
+    ac = fields.Selection(string='AC Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, required=True, store=True)
+    ac_in = fields.Selection(string='AC In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, store=True)
     activity_calendar_event_id = fields.Many2one(comodel_name='calendar.event', string='Next Activity Calendar Event', readonly=True)
     activity_date_deadline = fields.Date(string='Next Activity Deadline', readonly=True)
     activity_exception_decoration = fields.Selection(string='Activity Exception Decoration', help="""Type of the exception activity on record.""", selection=[('warning', 'Alert'), ('danger', 'Error')], readonly=True)
@@ -33,8 +32,8 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
     apply_penalty_done = fields.Boolean(string='Apply Penalty Done', copy=True, store=True)
     auth_type = fields.Selection(string='Authorization Type', selection=[('internal', 'Internal'), ('external', 'External')], 
                                  default='internal', copy=True, required=True, store=True)
-    car_seats = fields.Selection(string='Car Seats Out', selection=[('6', 'Clean'), ('7', 'Dirty')], default='6', copy=True, required=True, store=True)
-    car_seats_in = fields.Selection(string='Car Seats In', selection=[('6', 'Clean'), ('7', 'Dirty')], default='6', copy=True, store=True)
+    car_seats = fields.Selection(string='Car Seats Out', selection=[('6', 'Clean'), ('7', 'Dirty')], copy=True, required=True, store=True)
+    car_seats_in = fields.Selection(string='Car Seats In', selection=[('6', 'Clean'), ('7', 'Dirty')], copy=True, store=True)
     category_id = fields.Many2one(comodel_name='fleet.vehicle.model.category', string='Category', related='fleet_vehicle_id.category_id', readonly=True)
     charged_late_hours = fields.Float(string='Charged Late Hours', copy=True, store=True)
     current_date = fields.Date(string='Current Date', copy=True, store=True)
@@ -46,14 +45,10 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
     duration = fields.Integer(string='Duration', copy=True, required=True, store=True)
     extra_driver = fields.Many2one(comodel_name='res.partner', string='Extra Driver', copy=True, store=True)
     filter_due_amount = fields.Float(string='Filter Due Amount', readonly=True, store=True)
-    fire_extinguisher = fields.Selection(string='Fire Extinguisher Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, 
-                                                                    default='8', required=True, store=True)
-    fire_extinguisher_in = fields.Selection(string='Fire Extinguisher In', selection=[('8', 'Available'), ('9', 'Not Available')], 
-                                                                    default='8', copy=True, store=True)
-    first_aid_kit = fields.Selection(string='First Aid Kit Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, 
-                                                                    default='8', required=True, store=True)
-    first_aid_kit_in = fields.Selection(string='First Aid Kit In', selection=[('8', 'Available'), ('9', 'Not Available')], 
-                                                                    default='8', copy=True, store=True)
+    fire_extinguisher = fields.Selection(string='Fire Extinguisher Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, required=True, store=True)
+    fire_extinguisher_in = fields.Selection(string='Fire Extinguisher In', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, store=True)
+    first_aid_kit = fields.Selection(string='First Aid Kit Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, required=True, store=True)
+    first_aid_kit_in = fields.Selection(string='First Aid Kit In', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, store=True)
     fleet_model_id = fields.Many2one(comodel_name='fleet.vehicle.model', string='Model', related='fleet_vehicle_id.model_id', readonly=True)
     fleet_vehicle_id = fields.Many2one(comodel_name='fleet.vehicle', string='Vehicle', copy=True, required=True, ondelete='restrict', store=True)
     fuel_cost = fields.Float(string='Fuel cost', copy=True, readonly=True, store=True)
@@ -86,10 +81,8 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
     is_extended = fields.Boolean(string='Extended', copy=True, store=True)
     is_late = fields.Boolean(string='Late', copy=True, store=True)
     is_returned = fields.Boolean(string='Returned', copy=True, store=True)
-    keys = fields.Selection(string='Keys Out', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, 
-                                                defualt='4', required=True, store=True)
-    keys_in = fields.Selection(string='Keys In', selection=[('4', 'Working'), ('5', 'Not Working')], 
-                                                defualt='4', copy=True, store=True)
+    keys = fields.Selection(string='Keys Out', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, required=True, store=True)
+    keys_in = fields.Selection(string='Keys In', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, store=True)
     km_extra_cost = fields.Float(string='Km_Extra_Cost', copy=True, readonly=True, store=True)
     km_free = fields.Float(string='Km Free', copy=True, readonly=True, store=True)
     km_in = fields.Float(string='Km In', copy=True, store=True)
@@ -119,10 +112,8 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
     pickup_branch_id = fields.Many2one(comodel_name='stock.location', string='Pickup Branch', copy=True, required=True, ondelete='restrict', store=True)
     pickup_date = fields.Datetime(string='Pickup Date', copy=True, required=True, store=True, default=fields.Date.today())
     previous_amount = fields.Float(string='Previous Amount', copy=True, store=True)
-    radio_stereo = fields.Selection(string='Radio Stereo Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True,
-                                                 default='1', required=True, store=True)
-    radio_stereo_in = fields.Selection(string='Radio Stereo In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')],
-                                                 default='1', copy=True, store=True)
+    radio_stereo = fields.Selection(string='Radio Stereo Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, required=True, store=True)
+    radio_stereo_in = fields.Selection(string='Radio Stereo In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, store=True)
     ran_schedule_action = fields.Boolean(string='Ran Schedule Action', readonly=True)
     rental_invoices_dates_admin = fields.Boolean(string='Rental Invoices Dates Admin', readonly=True)
     rental_order_lines = fields.One2many(comodel_name='rental.contract.lines', inverse_name='contract_id', string='Rental Order Lines', store=True)
@@ -133,36 +124,24 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
                                         default=lambda self: self.env['customer.rental.policy'].search([('name', '=', 'actual')], limit=1).id)
     rental_pricing = fields.Many2one(comodel_name='customer.rental.pricing', string='Rental Pricing', copy=True, store=True)
     return_date = fields.Datetime(string='Return Date', readonly=True)
-    safety_triangle = fields.Selection(string='Safety Triangle Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, 
-                                                                    default='8', required=True, store=True)
-    safety_triangle_in = fields.Selection(string='Safety Triangle In', selection=[('8', 'Available'), ('9', 'Not Available')], 
-                                                                    default='8', copy=True, store=True)
-    screen = fields.Selection(string='Screen Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True,
-                                                 default='1', required=True, store=True)
-    screen_in = fields.Selection(string='Screen In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')],
-                                                 default='1', copy=True, store=True)
+    safety_triangle = fields.Selection(string='Safety Triangle Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, required=True, store=True)
+    safety_triangle_in = fields.Selection(string='Safety Triangle In', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, store=True)
+    screen = fields.Selection(string='Screen Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, required=True, store=True)
+    screen_in = fields.Selection(string='Screen In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak'), ('4', 'Not Working')], copy=True, store=True)
     source = fields.Selection(string='Source', selection=[('branch', 'Branch'), ('website', 'Website')], 
                               default='branch', copy=True, required=True, store=True)
-    spare_tire_tools = fields.Selection(string='Spare Tire Tools Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, 
-                                                                    default='8', required=True, store=True)
-    spare_tire_tools_in = fields.Selection(string='Spare Tire Tools In', selection=[('8', 'Available'), ('9', 'Not Available')], 
-                                                                    default='8', copy=True, store=True)
-    spare_tires = fields.Selection(string='Spare Tires Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True,
-                                                 default='1', required=True, store=True)
-    spare_tires_in = fields.Selection(string='Spare Tires In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')],
-                                                 default='1', copy=True, store=True)
-    speedometer = fields.Selection(string='Speedometer Out', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, 
-                                                defualt='4', required=True, store=True)
-    speedometer_in = fields.Selection(string='Speedometer In', selection=[('4', 'Working'), ('5', 'Not Working')], 
-                                                defualt='4', copy=True, store=True)
+    spare_tire_tools = fields.Selection(string='Spare Tire Tools Out', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, required=True, store=True)
+    spare_tire_tools_in = fields.Selection(string='Spare Tire Tools In', selection=[('8', 'Available'), ('9', 'Not Available')], copy=True, store=True)
+    spare_tires = fields.Selection(string='Spare Tires Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True, required=True, store=True)
+    spare_tires_in = fields.Selection(string='Spare Tires In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True, store=True)
+    speedometer = fields.Selection(string='Speedometer Out', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, required=True, store=True)
+    speedometer_in = fields.Selection(string='Speedometer In', selection=[('4', 'Working'), ('5', 'Not Working')], copy=True, store=True)
     state = fields.Selection(string='Status', selection=[('draft', 'Draft'), ('open', 'Open'), ('hold', 'Delivered Pending'), 
                                                          ('delivered_indebet', 'Delivered Indebet'), ('closed', 'Closed'), 
                                                          ('cancelled', 'Cancelled')], 
                                                 default='draft', store=True)
-    tires = fields.Selection(string='Tires Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True,
-                                                 default='1', required=True, store=True)
-    tires_in = fields.Selection(string='Tires In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')],
-                                                 default='1', copy=True, store=True)
+    tires = fields.Selection(string='Tires Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True, required=True, store=True)
+    tires_in = fields.Selection(string='Tires In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Weak')], copy=True, store=True)
     total_amount = fields.Float(string='Total Amount', readonly=True)
     total_consumed_fuel = fields.Float(string='Total Consumed Fuel', copy=True, readonly=True, store=True)
     total_dist = fields.Float(string='Total Distance', copy=True, readonly=True, store=True)
@@ -171,10 +150,8 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
     total_km_free = fields.Float(string='Total KM Free', copy=True, readonly=True, store=True)
     total_per_day = fields.Float(string='Total Per Day', readonly=True)
     vehicle_cost = fields.Float(string='Vehicle Cost', copy=True, store=True)
-    vehicle_status = fields.Selection(string='Vehicle Status Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Simple Scratch'), ('4', 'Deep Scratch'), ('5', 'Very Deep Scratch'), ('6', 'Bend In Structure')], copy=True,
-                                                 default='1', required=True, store=True)
-    vehicle_status_in = fields.Selection(string='Vehicle Status In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Simple Scratch'), ('4', 'Deep Scratch'), ('5', 'Very Deep Scratch'), ('6', 'Bend In Structure')],
-                                                 default='1', copy=True, store=True)
+    vehicle_status = fields.Selection(string='Vehicle Status Out', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Simple Scratch'), ('4', 'Deep Scratch'), ('5', 'Very Deep Scratch'), ('6', 'Bend In Structure')], copy=True, required=True, store=True)
+    vehicle_status_in = fields.Selection(string='Vehicle Status In', selection=[('1', 'Excellent'), ('2', 'Good'), ('3', 'Simple Scratch'), ('4', 'Deep Scratch'), ('5', 'Very Deep Scratch'), ('6', 'Bend In Structure')], copy=True, store=True)
     website_message_ids = fields.One2many(comodel_name='mail.message', inverse_name='res_id', string='Website Messages', help="""Website communication history""", store=True)
     x_studio_datetime_field_OeV9p = fields.Datetime(string='New التاريخ والوقت', copy=True, domain=[], store=True)
 
@@ -216,22 +193,29 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
             'domain': [('rental_contract_id', '=', self.id)],
             'target': 'current',
         }
-    
+        
+    def _check_customer_has_non_closed_contract(self, customer):
+        customer_id = customer
+        if customer_id:
+            has_non_closed_contract = self.search([('customer_id', '=', customer_id), ('state', 'not in', ['closed', 'cancelled'])], limit=1)
+            if has_non_closed_contract:
+                raise ValidationError(_('This Customer already has a non closed contract'))
+        
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('rental.contract') or 'New'
+        if vals.get('customer_id'):
+            self._check_customer_has_non_closed_contract(vals['customer_id'])
         if vals.get('duration') <= 0:
             raise ValidationError('Duration must be bigger than 0')
-        customer = vals.get('customer_id')
-        if customer:
-            active_contract = self.env['rental.contract'].search([('customer_id', '=', customer), ('state', 'in', ['open', 'hold', 'delivered_indebet'])], limit=1)
-            if active_contract:
-                raise ValidationError("This customer already has an active contract")
+        
         return super(RentalContract, self).create(vals)
     
     def write(self, vals):
         res = super().write(vals)
+        if vals.get('customer_id'):
+            self._check_customer_has_non_closed_contract(vals['customer_id'])
         duration = vals.get('duration')
         if duration == 0:
             raise ValidationError('Duration must be bigger than 0')
@@ -246,4 +230,17 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
             has_rental_pricing = self.env['customer.rental.pricing'].search([('models', 'in', [self.fleet_vehicle_id.model_id.id]), ('state', '=', 'confirmed')], limit=1)
             if not has_rental_pricing:
                 raise ValidationError("This vehicle model does not have an active rental pricing")
-    
+            self.ac = self.fleet_vehicle_id.ac
+            self.car_seats = self.fleet_vehicle_id.car_seats
+            self.fire_extinguisher = self.fleet_vehicle_id.fire_extinguisher
+            self.first_aid_kit = self.fleet_vehicle_id.first_aid_kit
+            self.radio_stereo = self.fleet_vehicle_id.radio_stereo
+            self.safety_triangle = self.fleet_vehicle_id.safety_triangle
+            self.screen = self.fleet_vehicle_id.screen
+            self.spare_tire_tools = self.fleet_vehicle_id.spare_tire_tools
+            self.spare_tires = self.fleet_vehicle_id.spare_tires
+            self.speedometer = self.fleet_vehicle_id.speedometer
+            self.tires = self.fleet_vehicle_id.tires
+            self.keys = self.fleet_vehicle_id.keys
+            self.vehicle_status = self.fleet_vehicle_id.vehicle_status
+            self.km_out = self.fleet_vehicle_id.odometer

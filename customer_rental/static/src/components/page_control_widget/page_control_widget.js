@@ -10,14 +10,28 @@ export class pageControlWidget extends Component {
         super.setup();
         this.state = useState({page_number : 1});
     }
-    clickNext(){
-        this.state.page_number += 1;
-        $('li.nav-item:nth-child(' + this.state.page_number + ') a').get(0).click();
+    clickNext() {
+        const totalTabs = document.querySelectorAll('li.nav-item').length;
+        console.log("Type of Page number: ", typeof this.state.page_number)
+        console.log("Type of Page number: ", typeof totalTabs)
+        if (this.state.page_number < totalTabs) {
+            const nextTab = document.querySelector(`li.nav-item:nth-child(${this.state.page_number + 1}) a`);
+            if (nextTab) {
+                this.state.page_number += 1;
+                nextTab.click();
+            }
+        }
     }
-    clickPrevious(){
-        this.state.page_number -= 1;
-        $('li.nav-item:nth-child(' + this.state.page_number + ') a').get(0).click();
+
+    clickPrevious() {
+    if (this.state.page_number > 1) {
+        const previousTab = document.querySelector(`li.nav-item:nth-child(${this.state.page_number - 1}) a`);
+        if (previousTab) {
+            this.state.page_number -= 1;
+            previousTab.click();
+        }
     }
+}
 
 }
 pageControlWidget.template = `pageControlWidget`;

@@ -10,7 +10,10 @@ class RentalContract(models.Model):
     main_close_code_id = fields.Many2one(comodel_name='naql.main.close.code', string='Close Reason', copy=True, store=True)
     naql_authorization_type = fields.Selection(string='Authorization Type', selection=[('1', 'Internal'), ('2', 'External')], copy=True, store=True)
     naql_contract_number = fields.Char(string='Naql Contract Number', copy=True, store=True)
-    naql_contract_state = fields.Selection(string='Naql Contract State', selection=[('0', 'Not Saved'), ('1', 'Valid'), ('2', 'Closed'), ('3', 'Claim'), ('4', 'Canceled'), ('5', 'Pending'), ('6', 'Saved'), ('7', 'Pending Under Taqdeer')], copy=True, store=True)
+    naql_contract_state = fields.Selection(string='Naql Contract State', selection=[('0', 'Not Saved'), ('1', 'Valid'), ('2', 'Closed'), ('3', 'Claim'), 
+                                                                                    ('4', 'Canceled'), ('5', 'Pending'), ('6', 'Saved'), 
+                                                                                    ('7', 'Pending Under Taqdeer')], copy=True, store=True,
+                                                                        default='0')
     naql_id = fields.Integer(string='Naql ID', copy=True, store=True)
     naql_token_number = fields.Char(string='Naql Token Number', copy=True, store=True)
     oil_change_cost = fields.Float(string='Oil Change Cost', copy=True, store=True)

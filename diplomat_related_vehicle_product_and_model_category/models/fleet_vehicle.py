@@ -49,6 +49,15 @@ class FleetVehicle(models.Model):
                 # Check for alphnumeric char and length of the string <= 10 if license plate value is entered.
                 if not re.search("^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]{1,10}$", lic_plate):
                     raise ValidationError(_('License Plate Must be <= 10 character and number.'))
+                
+    @api.constrains('vin_sn')
+    def _check_chassisnumber(self):
+        for vehicle in self:
+            chase_num = vehicle.vin_sn
+            if chase_num:
+                # Check for alphnumeric char and length of the string <= 10 if license plate value is entered.
+                if not re.search("^.{17}$", chase_num):
+                    raise ValidationError(_('Chassis No. must be 17 character or number.'))
 
     @api.onchange('model_id')
     def _onchange_model_id(self):
@@ -116,18 +125,37 @@ class FleetVehicle(models.Model):
     def write(self, vals):
         res = super(FleetVehicle, self).write(vals)
         for vehicle in self:
-            if vals.get('model_id') or vals.get('license_plate'):
+            # Update product information if license_plate changes
+            if 'license_plate' in vals:
                 vehicle.product_id.name = self._prepare_product_name(vehicle)
-                vehicle.product_id.default_code = vehicle.license_plate
-                vehicle.product_id.categ_id = vehicle.model_id.categ_id.id if vehicle.model_id.categ_id else False,
+                vehicle.product_id.default_code = vals.get('license_plate', vehicle.license_plate)
 
-            if vals.get('vin_sn'):
+            # Update product category if model_id changes
+            if 'model_id' in vals:
+                vehicle.product_id.categ_id = vehicle.model_id.categ_id.id if vehicle.model_id.categ_id else False
+
+            # Update barcode and chassis number
+            chase_num = vals.get('vin_sn')
+            if chase_num or not chase_num:
                 vehicle.product_id.barcode = vehicle.vin_sn
                 vehicle.analytic_account_id.chassis_num = vehicle.vin_sn
-                
-            if vals.get('serial_number') or vals.get('license_plate'):
-                vehicle.analytic_account_id.name = self._prepare_analytic_account_name(vehicle)
-                vehicle.analytic_account_id.serial_number = vehicle.serial_number
+
+            # Extract serial_number and license_plate from vals
+            serial_number = vals.get('serial_number', vehicle.serial_number)
+            license_plate = vals.get('license_plate', vehicle.license_plate)
+
+            # Check if both are False and update analytic_account_id.name accordingly
+            if not serial_number and not license_plate:
+                vehicle.analytic_account_id.name = "No Plate / No Serial"
+                vehicle.analytic_account_id.serial_number = False
+            else:
+                # Update serial_number if it has changed
+                if 'serial_number' in vals:
+                    vehicle.analytic_account_id.serial_number = serial_number
+
+                # Update analytic_account_id.name when serial_number or license_plate changes
+                if 'serial_number' in vals or 'license_plate' in vals:
+                    vehicle.analytic_account_id.name = self._prepare_analytic_account_name(vehicle)
 
         return res
 
@@ -155,10 +183,18 @@ class FleetVehicle(models.Model):
             
         if lic_plate:
             self.raise_user_error({'License Plate': lic_plate})
-            
+
         if default is None:
             default = {}
-        default['vin_sn'] = False
+            
+        if self.product_id and 'product_id' not in default:
+            duplicated_product = self.product_id.copy({'barcode': False})
+            default['product_id'] = duplicated_product.id
+            
+        if self.analytic_account_id and 'analytic_account_id' not in default:
+            duplicated_product = self.analytic_account_id.copy({})
+            default['analytic_account_id'] = duplicated_product.id
+
         return super(FleetVehicle, self).copy(default)
 
     def name_get(self):

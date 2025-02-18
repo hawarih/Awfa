@@ -75,7 +75,7 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
                                                         ('due_amount', 'Due Amount'), ('closed', 'Closed'), ('cancel', 'Canceled')], 
                                                 default='announcement', store=True)
     third_side_id = fields.Many2one(comodel_name='product.product', string='Third Side', related='company_id.third_side_id', readonly=True)
-    total_external_evaluation = fields.Float(string='Total External Evaluation', readonly=True)
+    total_external_evaluation = fields.Float(string='Total External Evaluation', readonly=True, store=True,)
     vehicle = fields.Many2one(comodel_name='fleet.vehicle', string='Vehicle', copy=True, store=True)
     vehicle_lines_ids = fields.One2many(comodel_name='vehicle.accident.lines', inverse_name='vehicle_accident_id', string='Lines', store=True)
     website_message_ids = fields.One2many(comodel_name='mail.message', inverse_name='res_id', string='Website Messages', help="""Website communication history""", store=True)
@@ -124,6 +124,30 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
             vehicle_insu_type = record.vehicle.insurance_type
             if vehicle_insu_type:
                 record.insurance_type = vehicle_insu_type
+    
+    @api.onchange('external_hand_wages', 'external_spare_parts')
+    def _onchange_total_external_evaluation(self):
+        for record in self:
+            record.total_external_evaluation = record.external_hand_wages + record.external_spare_parts
+            
+    @api.onchange('shared_customer_accident_percentage')
+    def _onchange_shared_customer_accident_percentage(self):
+        """Automatically update the other party percentage based on the customer percentage."""
+        if self.shared_customer_accident_percentage:
+            # Convert the selected value to an integer
+            customer_percentage = int(self.shared_customer_accident_percentage)
+            # Calculate the other party percentage
+            other_party_percentage = 100 - customer_percentage
+            # Update the shared_other_party_accident_percentage field
+            self.shared_other_party_accident_percentage = str(other_party_percentage)
+
+    def write(self, vals):
+        if 'external_hand_wages' in vals or 'external_spare_parts' in vals:
+            for record in self:
+                hand_wages = vals.get('external_hand_wages', record.external_hand_wages)
+                spare_parts = vals.get('external_spare_parts', record.external_spare_parts)
+                vals['total_external_evaluation'] = hand_wages + spare_parts
+        return super(VehicleAccident, self).write(vals)
 
     @api.model_create_multi
     def create(self, vals_list):

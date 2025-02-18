@@ -88,3 +88,5 @@ Planned: Future activities.""", selection=[('overdue', 'Overdue'), ('today', 'To
         for record in self:
             total = sum(line.amount for line in record.vehicle_damage_lines)
             record.total_without_tax = total
+            tax = record.tax.amount
+            record.total_with_tax = record.total_without_tax * (1 + (tax/100))
